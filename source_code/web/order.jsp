@@ -15,52 +15,55 @@
     </head>
     <body>
         <div class="wapper">
-    <div class="register-main-top">
-        <span><i class="fa fa-th" style="padding:0px 10px 0px 10px; font-size:26px;"></i>Customer information</span>
-    </div>
-        <div class="register-main">
-            <form action="#" method="post">
-                <div class="intro-form-input">
-                    <span class="intro-form-input-ico">
-                        <i class="fa fa-user"></i>
-
-                    </span>
-                    <input class="validate[required] form-control" type="text" placeholder="Full Name" name="txtname">
+            <div class="container">
+            <div class="register-main-top">
+                <div class="title-register">
+                <span><i class="fa fa-th" style="padding:0px 10px 0px 10px; font-size:26px;"></i>Customer information</span>
                 </div>
+            </div>
+            <div class="register-main">
+                <form class="main-form" action="#" method="post">
+                    <div class="intro-form-input">
+                        <span class="intro-form-input-ico">
+                            <i class="fa fa-user"></i>
 
-                <div class="intro-form-input">
-                    <span class="intro-form-input-ico">
-                        <i class="fa fa-envelope"></i>
-                    </span>
-                    <input class="validate[required,custom[email]] form-control" type="text" placeholder="Email" name="txtemail">
-                    <input type="hidden" value="#" name="url">
-                </div>
+                        </span>
+                        <input class="validate[required] form-control" type="text" placeholder="Full Name" name="txtname">
+                    </div>
 
-                <div class="intro-form-input">
-                    <span class="intro-form-input-ico">
-                        <i class="fa fa-phone"></i>
-                    </span>
-                    <input class="validate[required,custom[phone]] form-control" type="text" placeholder="Phone" name="txtphone">
-                    <input type="hidden" value="#" name="url">
-                </div>
-    <div class="intro-form-input">
-        
-        <textarea class="validate[required]" style=" width:100%;height:100px;border:1px solid;border-radius:5px;" placeholder="Address" name="txtaddress"></textarea>
-        
-    </div>
-                <div class="submit">
-                    <button class="btn-submit" type="submit">SubMit</button>
-                </div>
+                    <div class="intro-form-input">
+                        <span class="intro-form-input-ico">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                        <input class="validate[required,custom[email]] form-control" type="text" placeholder="Email" name="txtemail">
+                        <input type="hidden" value="#" name="url">
+                    </div>
+
+                    <div class="intro-form-input">
+                        <span class="intro-form-input-ico">
+                            <i class="fa fa-phone"></i>
+                        </span>
+                        <input class="validate[required,custom[phone]] form-control" type="text" placeholder="Phone" name="txtphone">
+                        <input type="hidden" value="#" name="url">
+                    </div>
+                    <div class="intro-form-input">
+
+                        <textarea class="validate[required]" style=" width:100%;height:100px;border:1px solid #fff;border-radius:5px;" placeholder="Address" name="txtaddress"></textarea>
+
+                    </div>
+                    <div class="submit">
+                        <button class="btn-submit" type="submit">SubMit</button>
+                    </div>
 
 
-            }
+                    
 
-   
-  
-                
-            </form>
-         </div>
-   </div> 
-        
+
+
+
+                </form>
+            </div>
+        </div> 
+</div>
     </body>
 </html>

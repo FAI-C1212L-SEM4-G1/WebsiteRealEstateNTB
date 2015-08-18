@@ -69,13 +69,13 @@
 
 
                         <ul class="list-menu">
-                            <li><a href="#">HOME</a></li>
-                            <li><a href="#">LISTING</a></li>
+                            <li><a href="index.jsp">HOME</a></li>
+                            <li><a href="listing.jsp">LISTING</a></li>
                             <li><a href="#">AGENT</a></li>
                             <li><a href="#">BLOG</a></li>
                             <li><a href="#">ABOUT US</a></li>
                             <li><a href="#">CONTACT</a></li>
-                            <li><a href="#">GALLERY</a></li>
+                            <li><a href="user.jsp">User Login</a></li>
 
 
 

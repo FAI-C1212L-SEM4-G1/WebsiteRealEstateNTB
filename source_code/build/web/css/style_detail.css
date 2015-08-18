@@ -77,4 +77,13 @@ and open the template in the editor.
     
     margin-bottom: 1.1%;
 }
+.Oder{background: #5cb4c5;
+    border-radius: 5px;
+  
+    height: 12.5%;
+    
+    margin-top: 2.3em;
+    max-width: 14%;
+    text-align: center;}
+.Oder a {text-decoration: none;padding-top: 12px;text-transform: uppercase;color: rgb(255, 237, 71);display: block;}
 

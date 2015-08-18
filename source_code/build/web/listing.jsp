@@ -128,7 +128,7 @@
                             <h1>Newtown Square, PA</h1>
                             <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
                             <span>$ 120 000</span><br>
-                            <a class="house__more" href="#">More</a>
+                            <a class="house__more" href="detail.jsp">More</a>
 
                         </div>
                     </article>

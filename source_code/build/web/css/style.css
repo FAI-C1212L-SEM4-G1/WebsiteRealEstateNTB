@@ -11,7 +11,7 @@ body{text-decoration: none;font-size: 12px;font-family: Raleway,sans-serif;color
 #menu {height: 90px;width:100%;background:#5cb4c5;}
 #menu .menu-content {max-width:960px;margin: 0 auto;height: 90px;}
 .menu-content .list-menu{float: left;height:100%;list-style-type: none;}
-.list-menu li { float: right;padding-left: 10px;padding-right: 10px;line-height: 90px;width: 100px;text-align: center;}
+.list-menu li { float: left;padding-left: 10px;padding-right: 10px;line-height: 90px;width: 100px;text-align: center;}
 .list-menu li a { text-decoration: none;color: #fff;font-weight: bold;}
 .list-menu li:hover{background: rgb(72, 161, 179);}
 
