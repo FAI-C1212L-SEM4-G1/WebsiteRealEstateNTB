@@ -17,7 +17,9 @@
         <link href="css/slider-show/css/nivo-slider.css" rel="stylesheet" type="text/css"/>
         <script src="css/slider-show/js/jquery.js" type="text/javascript"></script>
         <script src="css/slider-show/js/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+       
          <link href="css/mobile.css" rel="stylesheet" type="text/css"/>
+         
         <script>
             $(window).load(function () {
                 $('#slideshow').nivoSlider({
@@ -38,7 +40,16 @@
     </head>
 
     <body>
-
+<script>
+    $(function () {
+       
+        $('.menu-show').click(function () {
+            $('nav ul').toggleClass('showing');
+           
+        });
+        
+    });
+</script>
 
         <div id="wapper">
             <header id="header">
@@ -64,32 +75,34 @@
                     </div>
                 </div>
                 <div class="clear"></div>
-                <nav id="menu">
-                    <div class="menu-content">
 
 
-                        <ul class="list-menu">
-                            <li><a href="index.jsp">HOME</a></li>
-                            <li><a href="listing.jsp">LISTING</a></li>
-                            <li><a href="#">AGENT</a></li>
-                            <li><a href="#">BLOG</a></li>
-                            <li><a href="#">ABOUT US</a></li>
-                            <li><a href="#">CONTACT</a></li>
-                            <li><a href="user.jsp">User Login</a></li>
-
-
-
-                        </ul> 
-                    </div>
-                </nav>
+        <nav>
+           <div class="menu-show">
+               <i style="font-size: 18px;margin-top: 5px;" class="fa fa-bars"></i>
+            </div >
+            <ul   >
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                   
+     
+            </ul>
+           
+        </nav>
                 <div class="clear"></div>
             </header>
             <div id="slideshow" class="nivoSlider">
 
 
                 <img style="display: none;"  src="images/slider1.jpg" alt="" title="#htmlcaption-3"/>
-                <img style="display: none;"  src="images/slider1.jpg" alt="" title="#htmlcaption-3"/>
-                <img style="display: none;"  src="images/slider1.jpg" alt="" title="#htmlcaption-3"/>
+                
+                <img style="display: none;" src="images/slide-06.jpg" alt="" title="htmlcaption-1"/>
+               
 
 
 

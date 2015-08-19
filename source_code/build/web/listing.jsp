@@ -13,9 +13,21 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style_listing.css" rel="stylesheet" type="text/css"/>
+        <link href="css/mobile.css" rel="stylesheet" type="text/css"/>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="javascript.js" type="text/javascript"></script>
     </head>
     <body>
+<script>
+    $(function () {
+       
+        $('.menu-show').click(function () {
+            $('nav ul').toggleClass('showing');
+           
+        });
+        
+    });
+</script>
         
         <div id="wapper">
             <header id="header">
@@ -41,24 +53,23 @@
                     </div>
                 </div>
                 <div class="clear"></div>
-                <nav id="menu">
-                    <div class="menu-content">
-
-
-                        <ul class="list-menu">
-                            <li><a href="#">HOME</a></li>
-                            <li><a href="#">LISTING</a></li>
-                            <li><a href="#">AGENT</a></li>
-                            <li><a href="#">BLOG</a></li>
-                            <li><a href="#">ABOUT US</a></li>
-                            <li><a href="#">CONTACT</a></li>
-                            <li><a href="#">GALLERY</a></li>
-
-
-
-                        </ul> 
-                    </div>
-                </nav>
+                <nav>
+           <div class="menu-show">
+                <i style="font-size: 18px;margin-top: 5px;" class="fa fa-bars"></i>
+            </div >
+            <ul   >
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                   
+     
+            </ul>
+           
+        </nav>
                 <div class="clear"></div>
             </header>
             <div id="title-listing">

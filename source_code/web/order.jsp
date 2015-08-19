@@ -12,6 +12,7 @@
         <title>oder</title>
         <link href="css/style_oder.css" rel="stylesheet" type="text/css"/>
         <link href="font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/mobile.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="wapper">
@@ -48,7 +49,7 @@
                     </div>
                     <div class="intro-form-input">
 
-                        <textarea class="validate[required]" style=" width:100%;height:100px;border:1px solid #fff;border-radius:5px;" placeholder="Address" name="txtaddress"></textarea>
+                        <textarea class="validate[required]" style=" width:99%;height:100px;border:1px solid #fff;border-radius:5px;" placeholder="Address" name="txtaddress"></textarea>
 
                     </div>
                     <div class="submit">
