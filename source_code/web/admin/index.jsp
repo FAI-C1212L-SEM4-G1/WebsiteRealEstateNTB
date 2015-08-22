@@ -323,13 +323,13 @@
             </a>
             <ul>
                 <li class="SubFirst">
-                    <a href="/admin.aspx?module=orders">
+                    <a href="../admin/user/userindex.jsp">
                         <span class="SubMenuText">Danh sách đơn hàng
                         </span>
                     </a>
                 </li>
                 <li>
-                    <a href="/admin.aspx?module=orders&act=message">
+                    <a href="../admin/blog/blogindex.jsp">
                         <span class="SubMenuText">Tin nhắn từ khách hàng
                         </span>
                     </a>

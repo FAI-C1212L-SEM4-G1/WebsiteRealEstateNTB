@@ -12,16 +12,12 @@ body{text-decoration: none;font-size: 12px;font-family: Raleway,sans-serif;color
 #menu .menu-content {max-width:960px;margin: 0 auto;height: 90px;}
 .menu-content .list-menu{float: left;height:100%;list-style-type: none;}
 nav ul { background-color: rgb(92, 180, 197);overflow: hidden;color:white;padding: 0;width: 100%;text-align: center;
-transition: max-height 0.4s;padding-top: 10px;padding-bottom: 10px;
+transition: max-height 0.4s;height: auto;
 }
 nav ul li {display: inline-block;padding: 20px;}
 nav ul li a{text-decoration: none;color: white;}
 nav ul li:hover{background:rgb(178, 234, 244);}
-.menu-show {width: 100%;background-color: rgb(92, 180, 197);padding: 13px 10px  ;text-align: left;box-sizing:border-box;cursor: pointer;color: white;display: none;padding-bottom: 0px;}
-
-
-
-
+.menu-show {width: 100%;background-color: rgb(92, 180, 197);padding: 10px 9px 15px;text-align: left;box-sizing:border-box;cursor: pointer;color: white;display: none;}
 #slideshow{height: 599px;width: 100%;background:#646565;}
 #abount{width:100%;background:#ffffff;display: table;}
 #abount .container {max-width: 960px;height: auto;margin: 0 auto;}
