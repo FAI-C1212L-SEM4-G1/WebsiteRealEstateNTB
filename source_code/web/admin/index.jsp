@@ -329,7 +329,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="../admin/blog/blogindex.jsp">
+                    <a href="admin/profileland/blogindex.jsp">
                         <span class="SubMenuText">Tin nhắn từ khách hàng
                         </span>
                     </a>

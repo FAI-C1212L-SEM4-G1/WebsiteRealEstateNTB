@@ -1,7 +1,7 @@
 <%-- 
     Document   : edituser
-    Created on : Aug 20, 2015, 4:50:43 PM
-    Author     : sang
+    Created on : Aug 24, 2015, 11:44:17 AM
+    Author     : NguyenNgoc
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
