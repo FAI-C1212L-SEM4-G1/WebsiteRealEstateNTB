@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vn.javaweb.real.estate.manage;
 
 import java.io.Serializable;
@@ -15,39 +10,40 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import vn.javaweb.real.estate.manage.exceptions.IllegalOrphanException;
 import vn.javaweb.real.estate.manage.exceptions.NonexistentEntityException;
 import vn.javaweb.real.estate.manage.exceptions.PreexistingEntityException;
 import vn.javaweb.real.estate.manage.exceptions.RollbackFailureException;
+import vn.javaweb.real.estate.model.ConfigConnection;
 import vn.javaweb.real.estate.model.PaymentMode;
 
 /**
  *
- * @author NguyenNgoc
+ * @author PhanAnh
  */
 public class PaymentModeModelManage implements Serializable {
+
     private EntityManagerFactory emf = null;
     private static PaymentModeModelManage instance;
 
-    public PaymentModeModelManage() {
-        emf.createEntityManager();
-    }
-        
     public PaymentModeModelManage(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-    public static PaymentModeModelManage getInstance(){
-        if(instance == null)
-            instance = new PaymentModeModelManage();
+    public static PaymentModeModelManage getInstance() {
+        if (instance == null) {
+            instance = new PaymentModeModelManage(Persistence.createEntityManagerFactory(ConfigConnection.PERSISTENCE_UNIT_NAME));
+        }
         return instance;
     }
-    
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void createPaymentMode(PaymentMode paymentMode) throws IllegalOrphanException, PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(PaymentMode paymentMode) throws IllegalOrphanException, PreexistingEntityException, RollbackFailureException, Exception {
         List<String> illegalOrphanMessages = null;
         ProfileLand codeProfileLandOrphanCheck = paymentMode.getCodeProfileLand();
         if (codeProfileLandOrphanCheck != null) {
@@ -63,7 +59,9 @@ public class PaymentModeModelManage implements Serializable {
             throw new IllegalOrphanException(illegalOrphanMessages);
         }
         EntityManager em = getEntityManager();
+        EntityTransaction et = em.getTransaction();
         try {
+            et.begin();
             ProfileLand codeProfileLand = paymentMode.getCodeProfileLand();
             if (codeProfileLand != null) {
                 codeProfileLand = em.getReference(codeProfileLand.getClass(), codeProfileLand.getCode());
@@ -74,10 +72,10 @@ public class PaymentModeModelManage implements Serializable {
                 codeProfileLand.setPaymentMode(paymentMode);
                 codeProfileLand = em.merge(codeProfileLand);
             }
-            em.getTransaction().commit();
+            et.commit();
         } catch (Exception ex) {
             try {
-                em.getTransaction().rollback();
+                et.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
@@ -86,15 +84,15 @@ public class PaymentModeModelManage implements Serializable {
             }
             throw ex;
         } finally {
-            if (em != null) {
-                em.close();
-            }
+            em.close();
         }
     }
 
-    public void editPaymentMode(PaymentMode paymentMode) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(PaymentMode paymentMode) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = getEntityManager();
+        EntityTransaction et = em.getTransaction();
         try {
+            et.begin();
             PaymentMode persistentPaymentMode = em.find(PaymentMode.class, paymentMode.getCode());
             ProfileLand codeProfileLandOld = persistentPaymentMode.getCodeProfileLand();
             ProfileLand codeProfileLandNew = paymentMode.getCodeProfileLand();
@@ -124,10 +122,10 @@ public class PaymentModeModelManage implements Serializable {
                 codeProfileLandNew.setPaymentMode(paymentMode);
                 codeProfileLandNew = em.merge(codeProfileLandNew);
             }
-            em.getTransaction().commit();
+            et.commit();
         } catch (Exception ex) {
             try {
-                em.getTransaction().rollback();
+                et.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
@@ -140,21 +138,21 @@ public class PaymentModeModelManage implements Serializable {
             }
             throw ex;
         } finally {
-            if (em != null) {
-                em.close();
-            }
+            em.close();
         }
     }
 
-    public void deletePaymentMode(String id) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public void deleteByCode(String code) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = getEntityManager();
+        EntityTransaction et = em.getTransaction();
         try {
+            et.begin();
             PaymentMode paymentMode;
             try {
-                paymentMode = em.getReference(PaymentMode.class, id);
+                paymentMode = em.getReference(PaymentMode.class, code);
                 paymentMode.getCode();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The paymentMode with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The paymentMode with id " + code + " no longer exists.", enfe);
             }
             ProfileLand codeProfileLand = paymentMode.getCodeProfileLand();
             if (codeProfileLand != null) {
@@ -162,18 +160,16 @@ public class PaymentModeModelManage implements Serializable {
                 codeProfileLand = em.merge(codeProfileLand);
             }
             em.remove(paymentMode);
-            em.getTransaction().commit();
+            et.commit();
         } catch (Exception ex) {
             try {
-                em.getTransaction().rollback();
+                et.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             throw ex;
         } finally {
-            if (em != null) {
-                em.close();
-            }
+            em.close();
         }
     }
 
@@ -222,5 +218,5 @@ public class PaymentModeModelManage implements Serializable {
             em.close();
         }
     }
-    
+
 }
