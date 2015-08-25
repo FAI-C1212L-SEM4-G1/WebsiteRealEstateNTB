@@ -202,17 +202,26 @@ public class RegionalPriceModelManage implements Serializable {
     }
     
     public List<RegionalPrice> findByCity(String city){
-        EntityManager em = getEntityManager();                
-        Query query = em.createNamedQuery("RegionalPrice.findByCity");
-        query.setParameter("city", city);
-        return (List<RegionalPrice>)query.getResultList();
+        EntityManager em = getEntityManager();  
+        try {                          
+            Query query = em.createNamedQuery("RegionalPrice.findByCity");
+            query.setParameter("city", city);
+            return (List<RegionalPrice>)query.getResultList();
+        } finally {
+            em.close();
+        }
+        
     }
     
     public List<RegionalPrice> findByRegionalNameLike(String regionalName){
-        EntityManager em = getEntityManager();                
-        Query query = em.createNamedQuery("RegionalPrice.findByRegionalName");
-        query.setParameter("regionalName", "%" + regionalName + "%");
-        return (List<RegionalPrice>)query.getResultList();
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("RegionalPrice.findByRegionalNameLike");
+            query.setParameter("regionalName", "%" + regionalName + "%");
+            return (List<RegionalPrice>)query.getResultList(); 
+        } finally {
+            em.close();
+        }        
     }
 
     public int getRegionalPriceCount() {

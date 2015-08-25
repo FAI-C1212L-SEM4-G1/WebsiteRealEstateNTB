@@ -1,35 +1,38 @@
 package vn.javaweb.real.estate.manage;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.transaction.UserTransaction;
 import vn.javaweb.real.estate.manage.exceptions.IllegalOrphanException;
 import vn.javaweb.real.estate.manage.exceptions.NonexistentEntityException;
 import vn.javaweb.real.estate.manage.exceptions.PreexistingEntityException;
 import vn.javaweb.real.estate.manage.exceptions.RollbackFailureException;
 import vn.javaweb.real.estate.model.BuyLand;
+import vn.javaweb.real.estate.model.ConfigConnection;
 import vn.javaweb.real.estate.model.PaymentMode;
 import vn.javaweb.real.estate.model.ProfileLand;
 import vn.javaweb.real.estate.model.RegionalPrice;
 
 /**
  *
- * @author NguyenNgoc
+ * @author PhanAnh
  */
 public class ProfileLandModelManage implements Serializable {
+
     private static ProfileLandModelManage instance;
     private EntityManagerFactory emf = null;
-
-    public ProfileLandModelManage() {
-
-    }
+    public static enum ConstructionStatus { NotStarted, UnderConstruction, Completed };
 
     public ProfileLandModelManage(EntityManagerFactory emf) {
         this.emf = emf;
@@ -37,7 +40,7 @@ public class ProfileLandModelManage implements Serializable {
 
     public static ProfileLandModelManage getInstance() {
         if (instance == null) {
-            instance = new ProfileLandModelManage();
+            instance = new ProfileLandModelManage(Persistence.createEntityManagerFactory(ConfigConnection.PERSISTENCE_UNIT_NAME));
         }
         return instance;
     }
@@ -46,13 +49,14 @@ public class ProfileLandModelManage implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void createProfileLand(ProfileLand profileLand) throws PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(ProfileLand profileLand) throws PreexistingEntityException, RollbackFailureException, Exception {
         if (profileLand.getBuyLandList() == null) {
             profileLand.setBuyLandList(new ArrayList<BuyLand>());
         }
-        EntityManager em = null;
+        EntityManager em = getEntityManager();
+        EntityTransaction et = em.getTransaction();
         try {
-            em = getEntityManager();
+            et.begin();
             PaymentMode paymentMode = profileLand.getPaymentMode();
             if (paymentMode != null) {
                 paymentMode = em.getReference(paymentMode.getClass(), paymentMode.getCode());
@@ -92,23 +96,27 @@ public class ProfileLandModelManage implements Serializable {
                     oldCodeProfileLandOfBuyLandListBuyLand = em.merge(oldCodeProfileLandOfBuyLandListBuyLand);
                 }
             }
-            em.getTransaction().commit();
-        } catch (Exception ex) {            
-            if (findProfileLand(profileLand.getCode()) != null) {
+            et.commit();
+        } catch (Exception ex) {
+            try {
+                et.rollback();
+            } catch (Exception re) {
+                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+            }
+            if (findByCode(profileLand.getCode()) != null) {
                 throw new PreexistingEntityException("ProfileLand " + profileLand + " already exists.", ex);
             }
             throw ex;
         } finally {
-            if (em != null) {
-                em.close();
-            }
+            em.close();
         }
     }
 
-    public void editProfileLand(ProfileLand profileLand) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
-        EntityManager em = null;
+    public void edit(ProfileLand profileLand) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+        EntityManager em = getEntityManager();
+        EntityTransaction et = em.getTransaction();
         try {
-            em = getEntityManager();
+            et.begin();
             ProfileLand persistentProfileLand = em.find(ProfileLand.class, profileLand.getCode());
             PaymentMode paymentModeOld = persistentProfileLand.getPaymentMode();
             PaymentMode paymentModeNew = profileLand.getPaymentMode();
@@ -176,32 +184,31 @@ public class ProfileLandModelManage implements Serializable {
                     }
                 }
             }
-            em.getTransaction().commit();
+            et.commit();
         } catch (Exception ex) {
             try {
-                em.getTransaction().rollback();
+                et.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 String id = profileLand.getCode();
-                if (findProfileLand(id) == null) {
+                if (findByCode(id) == null) {
                     throw new NonexistentEntityException("The profileLand with id " + id + " no longer exists.");
                 }
             }
             throw ex;
         } finally {
-            if (em != null) {
-                em.close();
-            }
+            em.close();
         }
     }
 
-    public void deleteProfileLand(String id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
-        EntityManager em = null;
+    public void deleteByCode(String id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+        EntityManager em = getEntityManager();
+        EntityTransaction et = em.getTransaction();
         try {
-            em = getEntityManager();
+            et.begin();
             ProfileLand profileLand;
             try {
                 profileLand = em.getReference(ProfileLand.class, id);
@@ -231,17 +238,21 @@ public class ProfileLandModelManage implements Serializable {
                 buyLandListBuyLand = em.merge(buyLandListBuyLand);
             }
             em.remove(profileLand);
-            em.getTransaction().commit();
-        } catch (NonexistentEntityException | IllegalOrphanException ex) {           
+            et.commit();
+        } catch (NonexistentEntityException | IllegalOrphanException ex) {
+            System.out.println("Error exception delete ProfileLand !");
+            try {
+                et.rollback();
+            } catch (Exception re) {
+                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+            }
             throw ex;
         } finally {
-            if (em != null) {
-                em.close();
-            }
+            em.close();
         }
     }
 
-    public List<ProfileLand> findProfileLandEntities() {
+    public List<ProfileLand> findAll() {
         return findProfileLandEntities(true, -1, -1);
     }
 
@@ -265,15 +276,72 @@ public class ProfileLandModelManage implements Serializable {
         }
     }
 
-    public ProfileLand findProfileLand(String id) {
+    public ProfileLand findByCode(String code) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(ProfileLand.class, id);
+            return em.find(ProfileLand.class, code);
         } finally {
             em.close();
         }
     }
 
+    public List<ProfileLand> findByName(String name) {
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("ProfileLand.findByNameLike");
+            query.setParameter("name", "%" + name + "%");
+            return (List<ProfileLand>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<ProfileLand> findByLocation(String location) {
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("ProfileLand.findByLocationLike");
+            query.setParameter("location", "%" + location + "%");
+            return (List<ProfileLand>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<ProfileLand> findByTypeOf(String typeOf) {
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("ProfileLand.findByTypeOf");
+            query.setParameter("typeOf", typeOf);
+            return (List<ProfileLand>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    // Tìm kiếm dự án xây dựng dựa vào trạng thái [Đã xây dựng xong, đang xây dựng, Đã hoàn thành]
+    public List<ProfileLand> findByConstructionStatus(ConstructionStatus constructionStatus) {
+        Calendar calendar = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String dateCurrent = dateFormat.format(calendar.getTime());
+        EntityManager em = getEntityManager();
+        try {
+            Query query = null;
+            if (constructionStatus.compareTo(ConstructionStatus.NotStarted) == 0) {
+                query = em.createNamedQuery("ProfileLand.findProfileLandNotStarted");                
+            } else {
+                if (constructionStatus.compareTo(ConstructionStatus.UnderConstruction) == 0) {
+                    query = em.createNamedQuery("ProfileLand.findProfileLandUnderConstruction");
+                } else {
+                    query = em.createNamedQuery("ProfileLand.findProfileLandCompleted");
+                }
+            }
+            query.setParameter("dateCurrent", dateCurrent);
+            return (List<ProfileLand>) query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
     public int getProfileLandCount() {
         EntityManager em = getEntityManager();
         try {

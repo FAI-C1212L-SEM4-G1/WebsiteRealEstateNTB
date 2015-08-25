@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vn.javaweb.real.estate.model;
 
 import java.io.Serializable;
@@ -26,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author NguyenNgoc
+ * @author PhanAnh
  */
 @Entity
 @Table(catalog = "RealEstate", schema = "dbo")
@@ -34,14 +29,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "ProfileLand.findAll", query = "SELECT p FROM ProfileLand p"),
     @NamedQuery(name = "ProfileLand.findByCode", query = "SELECT p FROM ProfileLand p WHERE p.code = :code"),
-    @NamedQuery(name = "ProfileLand.findByName", query = "SELECT p FROM ProfileLand p WHERE p.name = :name"),
-    @NamedQuery(name = "ProfileLand.findByLocation", query = "SELECT p FROM ProfileLand p WHERE p.location = :location"),
+    @NamedQuery(name = "ProfileLand.findByNameLike", query = "SELECT p FROM ProfileLand p WHERE p.name LIKE :name"),
+    @NamedQuery(name = "ProfileLand.findByLocationLike", query = "SELECT p FROM ProfileLand p WHERE p.location = :location"),
     @NamedQuery(name = "ProfileLand.findByTypeOf", query = "SELECT p FROM ProfileLand p WHERE p.typeOf = :typeOf"),
     @NamedQuery(name = "ProfileLand.findByInvestors", query = "SELECT p FROM ProfileLand p WHERE p.investors = :investors"),
     @NamedQuery(name = "ProfileLand.findByTotalArea", query = "SELECT p FROM ProfileLand p WHERE p.totalArea = :totalArea"),
     @NamedQuery(name = "ProfileLand.findByCapitalInvestment", query = "SELECT p FROM ProfileLand p WHERE p.capitalInvestment = :capitalInvestment"),
     @NamedQuery(name = "ProfileLand.findByDateStart", query = "SELECT p FROM ProfileLand p WHERE p.dateStart = :dateStart"),
     @NamedQuery(name = "ProfileLand.findByDateEnd", query = "SELECT p FROM ProfileLand p WHERE p.dateEnd = :dateEnd"),
+    @NamedQuery(name = "ProfileLand.findProfileLandNotStarted", query = "SELECT p FROM ProfileLand p WHERE p.dateStart < :dateCurrent"),
+    @NamedQuery(name = "ProfileLand.findProfileLandUnderConstruction", query = "SELECT p FROM ProfileLand p WHERE p.dateStart <= :dateCurrent AND p.dateEnd >= :dateCurrent"),
+    @NamedQuery(name = "ProfileLand.findProfileLandCompleted", query = "SELECT p FROM ProfileLand p WHERE p.dateEnd >= :dateCurrent"),
     @NamedQuery(name = "ProfileLand.findByCurrentStatus", query = "SELECT p FROM ProfileLand p WHERE p.currentStatus = :currentStatus"),
     @NamedQuery(name = "ProfileLand.findByPopulationSize", query = "SELECT p FROM ProfileLand p WHERE p.populationSize = :populationSize"),
     @NamedQuery(name = "ProfileLand.findByTotalRoom", query = "SELECT p FROM ProfileLand p WHERE p.totalRoom = :totalRoom"),
