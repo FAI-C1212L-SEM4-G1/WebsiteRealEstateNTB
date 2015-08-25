@@ -12,7 +12,7 @@ import vn.javaweb.real.estate.model.RegionalPrice;
 
 /**
  *
- * @author NguyenNgoc
+ * @author PhanAnh
  */
 public class TestRegionalPrice {
 

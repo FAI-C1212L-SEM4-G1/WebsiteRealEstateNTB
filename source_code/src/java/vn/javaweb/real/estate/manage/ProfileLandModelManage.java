@@ -276,6 +276,7 @@ public class ProfileLandModelManage implements Serializable {
         }
     }
 
+    // Tìm kiếm dự án theo mã
     public ProfileLand findByCode(String code) {
         EntityManager em = getEntityManager();
         try {
@@ -285,6 +286,7 @@ public class ProfileLandModelManage implements Serializable {
         }
     }
 
+    // Tìm kiếm dự án theo tên dự án
     public List<ProfileLand> findByName(String name) {
         EntityManager em = getEntityManager();   
         try {
@@ -296,6 +298,7 @@ public class ProfileLandModelManage implements Serializable {
         }
     }
     
+    // Tìm kiếm dự án theo khu vực
     public List<ProfileLand> findByLocation(String location) {
         EntityManager em = getEntityManager();   
         try {
@@ -307,6 +310,7 @@ public class ProfileLandModelManage implements Serializable {
         }
     }
     
+    // Tìm kiếm dự án kiểu dự án
     public List<ProfileLand> findByTypeOf(String typeOf) {
         EntityManager em = getEntityManager();   
         try {

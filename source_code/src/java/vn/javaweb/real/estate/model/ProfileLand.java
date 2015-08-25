@@ -37,9 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ProfileLand.findByCapitalInvestment", query = "SELECT p FROM ProfileLand p WHERE p.capitalInvestment = :capitalInvestment"),
     @NamedQuery(name = "ProfileLand.findByDateStart", query = "SELECT p FROM ProfileLand p WHERE p.dateStart = :dateStart"),
     @NamedQuery(name = "ProfileLand.findByDateEnd", query = "SELECT p FROM ProfileLand p WHERE p.dateEnd = :dateEnd"),
-    @NamedQuery(name = "ProfileLand.findProfileLandNotStarted", query = "SELECT p FROM ProfileLand p WHERE p.dateStart < :dateCurrent"),
+    @NamedQuery(name = "ProfileLand.findProfileLandNotStarted", query = "SELECT p FROM ProfileLand p WHERE p.dateStart > :dateCurrent"),
     @NamedQuery(name = "ProfileLand.findProfileLandUnderConstruction", query = "SELECT p FROM ProfileLand p WHERE p.dateStart <= :dateCurrent AND p.dateEnd >= :dateCurrent"),
-    @NamedQuery(name = "ProfileLand.findProfileLandCompleted", query = "SELECT p FROM ProfileLand p WHERE p.dateEnd >= :dateCurrent"),
+    @NamedQuery(name = "ProfileLand.findProfileLandCompleted", query = "SELECT p FROM ProfileLand p WHERE p.dateEnd <= :dateCurrent"),
     @NamedQuery(name = "ProfileLand.findByCurrentStatus", query = "SELECT p FROM ProfileLand p WHERE p.currentStatus = :currentStatus"),
     @NamedQuery(name = "ProfileLand.findByPopulationSize", query = "SELECT p FROM ProfileLand p WHERE p.populationSize = :populationSize"),
     @NamedQuery(name = "ProfileLand.findByTotalRoom", query = "SELECT p FROM ProfileLand p WHERE p.totalRoom = :totalRoom"),
@@ -305,7 +305,7 @@ public class ProfileLand implements Serializable {
 
     @Override
     public String toString() {
-        return "vn.javaweb.real.estate.model.ProfileLand[ code=" + code + " ]";
+        return "ProfileLand [ code=" + code + " +++ name=" + name + " ]";
     }
     
 }
