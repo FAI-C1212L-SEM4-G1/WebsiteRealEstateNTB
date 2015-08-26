@@ -1,17 +1,17 @@
 <%-- 
     Document   : Add Profile Land
-    Created on : Aug 20, 2015, 4:49:46 PM
-    Author     : AnhNNP
+    Author     : PhanAnh
 --%>
 
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="core" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="robots" content="noindex, nofollow" />
         <title>Profile Land</title>
-        
+
         <link rel="Shortcut Icon" href="http://static.bizwebmedia.net/favicon.ico" type="image/x-icon" />
 
         <link type="text/css" rel="stylesheet" href="../Content/Styles/bootstrap.css">
@@ -20,7 +20,7 @@
         <link type="text/css" rel="stylesheet" href="../Content/Styles/style.css">
         <link type="text/css" rel="stylesheet" href="../Content/Styles/style_default.css">
         <link type="text/css" rel="Stylesheet" href="../Content/Styles/jquery-ui-1.9.2.custom.css"    
-        <link type="text/css" rel="stylesheet" href="../Content/Styles/iselector.css" />
+              <link type="text/css" rel="stylesheet" href="../Content/Styles/iselector.css" />
         <link rel="stylesheet" type="text/css" href="../Content/Styles/jquery.fancybox.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../Content/Styles/imodal.css">
 
@@ -35,7 +35,7 @@
         <script type="text/javascript" src="../Content/Scripts/bootstrap.min.js"></script>
         <script type="text/javascript" src="../Content/Scripts/scripts.js"></script>
         <script src="../../ckeditor/ckeditor.js" type="text/javascript"></script>
-        
+
         <script type="text/javascript">
             function beginKeepAlive() {
                 setTimeout("keepAlive()", 60000); // every 1 min
@@ -61,58 +61,21 @@
                 window.onresize = checkWindowSize;
             });
         </script>
-        <script type="text/javascript">
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments);
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m);
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            ga('create', 'UA-19570215-2', 'bizwebvietnam.com');
-            ga('send', 'pageview');
-        </script>
         <script>
-            window.onload = function() {
-                CKEDITOR.replace( 'txt_detail' );
+            window.onload = function () {
+                CKEDITOR.replace('txt_detail');
             };
         </script>
     </head>
     <body class="fixed-top">        
         <div id="AjaxLoading"><img src="../Content/Images/Admin/ajax-load.gif" alt=""/>&nbsp; Loading ... Please waiting ...</div>
         <form method="POST" action="" id="form1">
-
-            <script type="text/javascript">
-                //<![CDATA[
-                var theForm = document.forms['form1'];
-                if (!theForm) {
-                    theForm = document.form1;
-                }
-                function __doPostBack(eventTarget, eventArgument) {
-                    if (!theForm.onsubmit || (theForm.onsubmit() !== false)) {
-                        theForm.__EVENTTARGET.value = eventTarget;
-                        theForm.__EVENTARGUMENT.value = eventArgument;
-                        theForm.submit();
-                    }
-                }
-                //]]>
-            </script>
-
-
-
-            <!--<script src="/Extensions/ckeditor.4.0.1/ckeditor.js" type="text/javascript"></script>
-            <script src="/Extensions/fancybox-2/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>
-            <script src="/Extensions/fancybox-2/jquery.fancybox.pack.js" type="text/javascript"></script>-->
+            <script src="../Content/Scripts/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>            
+            <script src="../Content/Scripts/jquery.fancybox.pack.js" type="text/javascript"></script>
             <div class="PageHeader">
                 <div class="LogoHeader">
-
                 </div>
                 <div class="SystemMenu">
-
                     <div>
                         <ul class="sysMenu">
                             <li class="first"><a class="link-topmenu" href="/admin"><i class="icon-home"></i> Homepage</a></li>
@@ -509,38 +472,38 @@
 
             </div>
             <span id="additionalAttr"></span>
-<!--            <script type="text/javascript">
-                $j("#registerAd").fancybox({
-                    'width': 780,
-                    'height': 550,
-                    'autoScale': false,
-                    'transitionIn': 'fade',
-                    'transitionOut': 'fade',
-                    'speedIn': 500,
-                    'speedOut': 300,
-                    'titleShow': false,
-                    'hideOnOverlayClick': false,
-                    'type': 'iframe',
-                    onStart: function () {
-                        var text =
-                                "<style type='text/css'>" +
-                                "#fancybox-outer{ background: transparent; }" +
-                                "#fancy-bg-n, #fancy-bg-ne, #fancy-bg-e, #fancy-bg-se, #fancy-bg-s, #fancy-bg-sw, #fancy-bg-w, #fancy-bg-nw{ background-image: none; }" +
-                                "#fancybox-close{ right: 54px; top: 23px; background-image: url('/sites/admin/images/registerad/close.png'); background-position: center center; background-repeat: no-repeat; }" +
-                                "</style>";
-                        $j("#additionalAttr").html(text);
-                    },
-                    onCancel: function () {
-                        $j("#additionalAttr").html('');
-                    },
-                    onCleanup: function () {
-                        $j("#additionalAttr").html('');
-                    },
-                    onClose: function () {
-                        $j("#additionalAttr").html('');
-                    }
-                });
-            </script>-->
+            <script type="text/javascript">
+            $j("#registerAd").fancybox({
+                'width': 780,
+                'height': 550,
+                'autoScale': false,
+                'transitionIn': 'fade',
+                'transitionOut': 'fade',
+                'speedIn': 500,
+                'speedOut': 300,
+                'titleShow': false,
+                'hideOnOverlayClick': false,
+                'type': 'iframe',
+                onStart: function () {
+                    var text =
+                            "<style type='text/css'>" +
+                            "#fancybox-outer{ background: transparent; }" +
+                            "#fancy-bg-n, #fancy-bg-ne, #fancy-bg-e, #fancy-bg-se, #fancy-bg-s, #fancy-bg-sw, #fancy-bg-w, #fancy-bg-nw{ background-image: none; }" +
+                            "#fancybox-close{ right: 54px; top: 23px; background-image: url('/sites/admin/images/registerad/close.png'); background-position: center center; background-repeat: no-repeat; }" +
+                            "</style>";
+                    $j("#additionalAttr").html(text);
+                },
+                onCancel: function () {
+                    $j("#additionalAttr").html('');
+                },
+                onCleanup: function () {
+                    $j("#additionalAttr").html('');
+                },
+                onClose: function () {
+                    $j("#additionalAttr").html('');
+                }
+            });
+            </script>
         </form>
 
         <div id="main-content">
@@ -556,7 +519,10 @@
                                 </a>
                             </li>
                             <li class="Last">
-                                <span>Add new project</span>
+                                <span>
+                                    <i class="fa fa-angle-double-right" style="font-size:14px;"></i>
+                                    Add new project
+                                </span>
                             </li>
                         </ul>
                     </div>
@@ -566,11 +532,12 @@
                             <div class="widget-body">
                                 <div>
                                     <form id="form-add-profile-land" method="POST" action="../../ControllerAddProfileLand">
+                                        <jsp:useBean id="modelManage" class="vn.javaweb.real.estate.model.ConfigConnection" scope="request" />
                                         <div id="cph_Main_ContentPane">
                                             <div class="widget">
                                                 <div class="widget-title">
                                                     <h4>
-                                                        <i class="icon-reorder"></i>
+                                                        <i class="fa fa-file-text-o"></i>
                                                         Add new construction projects
                                                     </h4>
                                                     <div class="ui-corner-top ui-corner-bottom">
@@ -638,16 +605,20 @@
                                                                     <tr>
                                                                         <td class="key">
                                                                             Project code
-                                                                            <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
+                                                                            <input id="code" class="validate[required] text" type="text" placeholder="" value="" name="code" disabled>
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Project code </p>
-                                                                                    <p class="tooltipmessage"> PL + Code time default project created </p>
+                                                                                    <p class="tooltipmessage"> Code construction projects automatically </p>
                                                                                 </span>
                                                                             </span>
+                                                                            <script>
+                                                                                var d = new Date();
+                                                                                document.getElementById("code").value = "PL" + ("0" + d.getDate()).slice(-2) + ("0"+(d.getMonth()+1)).slice(-2) +
+                                                                                ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + d.getSeconds() + d.getMilliseconds();
+                                                                            </script>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -668,14 +639,14 @@
                                                                     <tr>
                                                                         <td class="key">
                                                                             Properties location
-                                                                            <span>*</span>
+                                                                            <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <select id="theloai" name="theloai">
-                                                                                <option value=""> ---Regional--- </option>
-                                                                                <option value="1">---</option>
-                                                                                <option value="2">---</option>
-                                                                                <option value="3">---</option>                                                             
+                                                                            <select id="codeRegional" name="codeRegional">
+                                                                                <option value="null">Select one option</option>
+                                                                                <core:forEach var="regionalPrice" items="${modelManage.regionalPriceModelManage.findAll()}" >                     
+                                                                                    <option value="${regionalPrice.code}">${regionalPrice.regionalName}</option>  
+                                                                                </core:forEach>
                                                                             </select>
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
@@ -684,11 +655,11 @@
                                                                                 </span>
                                                                             </span>
                                                                         </td>
+                                                                        
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="key">
-                                                                            Project type
-                                                                            <span class="Required">*</span>
+                                                                            Project type                                                                            
                                                                         </td>
                                                                         <td>
                                                                             <input id="Name" class="validate[required] text" type="text" placeholder="Luxury apartment" value="" name="name">
@@ -703,7 +674,6 @@
                                                                     <tr>
                                                                         <td class="key">
                                                                             Total land area
-                                                                            <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
                                                                             <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
@@ -718,7 +688,6 @@
                                                                     <tr>
                                                                         <td class="key">
                                                                             Capital investment
-                                                                            <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
                                                                             <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
@@ -733,7 +702,6 @@
                                                                     <tr>
                                                                         <td class="key">
                                                                             Legal status of the project
-                                                                            <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
                                                                             <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
@@ -748,7 +716,6 @@
                                                                     <tr>
                                                                         <td class="key">
                                                                             Estimated total population
-                                                                            <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
                                                                             <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
@@ -823,8 +790,11 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="datepicker" class="validate[custom[date]] text hasDatepicker" type="text" placeholder="" value="" name="ngaydang">
-                                                                            <span class="tooltip-help">
+                                                                            <input id="datePicker" class="validate[custom[date]] text hasDatepicker" type="date" placeholder="" value="" name="dateStart">
+                                                                            <span class="tooltip-help"></span>
+                                                                            <script>
+                                                                                document.getElementById('datePicker').valueAsDate = new Date();
+                                                                            </script>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -833,18 +803,16 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="datepicker" class="validate[custom[date]] text hasDatepicker" type="text" placeholder="" value="" name="ngaydang">
-                                                                            <span class="tooltip-help">
+                                                                            <input id="datepicker" class="validate[custom[date]] text hasDatepicker" type="date" placeholder="" value="" name="dateEnd">
+                                                                            <span class="tooltip-help"></span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="key">
                                                                             Photo description
-                                                                            <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Image" class="validate[required] text" type="text" value="" name="anhminhhoa">
-                                                                            <input id="SelectImages" type="button" value="Choose picture">
+                                                                            <input id="image" class="validate[required] text" type="file" value="" name="Choose picture">                              
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Photo description </p>
@@ -878,7 +846,7 @@
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>                                          
             <div style="margin-right: 25px; float: right; color: Gray;"> National Territory Builders - Real Estate </div>
             <div style="height: 10px; margin-top: 40px;"> </div>
         </div>                    

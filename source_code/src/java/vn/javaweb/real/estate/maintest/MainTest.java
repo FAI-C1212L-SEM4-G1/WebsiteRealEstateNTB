@@ -10,10 +10,10 @@ public class MainTest {
 
     public MainTest() {
         /** Test bang gia khu vuc */
-//        RegionalPriceTest();
+        RegionalPriceTest();
         
         /** Test ho so du an */
-        ProfileLandTest();
+//        ProfileLandTest();
     }
     
     public static void main(String args[]){
@@ -22,14 +22,20 @@ public class MainTest {
     
     private void RegionalPriceTest(){
         TestRegionalPrice testRegionalPrice = new TestRegionalPrice();
-        /** Khoi tao */
+        /** Them moi bang gia dat */
 //        testRegionalPrice.testCreate();
-        /** Xoa */
+        
+        /** Xoa bang gia dat */
 //        testRegionalPrice.testDelete();
+        
         /** Tim kiem theo ten thanh pho */
 //        testRegionalPrice.testFindByCity();
+        
         /** Tim kiem tuong doi khu vuc */
-        testRegionalPrice.testFindByRegionalNameLike();
+//        testRegionalPrice.testFindByRegionalNameLike();
+        
+        /** Tim tat ca */
+        testRegionalPrice.testFindAll();
     }
     
     

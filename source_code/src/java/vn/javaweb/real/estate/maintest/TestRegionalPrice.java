@@ -66,4 +66,13 @@ public class TestRegionalPrice {
         }  
         System.out.println("Tong so ket qua: " + list.size());
     }
+    
+    protected void testFindAll(){
+        ConfigConnection configConnection = ConfigConnection.getInstance();
+        List<RegionalPrice> list = configConnection.getRegionalPriceModelManage().findAll();
+        for(RegionalPrice rp : list){
+            System.out.println(rp.toString()); 
+        }  
+        System.out.println("Tong so ket qua: " + list.size());
+    }
 }

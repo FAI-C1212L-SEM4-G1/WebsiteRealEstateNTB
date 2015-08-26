@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import vn.javaweb.real.estate.model.ProfileLand;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-08-26T22:13:30")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-08-26T23:50:06")
 @StaticMetamodel(PaymentMode.class)
 public class PaymentMode_ { 
 
