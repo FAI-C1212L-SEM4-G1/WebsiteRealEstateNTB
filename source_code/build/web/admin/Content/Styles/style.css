@@ -3948,7 +3948,7 @@ jQuery UI Datepicker(new in v1.2.2)
 
 /*admintable*/
 .admintable .key {
-    width: 180px;
+    width: 250px;
     font-size: 14px;
     vertical-align:top;
 }
@@ -3973,6 +3973,7 @@ jQuery UI Datepicker(new in v1.2.2)
 .admintable input[type="tel"],
 .admintable input[type="color"] {
     margin-bottom:0px;
+    width: 580px;
 }
 
 .admintable label {

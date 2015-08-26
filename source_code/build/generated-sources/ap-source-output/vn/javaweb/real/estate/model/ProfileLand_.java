@@ -8,7 +8,7 @@ import vn.javaweb.real.estate.model.BuyLand;
 import vn.javaweb.real.estate.model.PaymentMode;
 import vn.javaweb.real.estate.model.RegionalPrice;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-08-25T22:33:46")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-08-26T22:13:30")
 @StaticMetamodel(ProfileLand.class)
 public class ProfileLand_ { 
 
