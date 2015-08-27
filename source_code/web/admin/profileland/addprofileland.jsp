@@ -553,7 +553,7 @@
                                                                                 </button>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <a class="toolbar btn btn-info" href="../../Product/ProductIndex" title="Quay lại">
+                                                                                <a class="toolbar btn btn-info" href="/" title="Back">
                                                                                     <i class="fa fa-arrow-circle-o-right"></i>
                                                                                     Back
                                                                                 </a>
@@ -577,13 +577,13 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td align="center">
-                                                                                        <button class="toolbar btn btn-info" type="submit">
+                                                                                        <button class="toolbar btn btn-info" type="submit" >
                                                                                             <i class="fa fa-floppy-o"></i>
                                                                                             Save
                                                                                         </button>
                                                                                     </td>
                                                                                     <td align="center">
-                                                                                        <a class="toolbar btn btn-info" href="../../Product/ProductIndex" title="Quay lại">
+                                                                                        <a class="toolbar btn btn-info" href="/" title="Back">
                                                                                             <i class="fa fa-arrow-circle-o-right"></i>
                                                                                             Back
                                                                                         </a>
@@ -607,7 +607,7 @@
                                                                             Project code
                                                                         </td>
                                                                         <td>
-                                                                            <input id="code" class="validate[required] text" type="text" placeholder="" value="" name="code" disabled>
+                                                                            <input id="code" class="validate[required] text" type="text" name="code" disabled>
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Project code </p>
@@ -616,8 +616,8 @@
                                                                             </span>
                                                                             <script>
                                                                                 var d = new Date();
-                                                                                document.getElementById("code").value = "PL" + ("0" + d.getDate()).slice(-2) + ("0"+(d.getMonth()+1)).slice(-2) +
-                                                                                ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + d.getSeconds() + d.getMilliseconds();
+                                                                                document.getElementById("code").value = "PL" + ("0" + d.getDate()).slice(-2) + ("0" + (d.getMonth() + 1)).slice(-2) +
+                                                                                        ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + d.getSeconds() + d.getMilliseconds();
                                                                             </script>
                                                                         </td>
                                                                     </tr>
@@ -627,7 +627,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Name" class="validate[required] text" type="text" placeholder="Example: Homeland Platinum condo project, ..." value="" name="name">
+                                                                            <input id="name" class="validate[required] text" type="text" placeholder="Example: Homeland Platinum condo project, ..." name="name">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Name of project construction </p>
@@ -655,14 +655,13 @@
                                                                                 </span>
                                                                             </span>
                                                                         </td>
-                                                                        
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="key">
                                                                             Project type                                                                            
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Name" class="validate[required] text" type="text" placeholder="Luxury apartment" value="" name="name">
+                                                                            <input id="typeOf" class="validate[required] text" type="text" placeholder="Luxury apartment" name="typeOf">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Project type </p>
@@ -676,7 +675,7 @@
                                                                             Total land area
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
+                                                                            <input id="totalArea" class="validate[required] text" type="text" name="totalArea">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Total land area </p>
@@ -690,7 +689,7 @@
                                                                             Capital investment
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
+                                                                            <input id="capitalInvestment" class="validate[required] text" type="text" name="capitalInvestment">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Capital investment </p>
@@ -704,7 +703,7 @@
                                                                             Legal status of the project
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
+                                                                            <input id="currentStatus" class="validate[required] text" type="text" name="currentStatus">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Legal status of the project </p>
@@ -718,7 +717,7 @@
                                                                             Estimated total population
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
+                                                                            <input id="populationSize" class="validate[required] text" type="text" name="populationSize">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Estimated total population </p>
@@ -732,7 +731,7 @@
                                                                             Total room           
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
+                                                                            <input id="totalRoom" class="validate[required] text" type="text" name="totalRoom">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Total room </p>
@@ -746,7 +745,7 @@
                                                                             Total floor
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
+                                                                            <input id="totalFloor" class="validate[required] text" type="text" name="totalFloor">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Total floor </p>
@@ -760,7 +759,7 @@
                                                                             Room size
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
+                                                                            <input id="roomArea" class="validate[required] text" type="text" name="roomArea">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Room size </p>
@@ -775,7 +774,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Name" class="validate[required] text" type="text" placeholder="" value="" name="name">
+                                                                            <input id="location" class="validate[required] text" type="text" name="location">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Address details project </p>
@@ -790,10 +789,10 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="datePicker" class="validate[custom[date]] text hasDatepicker" type="date" placeholder="" value="" name="dateStart">
+                                                                            <input id="dateStart" class="validate[custom[date]] text hasDatepicker" type="date" name="dateStart">
                                                                             <span class="tooltip-help"></span>
                                                                             <script>
-                                                                                document.getElementById('datePicker').valueAsDate = new Date();
+                                                                                document.getElementById('dateStart').valueAsDate = new Date();
                                                                             </script>
                                                                         </td>
                                                                     </tr>
@@ -803,7 +802,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="datepicker" class="validate[custom[date]] text hasDatepicker" type="date" placeholder="" value="" name="dateEnd">
+                                                                            <input id="dateEnd" class="validate[custom[date]] text hasDatepicker" type="date" name="dateEnd">
                                                                             <span class="tooltip-help"></span>
                                                                         </td>
                                                                     </tr>
@@ -812,7 +811,7 @@
                                                                             Photo description
                                                                         </td>
                                                                         <td>
-                                                                            <input id="image" class="validate[required] text" type="file" value="" name="Choose picture">                              
+                                                                            <input id="image" class="validate[required] text" type="file" name="Choose picture">                              
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Photo description </p>

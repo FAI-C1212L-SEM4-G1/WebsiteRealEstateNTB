@@ -1,7 +1,6 @@
 <%-- 
-    Document   : listblog
-    Created on : Aug 22, 2015, 8:32:28 AM
-    Author     : sang
+    Document   : List ProfileLand
+    Author     : PhanAnh
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,7 +8,7 @@
 <html>
      <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Profile Land</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="robots" content="noindex, nofollow" />
     <link rel="Shortcut Icon" href="http://static.bizwebmedia.net/favicon.ico" type="image/x-icon" />
