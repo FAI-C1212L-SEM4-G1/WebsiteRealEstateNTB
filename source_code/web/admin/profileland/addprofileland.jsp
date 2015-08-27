@@ -17,13 +17,13 @@
 <!--        <c:set var="url">${pageContext.request.requestURL}</c:set>
         <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />-->
         
-        <link type="text/css" rel="stylesheet" href="../Content/Styles/bootstrap.css">
+        <link type="text/css" rel="stylesheet" href="../Content/Styles/bootstrap.css" />
         <link href="../../font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
         <link type="text/css" rel="stylesheet" href="../Content/Styles/style.css">
-        <link type="text/css" rel="stylesheet" href="../Content/Styles/style_default.css">
-        <link type="text/css" rel="Stylesheet" href="../Content/Styles/jquery-ui-1.9.2.custom.css"    
-              <link type="text/css" rel="stylesheet" href="../Content/Styles/iselector.css" />
+        <link type="text/css" rel="stylesheet" href="../Content/Styles/style_default.css" />
+        <link type="text/css" rel="Stylesheet" href="../Content/Styles/jquery-ui-1.9.2.custom.css" />   
+        <link type="text/css" rel="stylesheet" href="../Content/Styles/iselector.css" />
         <link rel="stylesheet" type="text/css" href="../Content/Styles/jquery.fancybox.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../Content/Styles/imodal.css">
 
@@ -77,6 +77,7 @@
             <script src="../Content/Scripts/jquery.fancybox.pack.js" type="text/javascript"></script>
             <div class="PageHeader">
                 <div class="LogoHeader">
+                    
                 </div>
                 <div class="SystemMenu">
                     <div>
@@ -479,7 +480,7 @@
                     <div id="Breadcrumb" class="Block Breadcrumb ui-widget-content ui-corner-top ui-corner-bottom">
                         <ul>
                             <li class="SecondLast">
-                                <a href="/Admin/Default">
+                                <a href="#">
                                     <i class="fa fa-home" style="font-size:14px;"></i>
                                     Mainboard
                                 </a>
@@ -498,7 +499,9 @@
                             <div class="widget-body">
                                 <div>
                                     <form id="form-add-profile-land" method="POST" action="../../ControllerAddProfileLand">
-                                        <jsp:useBean id="modelManage" class="vn.javaweb.real.estate.model.ConfigConnection" scope="request" />
+                                        <core:if test="${modelManage==null}">
+                                            <jsp:useBean id="modelManage" class="vn.javaweb.real.estate.model.ConfigConnection" scope="session" />
+                                        </core:if>
                                         <div id="cph_Main_ContentPane">
                                             <div class="widget">
                                                 <div class="widget-title">

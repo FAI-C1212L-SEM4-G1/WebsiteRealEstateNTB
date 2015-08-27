@@ -23,6 +23,7 @@ public class ConfigConnection {
         profileLandModelManage = new ProfileLandModelManage(emf);
         regionalPriceModelManage = new RegionalPriceModelManage(emf);
         paymentModeModelManage = new PaymentModeModelManage(emf);
+        System.out.println("===KET NOI CAC MODEL OPEN===");
     }
     
     public static ConfigConnection getInstance(){

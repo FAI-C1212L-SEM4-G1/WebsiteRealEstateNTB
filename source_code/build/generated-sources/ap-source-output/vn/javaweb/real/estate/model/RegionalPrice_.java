@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import vn.javaweb.real.estate.model.ProfileLand;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-08-27T11:43:26")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-08-27T15:27:36")
 @StaticMetamodel(RegionalPrice.class)
 public class RegionalPrice_ { 
 
