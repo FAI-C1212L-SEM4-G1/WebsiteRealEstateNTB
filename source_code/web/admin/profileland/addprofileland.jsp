@@ -5,6 +5,7 @@
 
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="core" uri="http://java.sun.com/jstl/core_rt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,7 +14,9 @@
         <title>Profile Land</title>
 
         <link rel="Shortcut Icon" href="http://static.bizwebmedia.net/favicon.ico" type="image/x-icon" />
-
+<!--        <c:set var="url">${pageContext.request.requestURL}</c:set>
+        <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />-->
+        
         <link type="text/css" rel="stylesheet" href="../Content/Styles/bootstrap.css">
         <link href="../../font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
@@ -78,18 +81,18 @@
                 <div class="SystemMenu">
                     <div>
                         <ul class="sysMenu">
-                            <li class="first"><a class="link-topmenu" href="/admin"><i class="icon-home"></i> Homepage</a></li>
-                            <li><a class="link-topmenu" href="/admin.aspx?module=users"><i class="icon-user"></i> Profile User</a></li>
-                            <li><a class="link-topmenu" href="/admin.aspx?module=analytics"><i class="icon-bar-chart"></i> Statics</a></li>
-                            <li><a class="link-topmenu" href="/" target="_blank"><i class="icon-list-alt"></i> Website</a></li>
-                            <li><a class="link-topmenu" href="http://www.bizweb.vn/Tro-giup-p164.html" target="_blank"><i class="icon-question-sign"></i> Contacts</a></li>
+                            <li class="first"><a class="link-topmenu" href="../../index.jsp"><i class="icon-home"></i> Homepage</a></li>
+                            <li><a class="link-topmenu" href="#"><i class="icon-user"></i> Profile User</a></li>
+                            <li><a class="link-topmenu" href="#"><i class="icon-bar-chart"></i> Statics</a></li>
+                            <li><a class="link-topmenu" href="${pageContext.request.contextPath}/index.jsp" target="_blank"><i class="icon-list-alt"></i> Website</a></li>
+                            <li><a class="link-topmenu" href="#"><i class="icon-question-sign"></i> Contacts</a></li>
                             <li class="last">
                                 <div class="btn-group">
-                                    <a href="/admin.aspx?module=users&action=edituser&id=84211" class="btn account-info btn-info"><i class="icon-user"></i>
-                                        admin</a><a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle dropdown-toggle-acount"><span class="icon-caret-down"></span></a>
+                                    <a href="#" class="btn account-info btn-info"><i class="icon-user"></i>admin</a>
+                                    <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle dropdown-toggle-acount"><span class="icon-caret-down"></span></a>
                                     <ul class="dropdown-menu custome">
-                                        <li><a href="/admin.aspx?module=users&action=changepass"><i class="icon-key"></i> Change password</a></li>
-                                        <li><a id="siteUser_Lbtn_Logout" class="NormalGray" href="javascript:__doPostBack(&#39;ctl00$siteUser$Lbtn_Logout&#39;,&#39;&#39;)"><i class="icon-signout"></i> Logout</a></li>
+                                        <li><a href="#"><i class="icon-key"></i> Change password</a></li>
+                                        <li><a id="siteUser_Lbtn_Logout" class="NormalGray" href="#"><i class="icon-signout"></i> Logout</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -284,18 +287,18 @@
                     <div id="menu">
                         <ul>
                             <li>
-                                <a class="TopMenuItem" href="javascript:;">
+                                <a class="TopMenuItem" href="#">
                                     <span class="MenuText"><i class="icon-shopping-cart"></i> Profile building</span>
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="../admin/user/userindex.jsp">
+                                        <a href="${pageContext.request.contextPath}/admin/profileland/addprofileland.jsp">
                                             <span class="SubMenuText">Add new project
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="../admin/blog/blogindex.jsp">
+                                        <a href="${pageContext.request.contextPath}/admin/profileland/listprofileland.jsp">
                                             <span class="SubMenuText">List of projects
                                             </span>
                                         </a>
@@ -303,111 +306,74 @@
                                 </ul>
                             </li>
                             <li>
-                                <a class="TopMenuItem" href="javascript:;">
+                                <a class="TopMenuItem" href="#">
                                     <span class="MenuText"><i class="icon-tags"></i> Regional price</span>
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="/admin.aspx?module=products">
+                                        <a href="#">
                                             <span class="SubMenuText">Create regional price
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/admin.aspx?module=categories">
+                                        <a href="#">
                                             <span class="SubMenuText">List regional price
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/admin.aspx?module=export"> 
-                                            <span class="SubMenuText">---
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/admin.aspx?module=vendors">
-                                            <span class="SubMenuText">---
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/admin.aspx?module=customcategories">
-                                            <span class="SubMenuText">---
                                             </span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a class="TopMenuItem" href="javascript:;">
+                                <a class="TopMenuItem" href="#">
                                     <span class="MenuText"><i class="icon-th-large"></i> Manage account</span>
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="/admin.aspx?module=articles">
+                                        <a href="#">
                                             <span class="SubMenuText">Create new account
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/admin.aspx?module=articlecategories">
+                                        <a href="#">
                                             <span class="SubMenuText">Account waiting
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/admin.aspx?module=survey">
+                                        <a href="#">
                                             <span class="SubMenuText">All account
                                             </span>
                                         </a>
-                                    </li>
-                                    <li>
-                                        <a href="/admin.aspx?module=gallery">
-                                            <span class="SubMenuText">---
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/admin.aspx?module=download">
-                                            <span class="SubMenuText">---
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/admin.aspx?module=pages">
-                                            <span class="SubMenuText">---
-                                            </span>
-                                        </a>
-                                    </li>                                    
+                                    </li>                                                                       
                                 </ul>
                             </li>
                             <li>
-                                <a class="TopMenuItem" href="javascript:;">
+                                <a class="TopMenuItem" href="#">
                                     <span class="MenuText"><i class="icon-user"></i> Customer</span>
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="/admin.aspx?module=contacts">
+                                        <a href="#">
                                             <span class="SubMenuText">Customers order
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/admin.aspx?module=customers">
+                                        <a href="#">
                                             <span class="SubMenuText">List customers 
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/admin.aspx?module=customergroups">
+                                        <a href="#">
                                             <span class="SubMenuText">---
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/admin.aspx?module=emailsubscription">
+                                        <a href="#">
                                             <span class="SubMenuText">---
                                             </span>
                                         </a>
@@ -607,7 +573,7 @@
                                                                             Project code
                                                                         </td>
                                                                         <td>
-                                                                            <input id="code" class="validate[required] text" type="text" name="code" disabled>
+                                                                            <input id="code" class="validate[required] text" type="text" name="code" readonly="readonly" />
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Project code </p>
@@ -615,9 +581,9 @@
                                                                                 </span>
                                                                             </span>
                                                                             <script>
-                                                                                var d = new Date();
+                                                                                var d = new Date();                                                      ;
                                                                                 document.getElementById("code").value = "PL" + ("0" + d.getDate()).slice(-2) + ("0" + (d.getMonth() + 1)).slice(-2) +
-                                                                                        ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + d.getSeconds() + d.getMilliseconds();
+                                                                                        ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + d.getSeconds() + d.getMilliseconds();                                                                                
                                                                             </script>
                                                                         </td>
                                                                     </tr>
@@ -626,8 +592,8 @@
                                                                             Name of project construction
                                                                             <span class="Required">*</span>
                                                                         </td>
-                                                                        <td>
-                                                                            <input id="name" class="validate[required] text" type="text" placeholder="Example: Homeland Platinum condo project, ..." name="name">
+                                                                        <td>            
+                                                                            <input id="name" class="validate[required] text" type="text" placeholder="Example: Homeland Platinum condo project, ..." name="name" >
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Name of project construction </p>
@@ -811,7 +777,7 @@
                                                                             Photo description
                                                                         </td>
                                                                         <td>
-                                                                            <input id="image" class="validate[required] text" type="file" name="Choose picture">                              
+                                                                            <input id="image" class="validate[required] text" type="file" name="Choose picture" />                              
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Photo description </p>

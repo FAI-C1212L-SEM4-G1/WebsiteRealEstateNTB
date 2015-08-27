@@ -50,7 +50,7 @@ public class ControllerAddProfileLand extends HttpServlet {
         String image = req.getParameter("Choose picture");
         
         ConfigConnection modelManage = ConfigConnection.getInstance();
-        RegionalPrice regionalPrice = modelManage.getRegionalPriceModelManage().findByCode(codeRegional);
+        RegionalPrice regionalPrice = modelManage.getRegionalPriceModelManage().findByCode(codeRegional);       
         
         ProfileLand profileLand = new ProfileLand();
         profileLand.setCode(code);
@@ -84,7 +84,11 @@ public class ControllerAddProfileLand extends HttpServlet {
         if(flag){
             req.getRequestDispatcher("/admin/profileland/listprofileland.jsp").forward(req, resp);
         } else {
-            PrintWriter pw;
+            PrintWriter out = resp.getWriter();  
+            resp.setContentType("text/html");  
+            out.println("<script type=\"text/javascript\">");  
+            out.println("alert('Error! Not suscess');");  
+            out.println("</script>");
         }
     }
 
