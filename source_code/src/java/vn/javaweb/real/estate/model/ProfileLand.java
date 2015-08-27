@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,6 +15,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -48,6 +51,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ProfileLand.findByIntroduction", query = "SELECT p FROM ProfileLand p WHERE p.introduction = :introduction"),
     @NamedQuery(name = "ProfileLand.findByDescription", query = "SELECT p FROM ProfileLand p WHERE p.description = :description"),
     @NamedQuery(name = "ProfileLand.findByImage", query = "SELECT p FROM ProfileLand p WHERE p.image = :image")})
+@SqlResultSetMapping(name="ProfileLandResult", classes = {
+    @ConstructorResult(targetClass = ProfileLand.class, 
+    columns = {@ColumnResult(name="code"), @ColumnResult(name="codeRegional"), @ColumnResult(name="location"), @ColumnResult(name="typeOf"), @ColumnResult(name="investors")
+    , @ColumnResult(name="totalArea"), @ColumnResult(name="capitalInvestment"), @ColumnResult(name="dateStart"), @ColumnResult(name="dateEnd"), @ColumnResult(name="currentStatus"), @ColumnResult(name="populationSize")
+    , @ColumnResult(name="totalRoom"), @ColumnResult(name="totalFloor"), @ColumnResult(name="roomArea"), @ColumnResult(name="introduction"), @ColumnResult(name="description"), @ColumnResult(name="image")})
+})
 public class ProfileLand implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -9,6 +9,10 @@
         <servlet-name>ControllerUpdateProfileLand</servlet-name>
         <servlet-class>vn.javaweb.real.estate.actionservlet.adminpage.ControllerUpdateProfileLand</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControllerListProfileLand</servlet-name>
+        <servlet-class>vn.javaweb.real.estate.actionservlet.adminpage.ControllerListProfileLand</servlet-class>
+    </servlet>
     
     <!--Servlet pattern name-->
     <servlet-mapping>
@@ -18,6 +22,10 @@
     <servlet-mapping>
         <servlet-name>ControllerUpdateProfileLand</servlet-name>
         <url-pattern>/ControllerUpdateProfileLand</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerListProfileLand</servlet-name>
+        <url-pattern>/ControllerListProfileLand</url-pattern>
     </servlet-mapping>
     
     <session-config>

@@ -31,4 +31,13 @@ public class TestProfileLand {
         }  
         System.out.println("Tong so ket qua: " + list.size());
     }
+    
+    protected void testFindBetween(int indexStart, int indexEnd){
+        ConfigConnection configConnection = ConfigConnection.getInstance();
+        List<ProfileLand> list = configConnection.getProfileLandModelManage().findBetween(indexStart, indexEnd);
+        for(ProfileLand pl : list){
+            System.out.println(pl.toString()); 
+        }  
+        System.out.println("Tong so ket qua: " + list.size());
+    }
 }

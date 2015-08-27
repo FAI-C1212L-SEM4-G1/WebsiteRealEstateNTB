@@ -256,6 +256,20 @@ public class ProfileLandModelManage implements Serializable {
         return findProfileLandEntities(true, -1, -1);
     }
 
+    // Lấy danh sách theo indexStart - indexEnd
+    public List<ProfileLand> findBetween(int indexStart, int indexEnd) {
+        EntityManager em = getEntityManager();   
+        try {
+            String q = "SELECT * FROM " +
+                       "( SELECT *, ROW_NUMBER() over (ORDER BY dateStart DESC) as ct from [RealEstate].[dbo].[ProfileLand] ) sub " +
+                       "WHERE ct > "+ indexStart +"  and ct <= " + indexEnd;
+            Query query = em.createNativeQuery(q, "ProfileLandResult");
+            return (List<ProfileLand>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
     public List<ProfileLand> findProfileLandEntities(int maxResults, int firstResult) {
         return findProfileLandEntities(false, maxResults, firstResult);
     }

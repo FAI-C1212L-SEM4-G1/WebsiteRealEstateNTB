@@ -299,7 +299,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/admin/profileland/listprofileland.jsp">
+                                        <a href="${pageContext.request.contextPath}/ControllerListProfileLand?page=0">
                                             <span class="SubMenuText">List of projects
                                             </span>
                                         </a>

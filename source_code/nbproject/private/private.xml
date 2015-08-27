@@ -14,7 +14,8 @@
         <group>
             <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/web/admin/profileland/addprofileland.jsp</file>
             <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/actionservlet/adminpage/ControllerAddProfileLand.java</file>
-            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/model/ProfileLand.java</file>
+            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/manage/ProfileLandModelManage.java</file>
+            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/actionservlet/adminpage/ControllerListProfileLand.java</file>
             <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/web/admin/profileland/listprofileland.jsp</file>
         </group>
     </open-files>

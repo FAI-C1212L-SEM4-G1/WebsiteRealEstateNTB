@@ -82,7 +82,7 @@ public class ControllerAddProfileLand extends HttpServlet {
         }
         
         if(flag){
-            req.getRequestDispatcher("/admin/profileland/listprofileland.jsp").forward(req, resp);
+            req.getRequestDispatcher("admin/profileland/ControllerListProfileLand?page=0").forward(req, resp);
         } else {
             PrintWriter out = resp.getWriter();  
             resp.setContentType("text/html");  
