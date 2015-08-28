@@ -263,7 +263,7 @@ public class ProfileLandModelManage implements Serializable {
             String q = "SELECT * FROM " +
                        "( SELECT *, ROW_NUMBER() over (ORDER BY dateStart DESC) as ct from [RealEstate].[dbo].[ProfileLand] ) sub " +
                        "WHERE ct > "+ indexStart +"  and ct <= " + indexEnd;
-            Query query = em.createNativeQuery(q, "ProfileLandResult");
+            Query query = em.createNativeQuery(q, ProfileLand.class);
             return (List<ProfileLand>)query.getResultList(); 
         } finally {
             em.close();

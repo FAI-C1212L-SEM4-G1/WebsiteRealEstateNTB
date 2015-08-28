@@ -42,12 +42,12 @@ public class MainTest {
     private void ProfileLandTest(){
         TestProfileLand testProfileLand = new TestProfileLand();
         /** Lay tat ca ban ghi */
-        testProfileLand.testFindAll();
+//        testProfileLand.testFindAll();
         
         /** Tim cac du an da xay dung xong */
 //        testProfileLand.testFindByConstructionStatus(ProfileLandModelManage.ConstructionStatus.Completed);
         
         /** Lay tat ca ban ghi */
-//        testProfileLand.testFindBetween(0, 3);
+        testProfileLand.testFindBetween(3, 10);
     }
 }
