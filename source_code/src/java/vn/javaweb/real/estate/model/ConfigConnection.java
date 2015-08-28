@@ -19,11 +19,14 @@ public class ConfigConnection {
     public static String PERSISTENCE_UNIT_NAME = "HousingPU";
 
     public ConfigConnection() {
+        System.out.println("--------------------------------------");
+        System.out.println("................LOADING...............");
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         profileLandModelManage = new ProfileLandModelManage(emf);
         regionalPriceModelManage = new RegionalPriceModelManage(emf);
         paymentModeModelManage = new PaymentModeModelManage(emf);
-        System.out.println("===KET NOI CAC MODEL OPEN===");
+        System.out.println(".......MANAGE MODEL OPEN SUCSESS......");
+        System.out.println("--------------------------------------");
     }
     
     public static ConfigConnection getInstance(){

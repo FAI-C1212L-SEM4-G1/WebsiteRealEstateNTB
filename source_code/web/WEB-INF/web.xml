@@ -6,34 +6,31 @@
         <servlet-class>vn.javaweb.real.estate.actionservlet.adminpage.ControllerAddProfileLand</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ControllerUpdateProfileLand</servlet-name>
-        <servlet-class>vn.javaweb.real.estate.actionservlet.adminpage.ControllerUpdateProfileLand</servlet-class>
+        <servlet-name>ControllerProfileLand</servlet-name>
+        <servlet-class>vn.javaweb.real.estate.actionservlet.adminpage.ControllerProfileLand</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ControllerListProfileLand</servlet-name>
         <servlet-class>vn.javaweb.real.estate.actionservlet.adminpage.ControllerListProfileLand</servlet-class>
     </servlet>
-    
     <!--Servlet pattern name-->
     <servlet-mapping>
         <servlet-name>ControllerAddProfileLand</servlet-name>
         <url-pattern>/ControllerAddProfileLand</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ControllerUpdateProfileLand</servlet-name>
-        <url-pattern>/ControllerUpdateProfileLand</url-pattern>
+        <servlet-name>ControllerProfileLand</servlet-name>
+        <url-pattern>/ControllerProfileLand</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ControllerListProfileLand</servlet-name>
         <url-pattern>/ControllerListProfileLand</url-pattern>
     </servlet-mapping>
-    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

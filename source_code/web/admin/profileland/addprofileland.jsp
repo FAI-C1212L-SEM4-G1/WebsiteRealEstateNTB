@@ -14,30 +14,30 @@
         <title>Profile Land</title>
 
         <link rel="Shortcut Icon" href="http://static.bizwebmedia.net/favicon.ico" type="image/x-icon" />
-<!--        <c:set var="url">${pageContext.request.requestURL}</c:set>
-        <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />-->
+<%--        <c:set var="url">${pageContext.request.requestURL}</c:set>
+        <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" /> --%>
         
-        <link type="text/css" rel="stylesheet" href="../Content/Styles/bootstrap.css" />
-        <link href="../../font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/admin/Content/Styles/bootstrap.css" />
+        <link href="${pageContext.request.contextPath}/font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
-        <link type="text/css" rel="stylesheet" href="../Content/Styles/style.css">
-        <link type="text/css" rel="stylesheet" href="../Content/Styles/style_default.css" />
-        <link type="text/css" rel="Stylesheet" href="../Content/Styles/jquery-ui-1.9.2.custom.css" />   
-        <link type="text/css" rel="stylesheet" href="../Content/Styles/iselector.css" />
-        <link rel="stylesheet" type="text/css" href="../Content/Styles/jquery.fancybox.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="../Content/Styles/imodal.css">
+        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/admin/Content/Styles/style.css">
+        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/admin/Content/Styles/style_default.css" />
+        <link type="text/css" rel="Stylesheet" href="${pageContext.request.contextPath}/admin/Content/Styles/jquery-ui-1.9.2.custom.css" />   
+        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/admin/Content/Styles/iselector.css" />
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/Content/Styles/jquery.fancybox.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/Content/Styles/imodal.css">
 
-        <script src="../Content/Scripts/analytics.js" type="text/javascript"></script>
-        <script src="../Content/Scripts/jquery.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/admin/Content/Scripts/analytics.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/admin/Content/Scripts/jquery.min.js" type="text/javascript"></script>
         <script type="text/javascript">var $j = jQuery.noConflict();</script>
-        <script type="text/javascript" src="../Content/Scripts/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="../Content/Scripts/common.js"></script>
-        <script type="text/javascript" src="../Content/Scripts/iselector.js"></script>
-        <script type="text/javascript" src="../Content/Scripts/admin.js"></script>
-        <script type="text/javascript" src="../Content/Scripts/imodal.js"></script>
-        <script type="text/javascript" src="../Content/Scripts/bootstrap.min.js"></script>
-        <script type="text/javascript" src="../Content/Scripts/scripts.js"></script>
-        <script src="../../ckeditor/ckeditor.js" type="text/javascript"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/common.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/iselector.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/admin.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/imodal.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/scripts.js"></script>
+        <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             function beginKeepAlive() {
@@ -71,10 +71,10 @@
         </script>
     </head>
     <body class="fixed-top">        
-        <div id="AjaxLoading"><img src="../Content/Images/Admin/ajax-load.gif" alt=""/>&nbsp; Loading ... Please waiting ...</div>
+       <div id="AjaxLoading"><img src="${pageContext.request.contextPath}/admin/Content/Images/Admin/ajax-load.gif" alt=""/>&nbsp; Loading ... Please waiting ...</div>
         <form method="POST" action="" id="form1">
-            <script src="../Content/Scripts/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>            
-            <script src="../Content/Scripts/jquery.fancybox.pack.js" type="text/javascript"></script>
+            <script src="${pageContext.request.contextPath}/admin/Content/Scripts/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>            
+            <script src="${pageContext.request.contextPath}/admin/Content/Scripts/jquery.fancybox.pack.js" type="text/javascript"></script>
             <div class="PageHeader">
                 <div class="LogoHeader">
                     
@@ -82,7 +82,7 @@
                 <div class="SystemMenu">
                     <div>
                         <ul class="sysMenu">
-                            <li class="first"><a class="link-topmenu" href="../../index.jsp"><i class="icon-home"></i> Homepage</a></li>
+                            <li class="first"><a class="link-topmenu" href="${pageContext.request.contextPath}/index.jsp"><i class="icon-home"></i> Homepage</a></li>
                             <li><a class="link-topmenu" href="#"><i class="icon-user"></i> Profile User</a></li>
                             <li><a class="link-topmenu" href="#"><i class="icon-bar-chart"></i> Statics</a></li>
                             <li><a class="link-topmenu" href="${pageContext.request.contextPath}/index.jsp" target="_blank"><i class="icon-list-alt"></i> Website</a></li>
@@ -154,7 +154,7 @@
 
                     #menu ul li a
                     {
-                        background-image: url("../Content/Images/Admin/icon_sub.gif");
+                        background-image: url("${pageContext.request.contextPath}/admin/Content/Images/Admin/icon_sub.gif");
                         background-position: right center;
                         background-repeat: no-repeat;
                         color: #ffffff;
@@ -169,7 +169,7 @@
 
                     #menu li:hover a, #menu li.current a
                     {
-                        background-image: url("../Content/Images/Admin/icon_sub.gif");
+                        background-image: url("${pageContext.request.contextPath}/admin/Content/Images/Admin/icon_sub.gif");
                         color: #FFFFFF;
                         text-decoration: none;
                     }
@@ -293,13 +293,13 @@
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="${pageContext.request.contextPath}/admin/profileland/addprofileland.jsp">
+                                        <a href="${pageContext.request.contextPath}/ControllerProfileLand?action=add">
                                             <span class="SubMenuText">Add new project
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/ControllerListProfileLand?page=0">
+                                        <a href="${pageContext.request.contextPath}/ControllerProfileLand?action=list">
                                             <span class="SubMenuText">List of projects
                                             </span>
                                         </a>
@@ -486,8 +486,7 @@
                                 </a>
                             </li>
                             <li class="Last">
-                                <span>
-                                    <i class="fa fa-angle-double-right" style="font-size:14px;"></i>
+                                <span>      
                                     Add new project
                                 </span>
                             </li>
@@ -498,7 +497,7 @@
                         <div class="widget">
                             <div class="widget-body">
                                 <div>
-                                    <form id="form-add-profile-land" method="POST" action="../../ControllerAddProfileLand">
+                                    <form id="form-add-profile-land" method="POST" action="${pageContext.request.contextPath}/ControllerProfileLand">
                                         <core:if test="${modelManage==null}">
                                             <jsp:useBean id="modelManage" class="vn.javaweb.real.estate.model.ConfigConnection" scope="session" />
                                         </core:if>
@@ -522,7 +521,7 @@
                                                                                 </button>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <a class="toolbar btn btn-info" href="/" title="Back">
+                                                                                <a class="toolbar btn btn-info" href="#" title="Back">
                                                                                     <i class="fa fa-arrow-circle-o-right"></i>
                                                                                     Back
                                                                                 </a>
@@ -552,7 +551,7 @@
                                                                                         </button>
                                                                                     </td>
                                                                                     <td align="center">
-                                                                                        <a class="toolbar btn btn-info" href="/" title="Back">
+                                                                                        <a class="toolbar btn btn-info" href="#" title="Back">
                                                                                             <i class="fa fa-arrow-circle-o-right"></i>
                                                                                             Back
                                                                                         </a>
@@ -576,18 +575,21 @@
                                                                             Project code
                                                                         </td>
                                                                         <td>
-                                                                            <input id="code" class="validate[required] text" type="text" name="code" readonly="readonly" />
+                                                                            <input id="code" class="validate[required] text" type="text" name="code" value="${object.code}" readonly="readonly" />
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Project code </p>
                                                                                     <p class="tooltipmessage"> Code construction projects automatically </p>
                                                                                 </span>
                                                                             </span>
-                                                                            <script>
-                                                                                var d = new Date();                                                      ;
-                                                                                document.getElementById("code").value = "PL" + ("0" + d.getDate()).slice(-2) + ("0" + (d.getMonth() + 1)).slice(-2) +
-                                                                                        ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + d.getSeconds() + d.getMilliseconds();                                                                                
-                                                                            </script>
+                                                                            <% String action = request.getParameter("action");
+                                                                                    if (action.equalsIgnoreCase("add")) { %>
+                                                                                <script>
+                                                                                    var d = new Date();                                                      ;
+                                                                                    document.getElementById("code").value = "PL" + ("0" + d.getDate()).slice(-2) + ("0" + (d.getMonth() + 1)).slice(-2) +
+                                                                                            ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + d.getSeconds() + d.getMilliseconds();                                                                                
+                                                                                </script>  
+                                                                            <% }%>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -596,7 +598,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>            
-                                                                            <input id="name" class="validate[required] text" type="text" placeholder="Example: Homeland Platinum condo project, ..." name="name" >
+                                                                            <input id="name" class="validate[required] text" type="text" placeholder="Example: Homeland Platinum condo project, ..." value="${object.name}" name="name" >
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Name of project construction </p>
@@ -614,7 +616,7 @@
                                                                             <select id="codeRegional" name="codeRegional">
                                                                                 <option value="null">Select one option</option>
                                                                                 <core:forEach var="regionalPrice" items="${modelManage.regionalPriceModelManage.findAll()}" >                     
-                                                                                    <option value="${regionalPrice.code}">${regionalPrice.regionalName}</option>  
+                                                                                    <option value="${regionalPrice.code}" <core:if test="${object.codeRegional.code eq regionalPrice.code}">selected</core:if> >${regionalPrice.regionalName}</option>  
                                                                                 </core:forEach>
                                                                             </select>
                                                                             <span class="tooltip-help">
@@ -630,7 +632,7 @@
                                                                             Project type                                                                            
                                                                         </td>
                                                                         <td>
-                                                                            <input id="typeOf" class="validate[required] text" type="text" placeholder="Luxury apartment" name="typeOf">
+                                                                            <input id="typeOf" class="validate[required] text" type="text" value="${object.typeOf}" placeholder="Luxury apartment" name="typeOf">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Project type </p>
@@ -644,7 +646,7 @@
                                                                             Total land area
                                                                         </td>
                                                                         <td>
-                                                                            <input id="totalArea" class="validate[required] text" type="text" name="totalArea">
+                                                                            <input id="totalArea" class="validate[required] text" type="text" name="totalArea" value="${object.totalArea}">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Total land area </p>
@@ -658,7 +660,7 @@
                                                                             Capital investment
                                                                         </td>
                                                                         <td>
-                                                                            <input id="capitalInvestment" class="validate[required] text" type="text" name="capitalInvestment">
+                                                                            <input id="capitalInvestment" class="validate[required] text" type="text" name="capitalInvestment" value="${object.capitalInvestment}">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Capital investment </p>
@@ -672,7 +674,7 @@
                                                                             Legal status of the project
                                                                         </td>
                                                                         <td>
-                                                                            <input id="currentStatus" class="validate[required] text" type="text" name="currentStatus">
+                                                                            <input id="currentStatus" class="validate[required] text" type="text" name="currentStatus" value="${object.currentStatus}">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Legal status of the project </p>
@@ -686,7 +688,7 @@
                                                                             Estimated total population
                                                                         </td>
                                                                         <td>
-                                                                            <input id="populationSize" class="validate[required] text" type="text" name="populationSize">
+                                                                            <input id="populationSize" class="validate[required] text" type="text" name="populationSize" value="${object.populationSize}" >
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Estimated total population </p>
@@ -700,7 +702,7 @@
                                                                             Total room           
                                                                         </td>
                                                                         <td>
-                                                                            <input id="totalRoom" class="validate[required] text" type="text" name="totalRoom">
+                                                                            <input id="totalRoom" class="validate[required] text" type="text" name="totalRoom" value="${object.totalRoom}" >
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Total room </p>
@@ -714,7 +716,7 @@
                                                                             Total floor
                                                                         </td>
                                                                         <td>
-                                                                            <input id="totalFloor" class="validate[required] text" type="text" name="totalFloor">
+                                                                            <input id="totalFloor" class="validate[required] text" type="text" name="totalFloor" value="${object.totalFloor}" >
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Total floor </p>
@@ -728,7 +730,7 @@
                                                                             Room size
                                                                         </td>
                                                                         <td>
-                                                                            <input id="roomArea" class="validate[required] text" type="text" name="roomArea">
+                                                                            <input id="roomArea" class="validate[required] text" type="text" name="roomArea" value="${object.roomArea}" >
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Room size </p>
@@ -743,7 +745,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="location" class="validate[required] text" type="text" name="location">
+                                                                            <input id="location" class="validate[required] text" type="text" name="location" value="${object.location}">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Address details project </p>
@@ -758,11 +760,13 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="dateStart" class="validate[custom[date]] text hasDatepicker" type="date" name="dateStart">
+                                                                            <input id="dateStart" class="validate[custom[date]] text hasDatepicker" type="date" name="dateStart" value="${object.dateStart.toString()}">
                                                                             <span class="tooltip-help"></span>
+                                                                            <% if (action.equalsIgnoreCase("add")) { %>
                                                                             <script>
                                                                                 document.getElementById('dateStart').valueAsDate = new Date();
                                                                             </script>
+                                                                            <% }%>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -771,7 +775,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="dateEnd" class="validate[custom[date]] text hasDatepicker" type="date" name="dateEnd">
+                                                                            <input id="dateEnd" class="validate[custom[date]] text hasDatepicker" type="date" name="dateEnd" value="${object.dateEnd.toString()}">
                                                                             <span class="tooltip-help"></span>
                                                                         </td>
                                                                     </tr>
@@ -792,13 +796,13 @@
                                                                     <tr>
                                                                         <td class="key"> Project description </td>
                                                                         <td>
-                                                                            <textarea id="txt_description" class="validate[required]" style="visibility: visible; display: block;" rows="5" name="description" cols="20"></textarea>
+                                                                            <textarea id="txt_description" class="validate[required]" style="visibility: visible; display: block;" rows="5" name="description" cols="20" >${object.introduction}</textarea>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="key"> Project details </td>
                                                                         <td>
-                                                                            <textarea id="txt_detail" class="validate[required]" style="visibility: visible; display: block;" rows="10" name="details" cols="20"></textarea>
+                                                                            <textarea id="txt_detail" class="validate[required]" style="visibility: visible; display: block;" rows="10" name="details" cols="20">${object.description}</textarea>
                                                                         </td>
                                                                     </tr>                                                                                                              
                                                                 </tbody>

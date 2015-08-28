@@ -15,27 +15,27 @@
         <link rel="Shortcut Icon" href="http://static.bizwebmedia.net/favicon.ico" type="image/x-icon" />
         <!--  -->
 
-        <link type="text/css" rel="stylesheet" href="../source_code/admin/Content/Styles/bootstrap.css">
-        <link href="../source_code/font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/admin/Content/Styles/bootstrap.css">
+        <link href="${pageContext.request.contextPath}/font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
-        <link type="text/css" rel="stylesheet" href="../source_code/admin/Content/Styles/style.css">
-        <link type="text/css" rel="stylesheet" href="../source_code/admin/Content/Styles/style_default.css">
-        <link type="text/css" rel="Stylesheet" href="../source_code/admin/Content/Styles/jquery-ui-1.9.2.custom.css" />  
-        <link type="text/css" rel="stylesheet" href="../source_code/admin/Content/Styles/iselector.css" />
-        <link rel="stylesheet" type="text/css" href="../source_code/admin/Content/Styles/jquery.fancybox.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="../source_code/admin/Content/Styles/imodal.css">
+        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/admin/Content/Styles/style.css">
+        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/admin/Content/Styles/style_default.css">
+        <link type="text/css" rel="Stylesheet" href="${pageContext.request.contextPath}/admin/Content/Styles/jquery-ui-1.9.2.custom.css" />  
+        <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/admin/Content/Styles/iselector.css" />
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/Content/Styles/jquery.fancybox.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/admin/Content/Styles/imodal.css">
 
         <script async="" src="../source_code/admin/Content/Scripts/analytics.js">
         </script><script type="text/javascript" src="../source_code/admin/Content/Scripts/jquery.min.js"></script>
         <script type="text/javascript">var $j = jQuery.noConflict();</script>
-        <script type="text/javascript" src="../source_code/admin/Content/Scripts/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="../source_code/admin/Content/Scripts/common.js"></script>
-        <script type="text/javascript" src="../source_code/admin/Content/Scripts/iselector.js"></script>
-        <script type="text/javascript" src="../source_code/admin/Content/Scripts/admin.js"></script>
-        <script type="text/javascript" src="../source_code/admin/Content/Scripts/imodal.js"></script>
-        <script type="text/javascript" src="../source_code/admin/Content/Scripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/common.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/iselector.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/admin.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/imodal.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/bootstrap.min.js"></script>
 
-        <script type="text/javascript" src="../source_code/admin/Content/Scripts/scripts.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/admin/Content/Scripts/scripts.js"></script>
         <!--  -->
 
         <script type="text/javascript">
@@ -66,10 +66,10 @@
     </head>
 
     <body class="fixed-top">
-        <div id="AjaxLoading"><img src="../source_code/admin/Content/Images/Admin/ajax-load.gif" alt=""/>&nbsp; Loading ... Please waiting ...</div>
+        <div id="AjaxLoading"><img src="${pageContext.request.contextPath}/admin/Content/Images/Admin/ajax-load.gif" alt=""/>&nbsp; Loading ... Please waiting ...</div>
         <form method="POST" action="" id="form1">
-            <script src="../source_code/admin/Content/Scripts/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>            
-            <script src="../source_code/admin/Content/Scripts/jquery.fancybox.pack.js" type="text/javascript"></script>
+            <script src="${pageContext.request.contextPath}/admin/Content/Scripts/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>            
+            <script src="${pageContext.request.contextPath}/admin/Content/Scripts/jquery.fancybox.pack.js" type="text/javascript"></script>
             <div class="PageHeader">
                 <div class="LogoHeader">
 
@@ -77,7 +77,7 @@
                 <div class="SystemMenu">
                     <div>
                         <ul class="sysMenu">
-                            <li class="first"><a class="link-topmenu" href="../source_code/index.jsp"><i class="icon-home"></i> Homepage</a></li>
+                            <li class="first"><a class="link-topmenu" href="${pageContext.request.contextPath}/index.jsp"><i class="icon-home"></i> Homepage</a></li>
                             <li><a class="link-topmenu" href="#"><i class="icon-user"></i> Profile User</a></li>
                             <li><a class="link-topmenu" href="#"><i class="icon-bar-chart"></i> Statics</a></li>
                             <li><a class="link-topmenu" href="${pageContext.request.contextPath}/index.jsp" target="_blank"><i class="icon-list-alt"></i> Website</a></li>
@@ -147,7 +147,7 @@
 
                     #menu ul li a
                     {
-                        background-image: url("../Content/Images/Admin/icon_sub.gif");
+                        background-image: url("${pageContext.request.contextPath}/admin/Content/Images/Admin/icon_sub.gif");
                         background-position: right center;
                         background-repeat: no-repeat;
                         color: #ffffff;
@@ -162,7 +162,7 @@
 
                     #menu li:hover a, #menu li.current a
                     {
-                        background-image: url("../Content/Images/Admin/icon_sub.gif");
+                        background-image: url("${pageContext.request.contextPath}/admin/Content/Images/Admin/icon_sub.gif");
                         color: #FFFFFF;
                         text-decoration: none;
                     }
@@ -285,13 +285,13 @@
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="${pageContext.request.contextPath}/admin/profileland/addprofileland.jsp">
+                                        <a href="${pageContext.request.contextPath}/ControllerProfileLand?action=add">
                                             <span class="SubMenuText">Add new project
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/ControllerListProfileLand?page=0">
+                                        <a href="${pageContext.request.contextPath}/ControllerProfileLand?action=list">
                                             <span class="SubMenuText">List of projects
                                             </span>
                                         </a>
@@ -477,7 +477,6 @@
                             </li>
                             <li class="Last">
                                 <span>
-                                    <i class="fa fa-angle-double-right" style="font-size:14px;"></i>
                                     List of project
                                 </span>
                             </li>
@@ -562,7 +561,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <core:forEach items="${requestScope.list}" var="profileLand">                                                                                            
+                                            <core:forEach items="${requestScope.listData}" var="profileLand">                                                                                            
                                                 <tr>
                                                     <td class="Visible text-center" align="center" style="width:30px;">${profileLand.code}</td>
                                                     <td class="text-center" align="center" style="width:30px">
@@ -573,10 +572,10 @@
                                                     <td class="text-center" align="center" style="width:30px;"> ${profileLand.dateEnd} </td>
                                                     <td class="Visible text-center" align="center" style="width:45px;"> ${profileLand.typeOf} </td>
                                                     <td class="Visible text-center" align="center" style="width:45px;">
-                                                        <a id="lbtUpdateProduct2946698" class="action-link-button" title="Edit profile projects" href="#">
+                                                        <a id="lbtUpdateProduct2946698" class="action-link-button" title="Edit profile projects" href="${pageContext.request.contextPath}/ControllerProfileLand?action=edit&code=${profileLand.code}">
                                                             <i class="fa fa-pencil-square-o"></i>
                                                         </a>
-                                                        <a class="action-link-button" title="Delete this project profile" href="#">
+                                                        <a class="action-link-button" title="Delete this project profile" href="${pageContext.request.contextPath}/ControllerProfileLand?action=delete&code=${profileLand.code}">
                                                             <i class=" fa fa-trash"> </i>
                                                         </a>
                                                     </td>
