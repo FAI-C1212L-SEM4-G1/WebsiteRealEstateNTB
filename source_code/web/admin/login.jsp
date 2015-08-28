@@ -1,7 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : Aug 19, 2015, 6:25:20 PM
-    Author     : sang
+    Document   : Form Login Website
+    Author     : PhanAnh
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,17 +8,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login NTB System</title>
         <link href="../font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-      
+
         <link href="../css/style_login_user.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-       <div class="wapper">
+        <div class="wapper">
             <div class="container">
                 <div class="register-main-top">
                     <div class="title-register">
-                        <span><i class="fa fa-th" style="padding:0px 10px 0px 10px; font-size:26px;"></i>Customer User</span>
+                        <span><i class="fa fa-th" style="padding:0px 10px 0px 10px; font-size:26px;"></i>SIGN IN</span>
                     </div>
                 </div>
                 <div class="register-main">
@@ -40,23 +39,14 @@
                             <input type="hidden" value="#" name="url">
                         </div>
 
-
-
                         <div class="submit">
                             <button class="btn-submit" type="submit">SubMit</button>
                         </div>
-
-
-
-
-
-
-
 
                     </form>
                 </div>
             </div>
         </div>
-        
+
     </body>
 </html>
