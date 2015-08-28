@@ -10,7 +10,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Profile Land</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="robots" content="noindex, nofollow" />
         <link rel="Shortcut Icon" href="http://static.bizwebmedia.net/favicon.ico" type="image/x-icon" />
         <!--  -->
@@ -497,7 +496,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td align="center">
-                                                            <a id="cph_Main_ctl00_toolbox_rptAction_lbtAction_1" class="toolbar btn btn-info" href="${pageContext.request.contextPath}/admin/profileland/addprofileland.jsp" title="Add new project">
+                                                            <a id="cph_Main_ctl00_toolbox_rptAction_lbtAction_1" class="toolbar btn btn-info" href="${pageContext.request.contextPath}/ControllerProfileLand?action=add" title="Add new project">
                                                                 <i class="fa fa-plus"></i>
                                                                 Add new project
                                                             </a>
@@ -537,10 +536,18 @@
                             </div>
                             <div class="widget-body">
                                 <div class="span9">
-                                    <form action="#" method="post">
+                                    <form action="${pageContext.request.contextPath}/ControllerProfileLand" method="GET">
                                         <div class="span9 form-search pull-right text-right" style="float:left;margin-bottom:10px;">
-                                            <input id="txtSearch" class="ui-autocomplete-input" type="text" style="width: 200px;" placeholder="Enter search text ..." maxlength="100" name="search" autocomplete="off">
-                                            <button id="btnSearchh" class="toolbar btn btn-info" name="btnSearchh">
+                                            <input id="txtSearch" class="ui-autocomplete-input" type="text" style="width: 200px;" placeholder="Enter search text ..." maxlength="100" name="txtSearch" autocomplete="off">
+                                            <select id="typeSearch" name="typeSearch">
+                                                <option value="byName" selected>Search by name project</option>
+                                                <option value="byTypeOf">Search by project type</option>
+                                                <option value="byLocation">Search by location</option>
+                                                <option value="byDateNotStarted">Construction: Not started</option>
+                                                <option value="byDateUnder">Construction: Under construction</option>
+                                                <option value="byDateCompleted">Construction: Completed</option>
+                                            </select>
+                                            <button id="btnSearch" class="toolbar btn btn-info" name="action" value="Search">
                                                 <i class="fa fa-search"></i>
                                                 Search
                                             </button>
@@ -549,18 +556,18 @@
                                 </div>
                                 <div>
                                     <table id="cph_Main_ctl00_ctl00_grvProducts" class="table table-striped table-bordered dataTable table-hover" cellspacing="0" style="border-collapse:collapse;">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" style="text-align:center">Code</th>
-                                                    <th scope="col" style="text-align:center">Image</th>
-                                                    <th scope="col" style="text-align:center">Name of project building</th>
-                                                    <th scope="col" style="text-align:center">Date start</th>
-                                                    <th scope="col" style="text-align:center">On completing</th>
-                                                    <th scope="col" style="text-align:center">Project type</th>
-                                                    <th scope="col" style="text-align:center">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" style="text-align:center">Code</th>
+                                                <th scope="col" style="text-align:center">Image</th>
+                                                <th scope="col" style="text-align:center">Name of project building</th>
+                                                <th scope="col" style="text-align:center">Date start</th>
+                                                <th scope="col" style="text-align:center">On completing</th>
+                                                <th scope="col" style="text-align:center">Project type</th>
+                                                <th scope="col" style="text-align:center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             <core:forEach items="${requestScope.listData}" var="profileLand">                                                                                            
                                                 <tr>
                                                     <td class="Visible text-center" align="center" style="width:30px;">${profileLand.code}</td>
@@ -589,24 +596,25 @@
                                         <li>
                                             <div class="pagination-container">
                                                 <ul class="pagination">
-                                                    <li class="active">
-                                                        <a>1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="/Product/ProductIndex?Page=2">2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="/Product/ProductIndex?Page=3">3</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="/Product/ProductIndex?Page=4">4</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="/Product/ProductIndex?Page=5">5</a>
-                                                    </li>
-                                                    <li class="PagedList-skipToNext">
-                                                        <a rel="next" href="/Product/ProductIndex?Page=2">»</a>
-                                                    </li>
+                                                    <core:forEach begin="1" end="${noOfPages}" var="i" >
+                                                        <core:choose>
+                                                            <core:when test="${currentPage eq i}">
+                                                                <li class="active">
+                                                                    <a>${i}</a>
+                                                                </li>
+                                                            </core:when>
+                                                            <core:otherwise>
+                                                                <li>
+                                                                    <a href="${pageContext.request.contextPath}/ControllerProfileLand?action=list&page=${i}">${i}</a>
+                                                                </li>
+                                                            </core:otherwise>  
+                                                        </core:choose>                                                                                                              
+                                                    </core:forEach>
+                                                    <core:if test="${currentPage lt noOfPages}">
+                                                        <li class="PagedList-skipToNext">
+                                                            <a rel="next" href="${pageContext.request.contextPath}/ControllerProfileLand?action=list&page=${i+1}">»</a>
+                                                        </li>
+                                                    </core:if>                                                    
                                                 </ul>
                                             </div>
                                         </li>
@@ -617,7 +625,7 @@
                     </div>
                 </div>
             </div>
-            <div style="margin-right: 25px; float: right; color: Gray;"> thuốc dân gian - thuốc của mọi nhà </div>
+            <div style="margin-right: 25px; float: right; color: Gray;"> National Territory Builders - Real Estate </div>
             <div style="height: 10px; margin-top: 40px;"> </div>
         </div>
     </body>

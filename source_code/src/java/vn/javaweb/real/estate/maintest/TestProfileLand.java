@@ -23,11 +23,26 @@ public class TestProfileLand {
         System.out.println("Tong so ket qua: " + list.size());
     }
     
+    protected void testProfileLandCount(){
+        ConfigConnection configConnection = ConfigConnection.getInstance();
+        int number = configConnection.getProfileLandModelManage().getProfileLandCount();        
+        System.out.println("Ket qua tong so ban ghi trong bang: " + number);
+    }
+    
     protected void testFindByConstructionStatus(ProfileLandModelManage.ConstructionStatus constructionStatus){
         ConfigConnection configConnection = ConfigConnection.getInstance();
         List<ProfileLand> list = configConnection.getProfileLandModelManage().findByConstructionStatus(constructionStatus);
         for(ProfileLand pl : list){
             System.out.println(pl.toString() + " -- dateStart: " + pl.getDateStart() + " -- dateEnd: " + pl.getDateEnd()); 
+        }  
+        System.out.println("Tong so ket qua: " + list.size());
+    }
+    
+    protected void testFindByName(String name){
+        ConfigConnection configConnection = ConfigConnection.getInstance();
+        List<ProfileLand> list = configConnection.getProfileLandModelManage().findByName(name);
+        for(ProfileLand pl : list){
+            System.out.println(pl.toString()); 
         }  
         System.out.println("Tong so ket qua: " + list.size());
     }

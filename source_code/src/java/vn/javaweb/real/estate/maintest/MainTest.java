@@ -48,6 +48,12 @@ public class MainTest {
 //        testProfileLand.testFindByConstructionStatus(ProfileLandModelManage.ConstructionStatus.Completed);
         
         /** Lay tat ca ban ghi */
-        testProfileLand.testFindBetween(3, 10);
+//        testProfileLand.testFindBetween(3, 10);
+        
+        /** Tong so ban ghi */
+//        testProfileLand.testProfileLandCount();
+        
+        /** Tim kiem theo ten */
+        testProfileLand.testFindByName("Chung cư 219 Trung Kính");
     }
 }

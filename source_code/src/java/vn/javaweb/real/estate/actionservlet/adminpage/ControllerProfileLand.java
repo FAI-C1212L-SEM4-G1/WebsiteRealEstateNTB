@@ -2,12 +2,16 @@ package vn.javaweb.real.estate.actionservlet.adminpage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import vn.javaweb.real.estate.manage.ProfileLandModelManage;
 import vn.javaweb.real.estate.manage.exceptions.NonexistentEntityException;
 import vn.javaweb.real.estate.manage.exceptions.RollbackFailureException;
 import vn.javaweb.real.estate.model.ConfigConnection;
@@ -55,18 +59,63 @@ public class ControllerProfileLand extends HttpServlet {
                 forward = INSERT_OR_EDIT;
             } else {
                 if (action.equalsIgnoreCase("list")) {
-                    req.setAttribute("listData", ConfigConnection.getInstance().getProfileLandModelManage().findAll());
+                    int page = 1;
+                    int recordsPerPage = 15;
+                    if(req.getParameter("page") != null)
+                        page = Integer.parseInt(req.getParameter("page"));
+                    List<ProfileLand> listData = ConfigConnection.getInstance().getProfileLandModelManage().findBetween((page-1)*recordsPerPage, page*recordsPerPage);
+                    int noOfRecords = ConfigConnection.getInstance().getProfileLandModelManage().getProfileLandCount();
+                    int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                    req.setAttribute("listData", listData);
+                    req.setAttribute("noOfPages", noOfPages);
+                    req.setAttribute("currentPage", page);
                     forward = LIST_VIEW;
                 } else {
-                    forward = INSERT_OR_EDIT;
-                }
+                    if(action.equalsIgnoreCase("Search")){
+                        String txtSearch = req.getParameter("txtSearch");
+                        String type = req.getParameter("typeSearch");
+                        int page = 1;
+                        int recordsPerPage = 15;
+                        List<ProfileLand> listData = new ArrayList<>();
+                        if (type.equalsIgnoreCase("byName")) {
+                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByName(txtSearch);                            
+                        } else {
+                            if(type.equalsIgnoreCase("byTypeOf")){
+                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByTypeOf(txtSearch);                            
+                            } else {
+                                if(type.equalsIgnoreCase("byLocation")){
+                                    listData = ConfigConnection.getInstance().getProfileLandModelManage().findByLocation(txtSearch);                            
+                                } else {
+                                    if(type.equalsIgnoreCase("byDateNotStarted")){
+                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.NotStarted);                            
+                                    } else {
+                                        if(type.equalsIgnoreCase("byDateUnder")){
+                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.UnderConstruction);                            
+                                        } else {
+                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.Completed);                            
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        //TODO: Xu ly phan trang cho tim kiem (Xem lai)
+                        int noOfRecords = listData.size();
+                        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                        req.setAttribute("listData", listData);
+                        req.setAttribute("noOfPages", noOfPages);
+                        req.setAttribute("currentPage", page);
+                        forward = LIST_VIEW;
+                    } else {
+                        forward = INSERT_OR_EDIT;
+                    }
+                } 
             }
         }
         req.getRequestDispatcher(forward).forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {        
         String code = req.getParameter("code");
         String codeRegional = req.getParameter("codeRegional");
         String name = req.getParameter("name");
@@ -84,10 +133,10 @@ public class ControllerProfileLand extends HttpServlet {
         String introduction = req.getParameter("description");
         String description = req.getParameter("details");
         String image = req.getParameter("Choose picture");
-        
+
         ConfigConnection modelManage = ConfigConnection.getInstance();
-        RegionalPrice regionalPrice = modelManage.getRegionalPriceModelManage().findByCode(codeRegional);       
-        
+        RegionalPrice regionalPrice = modelManage.getRegionalPriceModelManage().findByCode(codeRegional);
+
         ProfileLand profileLand = new ProfileLand();
         profileLand.setCode(code);
         profileLand.setCodeRegional(regionalPrice);
@@ -106,7 +155,7 @@ public class ControllerProfileLand extends HttpServlet {
         profileLand.setIntroduction(introduction);
         profileLand.setDescription(description);
         profileLand.setImage(image);
-        
+
         boolean flag = false;
         try {
             modelManage.getProfileLandModelManage().create(profileLand);
@@ -116,14 +165,14 @@ public class ControllerProfileLand extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(ControllerAddProfileLand.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(flag){
+
+        if (flag) {
             resp.sendRedirect(req.getContextPath() + "/ControllerProfileLand?action=list");
         } else {
-            PrintWriter out = resp.getWriter();  
-            resp.setContentType("text/html");  
-            out.println("<script type=\"text/javascript\">");  
-            out.println("alert('Error! Not suscess');");  
+            PrintWriter out = resp.getWriter();
+            resp.setContentType("text/html");
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Error! Not suscess');");
             out.println("</script>");
         }
     }
