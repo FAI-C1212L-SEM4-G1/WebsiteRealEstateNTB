@@ -1,6 +1,5 @@
 <%-- 
     Document   : index
-    Created on : Aug 7, 2015, 10:12:15 AM
     Author     : sang
 --%>
 
@@ -11,15 +10,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device width,initial-scale=1" />
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-       
+
         <link href="font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <script src="javascript.js" type="text/javascript"></script>
         <link href="css/slider-show/css/nivo-slider.css" rel="stylesheet" type="text/css"/>
         <script src="css/slider-show/js/jquery.js" type="text/javascript"></script>
         <script src="css/slider-show/js/jquery.nivo.slider.pack.js" type="text/javascript"></script>
-       
-         <link href="css/mobile.css" rel="stylesheet" type="text/css"/>
-         
+
+        <link href="css/mobile.css" rel="stylesheet" type="text/css"/>
+
         <script>
             $(window).load(function () {
                 $('#slideshow').nivoSlider({
@@ -36,28 +35,27 @@
                 });
             });
         </script>
-        <title>Housing</title>
+        <title>National Territory Builders</title>
     </head>
 
     <body>
-<script>
-    $(function () {
-       
-        $('.menu-show').click(function () {
-            $('nav ul').toggleClass('showing');
-           
-        });
-        
-    });
-</script>
+        <script>
+            $(function () {
 
+                $('.menu-show').click(function () {
+                    $('nav ul').toggleClass('showing');
+
+                });
+
+            });
+        </script>
 
         <div id="wapper">
             <header id="header">
                 <div id="top">
                     <div class="top-content">
                         <div class="top-content-left">
-                            <i style="color:#5cb4c5; " class="fa fa-map-marker"></i><span style="color: #fff;font-size: 13px;font-weight: bold"> Time City:</span><span style="color:#5cb4c5; "> Amsterdam</span>
+                            <i style="color:#5cb4c5; " class="fa fa-map-marker"></i><span style="color: #fff;font-size: 13px;font-weight: bold"> Time City:</span><span style="color:#5cb4c5; "> Hanoi, Vietnam</span>
                         </div>
                         <div class="top-content-logo">
 
@@ -65,48 +63,35 @@
                         </div>
                         <div class="top-content-right">
                             <div class="phone">
-                                <span style="color:#fff"><i class="fa fa-phone"></i> 01666202886</span>
+                                <span style="color:#fff"><i class="fa fa-phone"></i> Hotline: +84933 0866 89</span>
                             </div>
                             <div class="email">
-                                <span style="color:#5cb4c5;"><i class="fa fa-envelope-o"></i> admin@gmail.com</span>
-
+                                <span style="color:#5cb4c5;"><i class="fa fa-envelope-o"></i> Contact: NTBbuilders@express.com</span>
                             </div>
-
                         </div>
                     </div>
                 </div>
                 <div class="clear"></div>
 
-
-        <nav>
-           <div class="menu-show">
-               <i style="font-size: 18px;margin-top: 5px;" class="fa fa-bars"></i>
-            </div >
-            <ul   >
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                   
-     
-            </ul>
-           
-        </nav>
+                <nav>
+                    <div class="menu-show">
+                        <i style="font-size: 18px;margin-top: 5px;" class="fa fa-bars"></i>
+                    </div>
+                    <ul>
+                        <li><a href="/index.jsp">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
+                    </ul>
+                </nav>
                 <div class="clear"></div>
             </header>
             <div id="slideshow" class="nivoSlider">
-
-
                 <img style="display: none;"  src="images/slider1.jpg" alt="" title="#htmlcaption-3"/>
-                
                 <img style="display: none;" src="images/slide-06.jpg" alt="" title="htmlcaption-1"/>
-               
-
-
-
             </div>
             <div class="clear"></div>
             <section id="abount">
@@ -124,10 +109,6 @@
                         <div class="box1-abount">
 
                             <i style="font-size: 80px;float: left;margin-right:5px;color:#5cb4c5"  class="fa fa-television"></i>
-
-
-
-
 
                             <h3>Lorem Ipsum</h3>
                             <span>There are many variations of passages of<br> Lorem Ipsum available, but the majority have suffered alteration in some form</span>
@@ -350,7 +331,7 @@
                                 </p>
                             </div>
                         </div>
-                       
+
                         <div class="box-blog-small">
                             <div class="images-box-blog-smail">
                                 <img src="images/blog3.jpg"/>

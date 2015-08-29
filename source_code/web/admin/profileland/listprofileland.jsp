@@ -303,13 +303,13 @@
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="#">
+                                        <a href="${pageContext.request.contextPath}/ControllerRegionalPrice?action=add">
                                             <span class="SubMenuText">Create regional price
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="${pageContext.request.contextPath}/ControllerRegionalPrice?action=list">
                                             <span class="SubMenuText">List regional price
                                             </span>
                                         </a>

@@ -584,12 +584,13 @@
                                                                             </span>
                                                                             <% String action = request.getParameter("action");
                                                                                     if (action.equalsIgnoreCase("add")) { %>
+                                                                                <input type="hidden" name="action" value="add">
                                                                                 <script>
                                                                                     var d = new Date();                                                      ;
                                                                                     document.getElementById("code").value = "PL" + ("0" + d.getDate()).slice(-2) + ("0" + (d.getMonth() + 1)).slice(-2) +
                                                                                             ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + d.getSeconds() + d.getMilliseconds();                                                                                
                                                                                 </script>  
-                                                                            <% }%>
+                                                                            <% } else { %> <input type="hidden" name="action" value="edit"><% }%>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>

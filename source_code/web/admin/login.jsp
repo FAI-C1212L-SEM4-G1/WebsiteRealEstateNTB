@@ -9,9 +9,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login NTB System</title>
-        <link href="../font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
-        <link href="../css/style_login_user.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/css/style_login_user.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div class="wapper">
@@ -22,27 +22,25 @@
                     </div>
                 </div>
                 <div class="register-main">
-                    <form class="main-form" action="#" method="post">
+                    <form class="main-form" action="${pageContext.request.contextPath}/login.do" method="POST">
                         <div class="intro-form-input">
                             <span class="intro-form-input-ico">
                                 <i class="fa fa-user"></i>
-
                             </span>
-                            <input class="validate[required] form-control" type="text" placeholder="username" name="username">
+                            <input class="validate[required] form-control" type="text" placeholder="Username" name="txtUsername">
                         </div>
 
                         <div class="intro-form-input">
                             <span class="intro-form-input-ico">
                                 <i class="fa fa-key"></i>
                             </span>
-                            <input class="validate[required,custom[email]] form-control" type="password" placeholder="passwprd" name="txtpassword">
+                            <input class="validate[required,custom[email]] form-control" type="password" placeholder="Password" name="txtPassword">
                             <input type="hidden" value="#" name="url">
                         </div>
 
                         <div class="submit">
-                            <button class="btn-submit" type="submit">SubMit</button>
+                            <button class="btn-submit" type="submit" name="submit">Submit</button>
                         </div>
-
                     </form>
                 </div>
             </div>

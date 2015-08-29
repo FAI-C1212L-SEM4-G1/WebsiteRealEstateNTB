@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <!--Servlet name class-->
+    <filter>
+        <filter-name>FilterAuthencationLogin</filter-name>
+        <filter-class>vn.javaweb.real.estate.filterservlet.FilterAuthencationLogin</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FilterAuthencationLogin</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
-        <servlet-name>ControllerAddProfileLand</servlet-name>
-        <servlet-class>vn.javaweb.real.estate.actionservlet.adminpage.ControllerAddProfileLand</servlet-class>
+        <servlet-name>ControllerRegionalPrice</servlet-name>
+        <servlet-class>vn.javaweb.real.estate.actionservlet.adminpage.ControllerRegionalPrice</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ControllerProfileLand</servlet-name>
         <servlet-class>vn.javaweb.real.estate.actionservlet.adminpage.ControllerProfileLand</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ControllerListProfileLand</servlet-name>
-        <servlet-class>vn.javaweb.real.estate.actionservlet.adminpage.ControllerListProfileLand</servlet-class>
+        <servlet-name>ControllerAuthencationLogin</servlet-name>
+        <servlet-class>vn.javaweb.real.estate.actionservlet.adminpage.ControllerAuthencationLogin</servlet-class>
     </servlet>
     <!--Servlet pattern name-->
     <servlet-mapping>
-        <servlet-name>ControllerAddProfileLand</servlet-name>
-        <url-pattern>/ControllerAddProfileLand</url-pattern>
+        <servlet-name>ControllerRegionalPrice</servlet-name>
+        <url-pattern>/ControllerRegionalPrice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ControllerProfileLand</servlet-name>
         <url-pattern>/ControllerProfileLand</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ControllerListProfileLand</servlet-name>
-        <url-pattern>/ControllerListProfileLand</url-pattern>
+        <servlet-name>ControllerAuthencationLogin</servlet-name>
+        <url-pattern>/login.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -209,8 +209,18 @@ public class RegionalPriceModelManage implements Serializable {
             return (List<RegionalPrice>)query.getResultList();
         } finally {
             em.close();
-        }
-        
+        }        
+    }
+    
+    public List<RegionalPrice> findByCountry(String country){
+        EntityManager em = getEntityManager();  
+        try {                          
+            Query query = em.createNamedQuery("RegionalPrice.findByCountry");
+            query.setParameter("country", country);
+            return (List<RegionalPrice>)query.getResultList();
+        } finally {
+            em.close();
+        }        
     }
     
     public List<RegionalPrice> findByRegionalNameLike(String regionalName){
@@ -237,4 +247,17 @@ public class RegionalPriceModelManage implements Serializable {
         }
     }
     
+    // Lấy danh sách theo indexStart - indexEnd
+    public List<RegionalPrice> findBetween(int indexStart, int indexEnd) {
+        EntityManager em = getEntityManager();   
+        try {
+            String q = "SELECT * FROM " +
+                       "( SELECT *, ROW_NUMBER() over (ORDER BY code) as ct from [RealEstate].[dbo].[RegionalPrice] ) sub " +
+                       "WHERE ct > "+ indexStart +"  and ct <= " + indexEnd;
+            Query query = em.createNativeQuery(q, RegionalPrice.class);
+            return (List<RegionalPrice>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
 }

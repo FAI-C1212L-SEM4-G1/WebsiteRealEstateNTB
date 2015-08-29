@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import vn.javaweb.real.estate.manage.exceptions.IllegalOrphanException;
 import vn.javaweb.real.estate.manage.exceptions.NonexistentEntityException;
@@ -264,4 +265,17 @@ public class AccountModelManage implements Serializable {
         }
     }
 
+    public Account checkAccount(String username, String password){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("Account.findByLoginIdAndPassword");
+            query.setParameter("loginId", username);
+            query.setParameter("password", password);
+            return (Account)query.getSingleResult(); 
+        } catch(NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
 }

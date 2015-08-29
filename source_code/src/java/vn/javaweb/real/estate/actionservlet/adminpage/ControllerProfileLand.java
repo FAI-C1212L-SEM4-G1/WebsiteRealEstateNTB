@@ -3,7 +3,6 @@ package vn.javaweb.real.estate.actionservlet.adminpage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -133,37 +132,58 @@ public class ControllerProfileLand extends HttpServlet {
         String introduction = req.getParameter("description");
         String description = req.getParameter("details");
         String image = req.getParameter("Choose picture");
-
-        ConfigConnection modelManage = ConfigConnection.getInstance();
-        RegionalPrice regionalPrice = modelManage.getRegionalPriceModelManage().findByCode(codeRegional);
-
-        ProfileLand profileLand = new ProfileLand();
-        profileLand.setCode(code);
-        profileLand.setCodeRegional(regionalPrice);
-        profileLand.setName(name);
-        profileLand.setLocation(location);
-        profileLand.setTypeOf(typeOf);
-        profileLand.setTotalArea(Double.parseDouble(totalArea));
-        profileLand.setCapitalInvestment(capitalInvestment);
-        profileLand.setDateStart(dateStart);
-        profileLand.setDateEnd(dateEnd);
-        profileLand.setCurrentStatus(currentStatus);
-        profileLand.setPopulationSize(Double.parseDouble(populationSize));
-        profileLand.setTotalRoom(Integer.parseInt(totalRoom));
-        profileLand.setTotalFloor(Integer.parseInt(totalFloor));
-        profileLand.setRoomArea(Integer.parseInt(roomArea));
-        profileLand.setIntroduction(introduction);
-        profileLand.setDescription(description);
-        profileLand.setImage(image);
+        String action = req.getParameter("action");
 
         boolean flag = false;
         try {
-            modelManage.getProfileLandModelManage().create(profileLand);
+            RegionalPrice regionalPrice = ConfigConnection.getInstance().getRegionalPriceModelManage().findByCode(codeRegional);
+            if(action.equalsIgnoreCase("add")){
+                ProfileLand profileLand = new ProfileLand();
+                profileLand.setCode(code);
+                profileLand.setCodeRegional(regionalPrice);
+                profileLand.setName(name);
+                profileLand.setLocation(location);
+                profileLand.setTypeOf(typeOf);
+                profileLand.setTotalArea(Double.parseDouble(totalArea));
+                profileLand.setCapitalInvestment(capitalInvestment);
+                profileLand.setDateStart(dateStart);
+                profileLand.setDateEnd(dateEnd);
+                profileLand.setCurrentStatus(currentStatus);
+                profileLand.setPopulationSize(Double.parseDouble(populationSize));
+                profileLand.setTotalRoom(Integer.parseInt(totalRoom));
+                profileLand.setTotalFloor(Integer.parseInt(totalFloor));
+                profileLand.setRoomArea(Integer.parseInt(roomArea));
+                profileLand.setIntroduction(introduction);
+                profileLand.setDescription(description);
+                profileLand.setImage(image);
+                ConfigConnection.getInstance().getProfileLandModelManage().create(profileLand);
+            } else {
+                ProfileLand profileLand = ConfigConnection.getInstance().getProfileLandModelManage().findByCode(code);
+                profileLand.setCode(code);
+                profileLand.setCodeRegional(regionalPrice);
+                profileLand.setName(name);
+                profileLand.setLocation(location);
+                profileLand.setTypeOf(typeOf);
+                profileLand.setTotalArea(Double.parseDouble(totalArea));
+                profileLand.setCapitalInvestment(capitalInvestment);
+                profileLand.setDateStart(dateStart);
+                profileLand.setDateEnd(dateEnd);
+                profileLand.setCurrentStatus(currentStatus);
+                profileLand.setPopulationSize(Double.parseDouble(populationSize));
+                profileLand.setTotalRoom(Integer.parseInt(totalRoom));
+                profileLand.setTotalFloor(Integer.parseInt(totalFloor));
+                profileLand.setRoomArea(Integer.parseInt(roomArea));
+                profileLand.setIntroduction(introduction);
+                profileLand.setDescription(description);
+                profileLand.setImage(image);
+                ConfigConnection.getInstance().getProfileLandModelManage().edit(profileLand);
+            }
+            
             flag = true;
         } catch (RollbackFailureException ex) {
-            Logger.getLogger(ControllerAddProfileLand.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControllerRegionalPrice.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(ControllerAddProfileLand.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControllerRegionalPrice.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         if (flag) {
