@@ -360,6 +360,14 @@ public class ProfileLandModelManage implements Serializable {
         }
     }
     
+    // Tìm kiếm dự án xây dựng sẽ và đang làm <Chưa hoàn thành>
+    public List<ProfileLand> findStartUnderConstruction(){
+        List<ProfileLand> profileLands = new ArrayList<>();
+        profileLands = (this.findByConstructionStatus(ConstructionStatus.NotStarted));
+        profileLands.addAll(this.findByConstructionStatus(ConstructionStatus.UnderConstruction));
+        return profileLands;
+    }
+    
     public int getProfileLandCount() {
         EntityManager em = getEntityManager();
         try {

@@ -142,17 +142,17 @@ public class PersonModelManage implements Serializable {
         }
     }
 
-    public void deleteByCode(String code) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public void deleteById(String id) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = getEntityManager();
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
             Person person;
             try {
-                person = em.getReference(Person.class, code);
+                person = em.getReference(Person.class, id);
                 person.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The person with id " + code + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The person with id " + id + " no longer exists.", enfe);
             }
             Account username = person.getUsername();
             if (username != null) {
@@ -219,4 +219,58 @@ public class PersonModelManage implements Serializable {
         }
     }
 
+    public List<Person> findByFullname(String fullname){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("Person.findByFullname");
+            query.setParameter("fullname", fullname);
+            return (List<Person>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Person> findByGender(String gender){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("Person.findByGender");
+            query.setParameter("gender", gender);
+            return (List<Person>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Person> findByAddress(String address){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("Person.findByAddress");
+            query.setParameter("address", address);
+            return (List<Person>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Person> findByTel(String tel){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("Person.findByTel");
+            query.setParameter("tel", tel);
+            return (List<Person>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Person> findByEmail(String email){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("Person.findByEmail");
+            query.setParameter("email", email);
+            return (List<Person>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
 }

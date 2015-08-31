@@ -13,7 +13,10 @@ public class MainTest {
 //        RegionalPriceTest();
         
         /** Test ho so du an */
-        ProfileLandTest();
+//        ProfileLandTest();
+        
+        /** Test account*/
+        AccountTest();
     }
     
     public static void main(String args[]){
@@ -55,5 +58,12 @@ public class MainTest {
         
         /** Tim kiem theo ten */
         testProfileLand.testFindByName("Chung cư 219 Trung Kính");
+    }
+    
+    private void AccountTest(){
+        TestAccount testAccount = new TestAccount();
+        
+        /** Tim kiem account trong khoang */
+        testAccount.testFindUserBetween(0, 3);
     }
 }

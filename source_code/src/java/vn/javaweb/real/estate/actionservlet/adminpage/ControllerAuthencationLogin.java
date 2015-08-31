@@ -23,17 +23,27 @@ public class ControllerAuthencationLogin extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
+        String queryString = request.getQueryString();
+        if(queryString != null && queryString.contains("action=logout")){
+           HttpSession session = request.getSession(false);
+           session.removeAttribute("account");
+           session.invalidate();
+           response.sendRedirect(request.getContextPath() + "/admin/login.jsp");
+        } else {
+            request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
+        }        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("txtUsername");
         String password = request.getParameter("txtPassword");
-        Account account = ConfigConnection.getInstance().getAccountModelManage().checkAccount(username, password);
+        ConfigConnection modelManage = ConfigConnection.getInstance();
+        Account account = modelManage.getAccountModelManage().checkAccount(username, password);
         if(account != null){
             HttpSession session = request.getSession(true);
             session.setAttribute("account", account);
+            session.setAttribute("modelManage", modelManage);
             response.sendRedirect(request.getContextPath() + "/ControllerProfileLand?action=list");            
         } else {
             PrintWriter pw = response.getWriter();

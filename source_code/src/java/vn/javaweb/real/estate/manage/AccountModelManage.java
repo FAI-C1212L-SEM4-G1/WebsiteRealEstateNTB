@@ -29,6 +29,10 @@ public class AccountModelManage implements Serializable {
 
     private EntityManagerFactory emf = null;
     private static AccountModelManage instance;
+    private static final int AccountAdmin = 0;
+    private static final int AccountUser = 1;
+    private static final int AccountCustomer = 2;
+    public static enum AccountStatus { Active, Inactive, Blocked, Waiting };
 
     public AccountModelManage(EntityManagerFactory emf) {
         this.emf = emf;
@@ -90,7 +94,7 @@ public class AccountModelManage implements Serializable {
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
-            if (findAccount(account.getLoginId()) != null) {
+            if (findByLoginId(account.getLoginId()) != null) {
                 throw new PreexistingEntityException("Account " + account + " already exists.", ex);
             }
             throw ex;
@@ -167,7 +171,7 @@ public class AccountModelManage implements Serializable {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 String id = account.getLoginId();
-                if (findAccount(id) == null) {
+                if (findByLoginId(id) == null) {
                     throw new NonexistentEntityException("The account with id " + id + " no longer exists.");
                 }
             }
@@ -177,7 +181,7 @@ public class AccountModelManage implements Serializable {
         }
     }
 
-    public void deleteByCode(String code) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+    public void deleteByLoginId(String code) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = getEntityManager();
         EntityTransaction et = em.getTransaction();
         try {
@@ -219,7 +223,7 @@ public class AccountModelManage implements Serializable {
         }
     }
 
-    public List<Account> findAccountEntities() {
+    public List<Account> findAll() {
         return findAccountEntities(true, -1, -1);
     }
 
@@ -243,7 +247,7 @@ public class AccountModelManage implements Serializable {
         }
     }
 
-    public Account findAccount(String id) {
+    public Account findByLoginId(String id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Account.class, id);
@@ -277,5 +281,93 @@ public class AccountModelManage implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    // Lấy danh sách User theo indexStart - indexEnd
+    public List<Account> findUserBetween(int indexStart, int indexEnd) {
+        EntityManager em = getEntityManager();   
+        try {
+            String q = "SELECT * FROM ( SELECT *, ROW_NUMBER() over (ORDER BY createDate) as ct from [RealEstate].[dbo].[Account] " +
+                       "WHERE ([RealEstate].[dbo].[Account].[role] = 0 OR [RealEstate].[dbo].[Account].[role] = 1)) sub " +
+                       "WHERE ct > "+ indexStart +"  and ct <= " + indexEnd;
+            Query query = em.createNativeQuery(q, Account.class);
+            return (List<Account>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    // Lấy danh sách Customer theo indexStart - indexEnd
+    public List<Account> findCustomerBetween(int indexStart, int indexEnd) {
+        EntityManager em = getEntityManager();   
+        try {
+            String q = "SELECT * FROM ( SELECT *, ROW_NUMBER() over (ORDER BY createDate) as ct from [RealEstate].[dbo].[Account] " +
+                       "WHERE [RealEstate].[dbo].[Account].[role] = 2) sub " +
+                       "WHERE ct > "+ indexStart +"  and ct <= " + indexEnd;
+            Query query = em.createNativeQuery(q, Account.class);
+            return (List<Account>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    // Tim tat ca tai khoan theo role
+    public List<Account> findAllByRole(int role){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("Account.findByRole");
+            query.setParameter("role", role);
+            return (List<Account>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    // Tim tat ca tai khoan la Admin || User
+    public List<Account> findAllIsUser(){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("Account.findAllIsUser");
+            return (List<Account>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    // Tim tat ca tai khoan cua Customer
+    public List<Account> findAllIsCustomer(){
+        return this.findAllByRole(AccountCustomer);
+    }
+    
+    // Tim tat ca tai khoan Customer voi trang thai Active, Blocked, Waiting
+    public List<Account> findAllCustomerByStatus(AccountStatus accountStatus){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("Account.findAllCustomerByStatus");
+            query.setParameter("role", accountStatus.toString());
+            return (List<Account>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    // Tim tat ca tai khoan User || Admin voi trang thai Active, Blocked, Waiting
+    public List<Account> findAllUserByStatus(AccountStatus accountStatus){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("Account.findAllUserByStatus");
+            query.setParameter("role", accountStatus.toString());
+            return (List<Account>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    public int getCustomerCount(){
+        return this.findAllIsCustomer().size();
+    }
+    
+    public int getUserCount(){
+         return this.findAllIsUser().size();
     }
 }

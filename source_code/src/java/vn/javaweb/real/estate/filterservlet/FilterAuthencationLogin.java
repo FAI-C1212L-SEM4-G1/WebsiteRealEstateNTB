@@ -19,28 +19,35 @@ public class FilterAuthencationLogin implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        
+
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        if(request instanceof HttpServletRequest){
-            System.out.println("da vao day roi ");
-            HttpServletRequest httpServletRequest = (HttpServletRequest)request;
-            HttpSession session = httpServletRequest.getSession(false);
-            if(session == null){
-//                httpServletRequest.getRequestDispatcher(httpServletRequest.getContextPath() + "/login.do").forward(request, response);
-            } 
-                chain.doFilter(request, response);
-            
-            
+        if (request instanceof HttpServletRequest && response instanceof HttpServletResponse) {
+            HttpServletRequest servletRequest = (HttpServletRequest) request;
+            HttpServletResponse servletResponse = (HttpServletResponse) response;
+
+            String servletPath = servletRequest.getServletPath();
+//            String uri = servletRequest.getRequestURI();
+//            System.out.println("------");
+//            System.out.println(" ___" + uri);
+
+            if (servletPath.contains("ControllerProfileLand") || servletPath.contains("ControllerRegionalPrice") 
+                    || servletPath.contains("ControllerAccount") || servletPath.contains("ControllerCustomer")) {
+                HttpSession session = servletRequest.getSession(false);
+                if (session == null || session.getAttribute("account") == null) {
+                    servletResponse.sendRedirect(servletRequest.getContextPath() + "/login.html");
+                    return;
+                }
+            }
+            chain.doFilter(request, response);
         }
-        
     }
 
     @Override
     public void destroy() {
-        
+
     }
-       
+
 }

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : List ProfileLand
+    Document   : List Customer Waiting ... Khach hang dang gui yeu cau mua nha
     Author     : PhanAnh
 --%>
 
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile Land</title>
+        <title>Customers Manage</title>
         <meta name="robots" content="noindex, nofollow" />
         <link rel="Shortcut Icon" href="http://static.bizwebmedia.net/favicon.ico" type="image/x-icon" />
         <!--  -->
@@ -335,7 +335,7 @@
                                     </li>                                                                      
                                 </ul>
                             </li>
-                            <li>
+                           <li>
                                 <a class="TopMenuItem" href="#">
                                     <span class="MenuText"><i class="icon-user"></i> Customer</span>
                                 </a>
@@ -392,24 +392,24 @@
                                 </ul>
                             </li>
                             <li>
-                                <a class="TopMenuItem" href="javascript:;">
+                                <a class="TopMenuItem" href="#">
                                     <span class="MenuText"><i class="icon-signin"></i> Information user</span>
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="/admin.aspx?module=sitesetting&action=hangtotstoresetting">
+                                        <a href="#">
                                             <span class="SubMenuText">View profile
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/admin.aspx?module=socialshop">
+                                        <a href="#">
                                             <span class="SubMenuText">Edit information
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/admin.aspx?module=socialshop">
+                                        <a href="#">
                                             <span class="SubMenuText">Setup security
                                             </span>
                                         </a>
@@ -470,7 +470,7 @@
                             </li>
                             <li class="Last">
                                 <span>
-                                    List of project
+                                    List customers waiting
                                 </span>
                             </li>
                         </ul>
@@ -481,7 +481,7 @@
                             <div class="widget-title">
                                 <h4>
                                     <i class="fa fa-list-alt"></i>
-                                    List project building
+                                    List customers waiting
                                 </h4>
                                 <div class="ui-widget-content ui-corner-top ui-corner-bottom">
                                     <div id="toolbox">
@@ -490,9 +490,9 @@
                                                 <tbody>
                                                     <tr>
                                                         <td align="center">
-                                                            <a id="cph_Main_ctl00_toolbox_rptAction_lbtAction_1" class="toolbar btn btn-info" href="${pageContext.request.contextPath}/ControllerProfileLand?action=add" title="Add new project">
+                                                            <a id="cph_Main_ctl00_toolbox_rptAction_lbtAction_1" class="toolbar btn btn-info" href="${pageContext.request.contextPath}/ControllerCustomer?action=add" title="Add new customer">
                                                                 <i class="fa fa-plus"></i>
-                                                                Add new project
+                                                                Add new customer
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -504,7 +504,7 @@
                                 <div id="hiddenToolBarScroll" class="scrollBox hidden">
                                     <h4>
                                         <i class="icon-list-alt"></i>
-                                        List project building
+                                        List customers waiting
                                     </h4>
                                     <div class="FloatMenuBar">
                                         <div class="ui-widget-content ui-corner-top ui-corner-bottom">
@@ -514,9 +514,9 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td align="center">
-                                                                    <a id="cph_Main_ctl00_toolbox2_rptAction_lbtAction_1" class="toolbar btn btn-info" href="${pageContext.request.contextPath}/ControllerProfileLand?action=add" title="Add new project">
+                                                                    <a id="cph_Main_ctl00_toolbox2_rptAction_lbtAction_1" class="toolbar btn btn-info" href="${pageContext.request.contextPath}/ControllerCustomer?action=add" title="Add new customer">
                                                                         <i class="fa fa-plus"></i>
-                                                                        Add new project
+                                                                        Add new customer
                                                                     </a>
                                                                 </td>
                                                             </tr>
@@ -530,16 +530,16 @@
                             </div>
                             <div class="widget-body">
                                 <div class="span9">
-                                    <form action="${pageContext.request.contextPath}/ControllerProfileLand" method="GET">
+                                    <form action="${pageContext.request.contextPath}/ControllerCustomer" method="GET">
                                         <div class="span9 form-search pull-right text-right" style="float:left;margin-bottom:10px;">
                                             <input id="txtSearch" class="ui-autocomplete-input" type="text" style="width: 200px;" placeholder="Enter search text ..." maxlength="100" name="txtSearch" autocomplete="off">
-                                            <select id="typeSearch" name="typeSearch">
-                                                <option value="byName" selected>Search by name project</option>
-                                                <option value="byTypeOf">Search by project type</option>
-                                                <option value="byLocation">Search by location</option>
-                                                <option value="byDateNotStarted">Construction: Not started</option>
-                                                <option value="byDateUnder">Construction: Under construction</option>
-                                                <option value="byDateCompleted">Construction: Completed</option>
+                                            <select id="typeSearch" name="typeSearch">                                                
+                                                <option value="byFullName" selected>Search by name</option>
+                                                <option value="byStatus">Search by date great</option>
+                                                <option value="byGender">Search by date less</option>
+                                                <option value="byAddress">Search by address</option>
+                                                <option value="byEmail">Search by profile land</option>
+                                                <option value="byTel">Search by number home</option>
                                             </select>
                                             <button id="btnSearch" class="toolbar btn btn-info" name="action" value="Search">
                                                 <i class="fa fa-search"></i>
@@ -552,31 +552,30 @@
                                     <table id="cph_Main_ctl00_ctl00_grvProducts" class="table table-striped table-bordered dataTable table-hover" cellspacing="0" style="border-collapse:collapse;">
                                         <thead>
                                             <tr>
-                                                <th scope="col" style="text-align:center">Code</th>
-                                                <th scope="col" style="text-align:center">Image</th>
-                                                <th scope="col" style="text-align:center">Name of project building</th>
-                                                <th scope="col" style="text-align:center">Date start</th>
-                                                <th scope="col" style="text-align:center">On completing</th>
-                                                <th scope="col" style="text-align:center">Project type</th>
+                                                <th scope="col" style="text-align:center">Profile land</th>
+                                                <th scope="col" style="text-align:center">Number home</th>
+                                                <th scope="col" style="text-align:center">Buy date</th>
+                                                <th scope="col" style="text-align:center">Full name</th>                                                
+                                                <th scope="col" style="text-align:center">Email</th>
                                                 <th scope="col" style="text-align:center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <core:forEach items="${requestScope.listData}" var="profileLand">                                                                                            
+                                            <core:forEach items="${requestScope.listData}" var="buyland">                                                                                            
                                                 <tr>
-                                                    <td class="Visible text-center" align="center" style="width:30px;">${profileLand.code}</td>
-                                                    <td class="text-center" align="center" style="width:30px">
-                                                        <img alt="" src="#" style="width:32px;height:32px;">
-                                                    </td>
-                                                    <td class="Visible text-center" align="center" style="width:45px;"> ${profileLand.name} </td>
-                                                    <td class="text-center" align="center" style="width:30px;"> ${profileLand.dateStart} </td>
-                                                    <td class="text-center" align="center" style="width:30px;"> ${profileLand.dateEnd} </td>
-                                                    <td class="Visible text-center" align="center" style="width:45px;"> ${profileLand.typeOf} </td>
+                                                    <td class="Visible text-center" align="center" style="width:30px;">${buyland.codeProfileLand.name}</td>
+                                                    <td class="Visible text-center" align="left" style="width:45px;"> ${buyland.code} </td>
+                                                    <td class="text-center" align="center" style="width:30px;"> ${buyland.buyDate} </td>
+                                                    <td class="text-center" align="center" style="width:30px;"> ${buyland.username.person.fullname} </td>
+                                                    <td class="Visible text-center" align="left" style="width:45px;"> ${buyland.username.person.email} </td>
                                                     <td class="Visible text-center" align="center" style="width:45px;">
-                                                        <a id="lbtUpdateProduct2946698" class="action-link-button" title="Edit profile projects" href="${pageContext.request.contextPath}/ControllerProfileLand?action=edit&code=${profileLand.code}">
-                                                            <i class="fa fa-pencil-square-o"></i>
+                                                        <a class="action-link-button" title="Sent mail this buyer" href="${pageContext.request.contextPath}/ControllerCustomer?action=sentmail&code=${buyland.code}">
+                                                            <i class="fa fa-envelope-o"></i>
                                                         </a>
-                                                        <a class="action-link-button" title="Delete this project profile" href="${pageContext.request.contextPath}/ControllerProfileLand?action=delete&code=${profileLand.code}">
+                                                        <a class="action-link-button" title="Edit this buyer" href="${pageContext.request.contextPath}/ControllerCustomer?action=edit&code=${buyland.code}">
+                                                            <i class="fa fa-pencil-square-o"></i>
+                                                        </a>                                                        
+                                                        <a class="action-link-button" title="Delete this buyer" href="${pageContext.request.contextPath}/ControllerCustomer?action=delete&code=${buyland.code}">
                                                             <i class=" fa fa-trash"> </i>
                                                         </a>
                                                     </td>
@@ -599,14 +598,14 @@
                                                             </core:when>
                                                             <core:otherwise>
                                                                 <li>
-                                                                    <a href="${pageContext.request.contextPath}/ControllerProfileLand?action=list&page=${i}">${i}</a>
+                                                                    <a href="${pageContext.request.contextPath}/ControllerCustomer?action=listwait&page=${i}">${i}</a>
                                                                 </li>
                                                             </core:otherwise>  
                                                         </core:choose>                                                                                                              
                                                     </core:forEach>
                                                     <core:if test="${currentPage lt noOfPages}">
                                                         <li class="PagedList-skipToNext">
-                                                            <a rel="next" href="${pageContext.request.contextPath}/ControllerProfileLand?action=list&page=${i+1}">»</a>
+                                                            <a rel="next" href="${pageContext.request.contextPath}/ControllerAccount?action=listwait&page=${i+1}">»</a>
                                                         </li>
                                                     </core:if>                                                    
                                                 </ul>
@@ -624,3 +623,4 @@
         </div>
     </body>
 </html>
+

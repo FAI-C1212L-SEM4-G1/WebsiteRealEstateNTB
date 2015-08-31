@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="register-main">
-                    <form class="main-form" action="${pageContext.request.contextPath}/login.do" method="POST">
+                    <form class="main-form" action="${pageContext.request.contextPath}/login.html" method="POST">
                         <div class="intro-form-input">
                             <span class="intro-form-input-ico">
                                 <i class="fa fa-user"></i>

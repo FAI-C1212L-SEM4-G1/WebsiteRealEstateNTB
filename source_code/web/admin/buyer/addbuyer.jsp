@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Create new account
+    Document   : Add Buyer ... Them khach hang moi voi du an mua nha
     Author     : PhanAnh
 --%>
 
@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="robots" content="noindex, nofollow" />
-        <title>Manage account</title>
+        <title>Manage customer</title>
 
         <link rel="Shortcut Icon" href="http://static.bizwebmedia.net/favicon.ico" type="image/x-icon" />
         
@@ -471,7 +471,7 @@
                             </li>
                             <li class="Last">
                                 <span>      
-                                    Create account
+                                    Create customer
                                 </span>
                             </li>
                         </ul>
@@ -481,7 +481,7 @@
                         <div class="widget">
                             <div class="widget-body">
                                 <div>
-                                    <form id="form-add-profile-land" method="POST" action="${pageContext.request.contextPath}/ControllerAccount">
+                                    <form id="form-add-profile-land" method="POST" action="${pageContext.request.contextPath}/ControllerCustomer">
                                         <core:if test="${sessionScope.modelManage==null}">
                                             <jsp:useBean id="modelManage" class="vn.javaweb.real.estate.model.ConfigConnection" scope="session" />
                                         </core:if>
@@ -490,7 +490,7 @@
                                                 <div class="widget-title">
                                                     <h4>
                                                         <i class="fa fa-file-text-o"></i>
-                                                        Create new account
+                                                        Create new customer
                                                     </h4>
                                                     <div class="ui-corner-top ui-corner-bottom">
                                                         <div id="toolbox">
@@ -507,7 +507,7 @@
                                                                             <td align="center">
                                                                                 <a class="toolbar btn btn-info" href="#" title="Back">
                                                                                     <i class="fa fa-arrow-circle-o-right"></i>
-                                                                                    Back
+                                                                                    Mail active
                                                                                 </a>
                                                                             </td>
                                                                         </tr>
@@ -519,7 +519,7 @@
                                                     <div id="hiddenToolBarScroll" class="scrollBox hidden">
                                                         <h4>
                                                             <i class="icon-reorder"></i>
-                                                            Create new account
+                                                            Create new customer
                                                         </h4>
                                                         <div class="FloatMenuBar">
                                                             <div class="ui-corner-top ui-corner-bottom">
@@ -537,7 +537,7 @@
                                                                                     <td align="center">
                                                                                         <a class="toolbar btn btn-info" href="#" title="Back">
                                                                                             <i class="fa fa-arrow-circle-o-right"></i>
-                                                                                            Back
+                                                                                            Mail active
                                                                                         </a>
                                                                                     </td>
                                                                                 </tr>
@@ -560,7 +560,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="loginId" class="validate[required] text" type="text" name="loginId" placeholder="Enter username ..." value="${object.loginId}" <core:if test="${object ne null}">readonly</core:if> />                                                                            
+                                                                            <input id="loginId" class="validate[required] text" type="text" name="loginId" placeholder="Enter username ..." value="${object.username.loginId}" <core:if test="${object ne null}">readonly</core:if> />                                                                            
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Username </p>
@@ -579,7 +579,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>            
-                                                                            <input id="password" class="validate[required] text" type="password" placeholder="Enter password ..." value="${object.password}" name="password" >
+                                                                            <input id="password" class="validate[required] text" type="password" placeholder="Enter password ..." value="${object.username.password}" name="password" >
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Password </p>
@@ -594,7 +594,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>            
-                                                                            <input id="password" class="validate[required] text" type="password" placeholder="Re-password ..." value="${object.password}" name="re-password" >
+                                                                            <input id="password" class="validate[required] text" type="password" placeholder="Re-password ..." value="${object.username.password}" name="re-password" >
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Re-password </p>
@@ -609,10 +609,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <select id="status" name="status">                                                                                
-                                                                                <option value="waiting" <core:if test="${object.status eq 'WAITING'}"><core:out value="selected"></core:out></core:if>>Waiting</option>
-                                                                                <option value="active" <core:if test="${object.status eq 'ACTIVE'}"><core:out value="selected"></core:out></core:if>>Active</option>
-                                                                                <option value="inactive" <core:if test="${object.status eq 'INACTIVE'}"><core:out value="selected"></core:out></core:if>>Inactive</option>
-                                                                                <option value="blocked" <core:if test="${object.status eq 'BLOCKED'}"><core:out value="selected"></core:out></core:if>>Blocked</option>
+                                                                                <option value="waiting" <core:if test="${object.username.status eq 'WAITING'}"><core:out value="selected"></core:out></core:if>>Waiting</option>
+                                                                                <option value="active" <core:if test="${object.username.status eq 'ACTIVE'}"><core:out value="selected"></core:out></core:if>>Active</option>
+                                                                                <option value="inactive" <core:if test="${object.username.status eq 'INACTIVE'}"><core:out value="selected"></core:out></core:if>>Inactive</option>
+                                                                                <option value="blocked" <core:if test="${object.username.status eq 'BLOCKED'}"><core:out value="selected"></core:out></core:if>>Blocked</option>
                                                                             </select>
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
@@ -624,17 +624,33 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="key">
-                                                                            Role                                                                            
+                                                                            Profile Land 
+                                                                            <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <select id="role" name="role">                                                                                
-                                                                                <option value="admin" <core:if test="${object.role eq '0'}"><core:out value="selected"></core:out></core:if>>Administrator</option>
-                                                                                <option value="user" <core:if test="${object.role eq '1'}"><core:out value="selected"></core:out></core:if>>User</option>
-                                                                                <option value="customer" <core:if test="${object.role eq '2'}"><core:out value="selected"></core:out></core:if>>Customer</option>
+                                                                            <select id="codeProfileLand" name="codeProfileLand" <core:if test="${object ne null}">disabled</core:if>>   
+                                                                                <core:forEach items="${modelManage.profileLandModelManage.findStartUnderConstruction()}" var="profileLand">
+                                                                                    <option value="${profileLand.code}" <core:if test="${object.codeProfileLand.code eq profileLand.code}">selected</core:if>>${profileLand.name}</option>
+                                                                                </core:forEach>
                                                                             </select>
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
-                                                                                    <p class="tooltiptitle"> Role </p>
+                                                                                    <p class="tooltiptitle"> Profile Land  </p>
+                                                                                    <p class="tooltipmessage"> ... </p>
+                                                                                </span>
+                                                                            </span>                                                                            
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="key">
+                                                                            Position buy (number home)
+                                                                            <span class="Required">*</span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input id="codeHome" class="validate[required] text" type="text" name="codeHome" value="${object.code}" <core:if test="${object ne null}">readonly</core:if>>
+                                                                            <span class="tooltip-help">
+                                                                                <span class="tooltipContent">
+                                                                                    <p class="tooltiptitle"> Person Id </p>
                                                                                     <p class="tooltipmessage"> ... </p>
                                                                                 </span>
                                                                             </span>
@@ -647,7 +663,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="id" class="validate[required] text" type="text" name="id" value="${object.person.id}">
+                                                                            <input id="id" class="validate[required] text" type="text" name="id" value="${object.username.person.id}" required>
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Person Id </p>
@@ -662,7 +678,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="fullname" class="validate[required] text" type="text" name="fullname" value="${object.person.fullname}">
+                                                                            <input id="fullname" class="validate[required] text" type="text" name="fullname" value="${object.username.person.fullname}">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Full name </p>
@@ -676,7 +692,7 @@
                                                                             Birthday                                                                           
                                                                         </td>
                                                                         <td>
-                                                                            <input id="birthday" class="validate[custom[date]] text hasDatepicker" type="date" name="birthday" value="${object.person.birthday.toString()}">
+                                                                            <input id="birthday" class="validate[custom[date]] text hasDatepicker" type="date" name="birthday" value="${object.username.person.birthday.toString()}">
                                                                             <span class="tooltip-help"></span>
                                                                         </td>
                                                                     </tr>
@@ -686,9 +702,9 @@
                                                                         </td>
                                                                         <td>
                                                                             <select id="gender" name="gender">                                                                                
-                                                                                <option value="male" <core:if test="${object.role eq 'male'}"><core:out value="selected"></core:out></core:if>>Male</option>
-                                                                                <option value="female" <core:if test="${object.role eq 'female'}"><core:out value="selected"></core:out></core:if>>Female</option>
-                                                                                <option value="other" <core:if test="${object.role eq 'other'}"><core:out value="selected"></core:out></core:if>>Other</option>
+                                                                                <option value="male" <core:if test="${object.username.person.gender eq 'male'}"><core:out value="selected"></core:out></core:if>>Male</option>
+                                                                                <option value="female" <core:if test="${object.username.person.gender eq 'female'}"><core:out value="selected"></core:out></core:if>>Female</option>
+                                                                                <option value="other" <core:if test="${object.username.person.gender eq 'other'}"><core:out value="selected"></core:out></core:if>>Other</option>
                                                                             </select>
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
@@ -717,7 +733,7 @@
                                                                             Telephone
                                                                         </td>
                                                                         <td>
-                                                                            <input id="tel" class="validate[required] text" type="text" name="tel" value="${object.person.tel}">
+                                                                            <input id="tel" class="validate[required] text" type="text" name="tel" value="${object.username.person.tel}">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Telephone </p>
@@ -729,9 +745,10 @@
                                                                     <tr>
                                                                         <td class="key">
                                                                             Email
+                                                                            <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="email" class="validate[required] text" type="text" name="email" value="${object.person.email}">
+                                                                            <input id="email" class="validate[required] text" type="text" name="email" value="${object.username.person.email}" required>
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Email </p>
@@ -745,7 +762,7 @@
                                                                             Address
                                                                         </td>
                                                                         <td>
-                                                                            <input id="address" class="validate[required] text" type="text" name="address" value="${object.person.address}">
+                                                                            <input id="address" class="validate[required] text" type="text" name="address" value="${object.username.person.address}">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Address </p>
@@ -759,7 +776,7 @@
                                                                             Note
                                                                         </td>
                                                                         <td>
-                                                                            <input id="note" class="validate[required] text" type="text" name="note" value="${object.person.note}">
+                                                                            <input id="note" class="validate[required] text" type="text" name="note" value="${object.username.person.note}">
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Note </p>

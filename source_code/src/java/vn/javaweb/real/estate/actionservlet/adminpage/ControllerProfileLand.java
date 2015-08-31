@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import vn.javaweb.real.estate.manage.ProfileLandModelManage;
 import vn.javaweb.real.estate.manage.exceptions.NonexistentEntityException;
 import vn.javaweb.real.estate.manage.exceptions.RollbackFailureException;
@@ -38,11 +39,17 @@ public class ControllerProfileLand extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String forward = "";
         String action = req.getParameter("action");
+        HttpSession session = req.getSession();        
+        ConfigConnection modelManage = (ConfigConnection)session.getAttribute("modelManage");
+        if(modelManage == null){
+            modelManage = ConfigConnection.getInstance(); 
+            session.setAttribute("modelManage", modelManage);
+        }
         if (action.equalsIgnoreCase("delete")) {
             String code = req.getParameter("code");
             try {
-                ConfigConnection.getInstance().getProfileLandModelManage().deleteByCode(code);
-                req.setAttribute("listData", ConfigConnection.getInstance().getProfileLandModelManage().findAll());
+                modelManage.getProfileLandModelManage().deleteByCode(code);
+                req.setAttribute("listData", modelManage.getProfileLandModelManage().findAll());
                 forward = LIST_VIEW;
             } catch (NonexistentEntityException ex) {
                 Logger.getLogger(ControllerProfileLand.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,7 +61,7 @@ public class ControllerProfileLand extends HttpServlet {
         } else {
             if (action.equalsIgnoreCase("edit")) {
                 String code = req.getParameter("code");
-                req.setAttribute("object", ConfigConnection.getInstance().getProfileLandModelManage().findByCode(code));
+                req.setAttribute("object", modelManage.getProfileLandModelManage().findByCode(code));
                 forward = INSERT_OR_EDIT;
             } else {
                 if (action.equalsIgnoreCase("list")) {
@@ -62,8 +69,8 @@ public class ControllerProfileLand extends HttpServlet {
                     int recordsPerPage = 15;
                     if(req.getParameter("page") != null)
                         page = Integer.parseInt(req.getParameter("page"));
-                    List<ProfileLand> listData = ConfigConnection.getInstance().getProfileLandModelManage().findBetween((page-1)*recordsPerPage, page*recordsPerPage);
-                    int noOfRecords = ConfigConnection.getInstance().getProfileLandModelManage().getProfileLandCount();
+                    List<ProfileLand> listData = modelManage.getProfileLandModelManage().findBetween((page-1)*recordsPerPage, page*recordsPerPage);
+                    int noOfRecords = modelManage.getProfileLandModelManage().getProfileLandCount();
                     int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
                     req.setAttribute("listData", listData);
                     req.setAttribute("noOfPages", noOfPages);

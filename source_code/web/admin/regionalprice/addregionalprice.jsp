@@ -80,11 +80,11 @@
                             <li><a class="link-topmenu" href="#"><i class="icon-question-sign"></i> Contacts</a></li>
                             <li class="last">
                                 <div class="btn-group">
-                                    <a href="#" class="btn account-info btn-info"><i class="icon-user"></i>admin</a>
+                                    <a href="#" class="btn account-info btn-info"><i class="icon-user"></i>${sessionScope.account.loginId}</a>
                                     <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle dropdown-toggle-acount"><span class="icon-caret-down"></span></a>
                                     <ul class="dropdown-menu custome">
                                         <li><a href="#"><i class="icon-key"></i> Change password</a></li>
-                                        <li><a id="siteUser_Lbtn_Logout" class="NormalGray" href="#"><i class="icon-signout"></i> Logout</a></li>
+                                        <li><a id="siteUser_Lbtn_Logout" class="NormalGray" href="${pageContext.request.contextPath}/login.html?action=logout"><i class="icon-signout"></i> Logout</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -321,20 +321,14 @@
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="#">
+                                        <a href="${pageContext.request.contextPath}/ControllerAccount?action=add">
                                             <span class="SubMenuText">Create new account
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
-                                            <span class="SubMenuText">Account waiting
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="SubMenuText">All account
+                                        <a href="${pageContext.request.contextPath}/ControllerAccount?action=list">
+                                            <span class="SubMenuText">All account user
                                             </span>
                                         </a>
                                     </li>                                                                       
@@ -346,59 +340,59 @@
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="#">
-                                            <span class="SubMenuText">Customers order
+                                        <a href="${pageContext.request.contextPath}/ControllerCustomer?action=add">
+                                            <span class="SubMenuText">Create customer
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="SubFirst">
+                                        <a href="${pageContext.request.contextPath}/ControllerCustomer?action=listwait">
+                                            <span class="SubMenuText">Customers waiting
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
-                                            <span class="SubMenuText">List customers 
+                                        <a href="${pageContext.request.contextPath}/ControllerCustomer?action=listpayi">
+                                            <span class="SubMenuText">Paying customers 
                                             </span>
                                         </a>
-                                    </li>
+                                    </li>  
                                     <li>
-                                        <a href="#">
-                                            <span class="SubMenuText">---
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="SubMenuText">---
+                                        <a href="${pageContext.request.contextPath}/ControllerCustomer?action=listpayf">
+                                            <span class="SubMenuText">Pay finish 
                                             </span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a class="TopMenuItem" href="javascript:;">
-                                    <span class="MenuText"><i class="icon-globe"></i> About contact</span>
+                                <a class="TopMenuItem" href="#">
+                                    <span class="MenuText"><i class="icon-globe"></i> Statics sales</span>
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="/admin.aspx?module=seo">
-                                            <span class="SubMenuText">---
+                                        <a href="#">
+                                            <span class="SubMenuText">Statics by time
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/admin.aspx?module=promotion">
-                                            <span class="SubMenuText">---
+                                        <a href="#">
+                                            <span class="SubMenuText">Statics by sales
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/admin.aspx?module=coupons">
-                                            <span class="SubMenuText">---
+                                        <a href="#">
+                                            <span class="SubMenuText">Statics by location
                                             </span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a class="TopMenuItem" href="javascript:;">
-                                    <span class="MenuText"><i class="icon-signin"></i> Infomation user</span>
+                                <a class="TopMenuItem" href="#">
+                                    <span class="MenuText"><i class="icon-signin"></i> Information user</span>
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
@@ -409,7 +403,7 @@
                                     </li>
                                     <li>
                                         <a href="/admin.aspx?module=socialshop">
-                                            <span class="SubMenuText">Edit infomation
+                                            <span class="SubMenuText">Edit information
                                             </span>
                                         </a>
                                     </li>

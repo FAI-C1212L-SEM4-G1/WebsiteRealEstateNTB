@@ -3,7 +3,10 @@ package vn.javaweb.real.estate.model;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import vn.javaweb.real.estate.manage.AccountModelManage;
+import vn.javaweb.real.estate.manage.BuyLandModelManage;
+import vn.javaweb.real.estate.manage.InvoiceTransactionModelManage;
 import vn.javaweb.real.estate.manage.PaymentModeModelManage;
+import vn.javaweb.real.estate.manage.PersonModelManage;
 import vn.javaweb.real.estate.manage.ProfileLandModelManage;
 import vn.javaweb.real.estate.manage.RegionalPriceModelManage;
 
@@ -18,6 +21,10 @@ public class ConfigConnection {
     private final ProfileLandModelManage profileLandModelManage;
     private final PaymentModeModelManage paymentModeModelManage;
     private final AccountModelManage accountModelManage;
+    private final PersonModelManage personModelManage;
+    private final InvoiceTransactionModelManage invoiceTransactionModelManage;
+    private final BuyLandModelManage buyLandModelManage;
+    
     public static String PERSISTENCE_UNIT_NAME = "HousingPU";
 
     public ConfigConnection() {
@@ -28,6 +35,9 @@ public class ConfigConnection {
         regionalPriceModelManage = new RegionalPriceModelManage(emf);
         paymentModeModelManage = new PaymentModeModelManage(emf);
         accountModelManage = new AccountModelManage(emf);
+        personModelManage = new PersonModelManage(emf);
+        invoiceTransactionModelManage = new InvoiceTransactionModelManage(emf);
+        buyLandModelManage = new BuyLandModelManage(emf);
         System.out.println(".......MANAGE MODEL OPEN SUCSESS......");
         System.out.println("--------------------------------------");
     }
@@ -52,6 +62,18 @@ public class ConfigConnection {
 
     public AccountModelManage getAccountModelManage() {
         return accountModelManage;
+    }
+
+    public PersonModelManage getPersonModelManage() {
+        return personModelManage;
+    }
+
+    public InvoiceTransactionModelManage getInvoiceTransactionModelManage() {
+        return invoiceTransactionModelManage;
+    }
+
+    public BuyLandModelManage getBuyLandModelManage() {
+        return buyLandModelManage;
     }
     
 }

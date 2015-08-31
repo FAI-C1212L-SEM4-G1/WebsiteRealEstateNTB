@@ -93,7 +93,7 @@ public class BuyLandModelManage implements Serializable {
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
-            if (findBuyLand(buyLand.getCode()) != null) {
+            if (findByCode(buyLand.getCode()) != null) {
                 throw new PreexistingEntityException("BuyLand " + buyLand + " already exists.", ex);
             }
             throw ex;
@@ -173,7 +173,7 @@ public class BuyLandModelManage implements Serializable {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 String id = buyLand.getCode();
-                if (findBuyLand(id) == null) {
+                if (findByCode(id) == null) {
                     throw new NonexistentEntityException("The buyLand with id " + id + " no longer exists.");
                 }
             }
@@ -248,10 +248,10 @@ public class BuyLandModelManage implements Serializable {
         }
     }
 
-    public BuyLand findBuyLand(String id) {
+    public BuyLand findByCode(String code) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(BuyLand.class, id);
+            return em.find(BuyLand.class, code);
         } finally {
             em.close();
         }
@@ -270,4 +270,18 @@ public class BuyLandModelManage implements Serializable {
         }
     }
 
+    // Lấy danh sách Buyer waiting theo indexStart - indexEnd
+    public List<BuyLand> findBuyerWaitBetween(int indexStart, int indexEnd) {
+        EntityManager em = getEntityManager();   
+        try {
+            String q = "SELECT * FROM (SELECT bl.*, ROW_NUMBER() over (ORDER BY bl.buyDate) as ct " +
+                       "from [RealEstate].[dbo].[BuyLand] as bl join [RealEstate].[dbo].[Account] as ac on bl.username = ac.loginId " +
+                       "where (ac.role = 2 and ac.status = 'WAITING')) sub " +
+                       "WHERE ct > "+ indexStart +"  and ct <= " + indexEnd;
+            Query query = em.createNativeQuery(q, BuyLand.class);
+            return (List<BuyLand>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
 }
