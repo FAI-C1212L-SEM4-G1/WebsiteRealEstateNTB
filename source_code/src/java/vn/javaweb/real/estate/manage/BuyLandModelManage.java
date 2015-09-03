@@ -21,7 +21,7 @@ import vn.javaweb.real.estate.model.BuyLand;
 import vn.javaweb.real.estate.model.ConfigConnection;
 
 /**
- *
+ * @description Nghiệp vụ cho "Hợp đồng mua đất của khách hàng"
  * @author PhanAnh
  */
 public class BuyLandModelManage implements Serializable {
@@ -224,7 +224,7 @@ public class BuyLandModelManage implements Serializable {
         }
     }
 
-    public List<BuyLand> findBuyLandEntities() {
+    public List<BuyLand> findAll() {
         return findBuyLandEntities(true, -1, -1);
     }
 
@@ -284,4 +284,67 @@ public class BuyLandModelManage implements Serializable {
             em.close();
         }
     }
+    
+    public List<BuyLand> findBuyerWait(){
+       EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("BuyLand.findBuyerWait");
+            return (List<BuyLand>)query.getResultList(); 
+        } finally {
+            em.close();
+        } 
+    }
+    
+    // Tìm hợp đồng của khách hàng đang mua
+    public List<BuyLand> findBuyerIng(){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("BuyLand.findBuyerIng");
+            return (List<BuyLand>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    // Tìm hợp đồng của khách hàng đang mua hiển thị từ indexStart đến indexEnd
+    // Điều kiện: Là khách hàng, đang mua
+    public List<BuyLand> findBuyerIngBetween(int indexStart, int indexEnd){
+        EntityManager em = getEntityManager();   
+        try {
+            String q = "SELECT * FROM (SELECT bl.*, ROW_NUMBER() over (ORDER BY bl.buyDate) as ct " +
+                       "from [RealEstate].[dbo].[BuyLand] as bl join [RealEstate].[dbo].[Account] as ac on bl.username = ac.loginId " +
+                       "where (bl.totalPaid > bl.havePay and ac.role = 2)) sub " +
+                       "WHERE ct > "+ indexStart +"  and ct <= " + indexEnd;
+            Query query = em.createNativeQuery(q, BuyLand.class);
+            return (List<BuyLand>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    // Tìm tất cả hợp đồng mua đất của khách đã hoàn thành giao dịch
+    public List<BuyLand> findBuyerEd(){
+        EntityManager em = getEntityManager();   
+        try {
+            Query query = em.createNamedQuery("BuyLand.findBuyerFinish");
+            return (List<BuyLand>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<BuyLand> findBuyerEdBetween(int indexStart, int indexEnd){
+        EntityManager em = getEntityManager();   
+        try {
+            String q = "SELECT * FROM (SELECT bl.*, ROW_NUMBER() over (ORDER BY bl.buyDate) as ct " +
+                       "from [RealEstate].[dbo].[BuyLand] as bl join [RealEstate].[dbo].[Account] as ac on bl.username = ac.loginId " +
+                       "where (bl.totalPaid = bl.havePay and ac.role = 2)) sub " +
+                       "WHERE ct > "+ indexStart +"  and ct <= " + indexEnd;
+            Query query = em.createNativeQuery(q, BuyLand.class);
+            return (List<BuyLand>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
+    
 }

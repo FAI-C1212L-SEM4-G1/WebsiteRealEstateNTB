@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -64,9 +63,9 @@ public class ControllerCustomer extends HttpServlet {
             String codeBuyLand = req.getParameter("code");
             BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeBuyLand);
             Account account = buyLand.getUsername();
-            
+
             final String username = "anhnnp.hdn.vn@gmail.com";
-            final String password = "hdn142676301";                       
+            final String password = "hdn142676301";
             // Recipient's email ID needs to be mentioned.
             // String to = "phananhhdnit@gmail.com"
             String to = account.getPerson().getEmail();
@@ -79,7 +78,7 @@ public class ControllerCustomer extends HttpServlet {
             props.put("mail.smtp.starttls.enable", "true");
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.port", "587");
-            
+
             // Get the default Session object.
             Session sessionMail = Session.getInstance(props,
                     new javax.mail.Authenticator() {
@@ -103,9 +102,9 @@ public class ControllerCustomer extends HttpServlet {
                 // Set Subject: header field
                 message.setSubject("(NTB Real Estate) Account Information housing");
                 // Content send
-                String content = "<h1>Hi "+ account.getPerson().getFullname() +" !</h1>"
+                String content = "<h1>Hi " + account.getPerson().getFullname() + " !</h1>"
                         + "<p>I represent the company NTB resubmit your account information to register your property as follows:</p>"
-                        + "<hr/>"                        
+                        + "<hr/>"
                         + "Name profile land: " + buyLand.getCodeProfileLand().getName() + "<br/>"
                         + "Location: " + buyLand.getCodeProfileLand().getLocation() + "<br/>"
                         + "Unit price: " + buyLand.getCodeProfileLand().getCodeRegional().getUnitPrice() + "$<br/>"
@@ -119,9 +118,9 @@ public class ControllerCustomer extends HttpServlet {
                 message.setContent(content, "text/html; charset=utf-8");
                 // Send message
                 Transport.send(message);
-                
+
                 System.out.println("Done send mail ...");
-                
+
                 String title = "Send Email";
                 String res = "Sent message successfully....";
                 String docType
@@ -137,7 +136,7 @@ public class ControllerCustomer extends HttpServlet {
             } catch (MessagingException mex) {
                 mex.printStackTrace();
             }
-            
+
         } else {
             if (action.equalsIgnoreCase("delete")) {
                 String code = req.getParameter("code");
@@ -175,49 +174,79 @@ public class ControllerCustomer extends HttpServlet {
                             page = Integer.parseInt(req.getParameter("page"));
                         }
                         List<BuyLand> listData = modelManage.getBuyLandModelManage().findBuyerWaitBetween((page - 1) * recordsPerPage, page * recordsPerPage);
-                        int noOfRecords = modelManage.getProfileLandModelManage().getProfileLandCount();
+                        int noOfRecords = modelManage.getBuyLandModelManage().findBuyerWait().size();
                         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
                         req.setAttribute("listData", listData);
                         req.setAttribute("noOfPages", noOfPages);
                         req.setAttribute("currentPage", page);
                         forward = LIST_VIEW_WAIT;
                     } else {
-                        if (action.equalsIgnoreCase("Search")) {
-                            String txtSearch = req.getParameter("txtSearch");
-                            String type = req.getParameter("typeSearch");
+                        if (action.equalsIgnoreCase("listpayi")) {
                             int page = 1;
                             int recordsPerPage = 15;
-                            List<ProfileLand> listData = new ArrayList<>();
-                            if (type.equalsIgnoreCase("byName")) {
-                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByName(txtSearch);
-                            } else {
-                                if (type.equalsIgnoreCase("byTypeOf")) {
-                                    listData = ConfigConnection.getInstance().getProfileLandModelManage().findByTypeOf(txtSearch);
-                                } else {
-                                    if (type.equalsIgnoreCase("byLocation")) {
-                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByLocation(txtSearch);
-                                    } else {
-                                        if (type.equalsIgnoreCase("byDateNotStarted")) {
-                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.NotStarted);
-                                        } else {
-                                            if (type.equalsIgnoreCase("byDateUnder")) {
-                                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.UnderConstruction);
-                                            } else {
-                                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.Completed);
-                                            }
-                                        }
-                                    }
-                                }
+                            if (req.getParameter("page") != null) {
+                                page = Integer.parseInt(req.getParameter("page"));
                             }
-                            //TODO: Xu ly phan trang cho tim kiem (Xem lai)
-                            int noOfRecords = listData.size();
+                            List<BuyLand> listData = modelManage.getBuyLandModelManage().findBuyerIngBetween((page - 1) * recordsPerPage, page * recordsPerPage);
+                            int noOfRecords = modelManage.getBuyLandModelManage().findBuyerIng().size();
                             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
                             req.setAttribute("listData", listData);
                             req.setAttribute("noOfPages", noOfPages);
                             req.setAttribute("currentPage", page);
-                            forward = LIST_VIEW_WAIT;
+                            forward = LIST_VIEW_ING;
                         } else {
-                            forward = INSERT_OR_EDIT;
+                            if (action.equalsIgnoreCase("listpayf")) {
+                                int page = 1;
+                                int recordsPerPage = 15;
+                                if (req.getParameter("page") != null) {
+                                    page = Integer.parseInt(req.getParameter("page"));
+                                }
+                                List<BuyLand> listData = modelManage.getBuyLandModelManage().findBuyerEdBetween((page - 1) * recordsPerPage, page * recordsPerPage);
+                                int noOfRecords = modelManage.getBuyLandModelManage().findBuyerEd().size();
+                                int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                                req.setAttribute("listData", listData);
+                                req.setAttribute("noOfPages", noOfPages);
+                                req.setAttribute("currentPage", page);
+                                forward = LIST_VIEW_ED;
+                            } else {
+                                if (action.equalsIgnoreCase("Search")) {
+                                    String txtSearch = req.getParameter("txtSearch");
+                                    String type = req.getParameter("typeSearch");
+                                    int page = 1;
+                                    int recordsPerPage = 15;
+                                    List<ProfileLand> listData = new ArrayList<>();
+                                    if (type.equalsIgnoreCase("byName")) {
+                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByName(txtSearch);
+                                    } else {
+                                        if (type.equalsIgnoreCase("byTypeOf")) {
+                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByTypeOf(txtSearch);
+                                        } else {
+                                            if (type.equalsIgnoreCase("byLocation")) {
+                                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByLocation(txtSearch);
+                                            } else {
+                                                if (type.equalsIgnoreCase("byDateNotStarted")) {
+                                                    listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.NotStarted);
+                                                } else {
+                                                    if (type.equalsIgnoreCase("byDateUnder")) {
+                                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.UnderConstruction);
+                                                    } else {
+                                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.Completed);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    //TODO: Xu ly phan trang cho tim kiem (Xem lai)
+                                    int noOfRecords = listData.size();
+                                    int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                                    req.setAttribute("listData", listData);
+                                    req.setAttribute("noOfPages", noOfPages);
+                                    req.setAttribute("currentPage", page);
+                                    forward = LIST_VIEW_WAIT;
+                                } else {
+                                    forward = INSERT_OR_EDIT;
+                                }
+                            }
                         }
                     }
                 }
@@ -231,7 +260,7 @@ public class ControllerCustomer extends HttpServlet {
         //Account
         String loginId = req.getParameter("loginId");
         String password = req.getParameter("password");
-        String status = req.getParameter("status");        
+        String status = req.getParameter("status");
         //Person
         String id = req.getParameter("id");
         String fullname = req.getParameter("fullname");
@@ -242,11 +271,11 @@ public class ControllerCustomer extends HttpServlet {
         String tel = req.getParameter("tel");
         String email = req.getParameter("email");
         String note = req.getParameter("note");
-        String action = req.getParameter("action");
         //Profile Land
         String codeProfileLand = req.getParameter("codeProfileLand");
-        String codeHome = req.getParameter("codeHome");                        
-        
+        String codeHome = req.getParameter("codeHome");
+        String action = req.getParameter("action");
+
         boolean flag = false;
         try {
             HttpSession session = req.getSession();
@@ -256,14 +285,14 @@ public class ControllerCustomer extends HttpServlet {
                 session.setAttribute("modelManage", modelManage);
             }
             ProfileLand profileLand = modelManage.getProfileLandModelManage().findByCode(codeProfileLand);
-            if(action.equalsIgnoreCase("add")){
+            if (action.equalsIgnoreCase("add")) {
                 Account account = new Account();
                 account.setLoginId(loginId);
                 account.setPassword(password);
-                account.setStatus(status.toUpperCase());                
+                account.setStatus(status.toUpperCase());
                 account.setRole(2);
                 modelManage.getAccountModelManage().create(account);
-                
+
                 Person person = new Person();
                 person.setId(id);
                 person.setUsername(account);
@@ -275,23 +304,23 @@ public class ControllerCustomer extends HttpServlet {
                 person.setTel(tel);
                 person.setEmail(email);
                 person.setNote(note);
-                modelManage.getPersonModelManage().create(person);  
-                
+                modelManage.getPersonModelManage().create(person);
+
                 BuyLand buyLand = new BuyLand();
                 buyLand.setCode(codeHome);
                 buyLand.setCodeProfileLand(profileLand);
                 buyLand.setUsername(account);
                 buyLand.setNote(note);
-                buyLand.setBuyDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));                
+                buyLand.setBuyDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
                 double totalPrice = profileLand.getRoomArea() * Double.parseDouble(profileLand.getCodeRegional().getUnitPrice());
                 buyLand.setTotalPaid(Double.toString(totalPrice));
                 buyLand.setHavePay("0");
                 modelManage.getBuyLandModelManage().create(buyLand);
             } else {
-                BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeHome);                
+                BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeHome);
                 Account account = buyLand.getUsername();
                 account.setPassword(password);
-                account.setStatus(status.toUpperCase());                
+                account.setStatus(status.toUpperCase());
                 Person person = account.getPerson();
                 person.setFullname(fullname);
                 person.setBirthday(birthday);
@@ -302,12 +331,12 @@ public class ControllerCustomer extends HttpServlet {
                 person.setEmail(email);
                 person.setNote(note);
                 modelManage.getBuyLandModelManage().edit(buyLand);
-            }            
+            }
             flag = true;
         } catch (RollbackFailureException ex) {
-            Logger.getLogger(ControllerAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControllerCustomer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(ControllerAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControllerCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         if (flag) {
@@ -319,6 +348,7 @@ public class ControllerCustomer extends HttpServlet {
             out.println("alert('Error! Not suscess');");
             out.println("</script>");
         }
+
     }
 
     @Override

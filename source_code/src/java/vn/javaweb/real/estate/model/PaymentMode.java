@@ -1,11 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vn.javaweb.real.estate.model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author NguyenNgoc
+ * @author PhanAnh
  */
 @Entity
 @Table(catalog = "RealEstate", schema = "dbo", uniqueConstraints = {
@@ -99,6 +99,21 @@ public class PaymentMode implements Serializable {
     public void setCodeProfileLand(ProfileLand codeProfileLand) {
         this.codeProfileLand = codeProfileLand;
     }
+    
+    public List<SessionPay> getTimePayment() throws ParseException{
+        List<SessionPay> sprintPays = new ArrayList<>();
+        String[] splitPercentPay = percentPay.split(",");
+        String[] splitTimePay = note.split(",");
+        for(int i = 0; i < countPay; i++){
+            SessionPay sprintPay = new SessionPay();
+            sprintPay.setId(i+1);
+            sprintPay.setTimePay(new SimpleDateFormat("dd/MM/yyyy").parse(splitTimePay[i]));
+            sprintPay.setPercentPay(Double.parseDouble(splitPercentPay[i]));
+            sprintPay.setPricePay((Double.parseDouble(codeProfileLand.getCodeRegional().getUnitPrice()) * codeProfileLand.getRoomArea() * 30 / 100) + "");
+            sprintPays.add(sprintPay);
+        }        
+        return sprintPays;
+    }
 
     @Override
     public int hashCode() {
@@ -108,16 +123,15 @@ public class PaymentMode implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PaymentMode)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        PaymentMode other = (PaymentMode) object;
-        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final PaymentMode other = (PaymentMode) obj;
+        return Objects.equals(this.code, other.code);
     }
 
     @Override

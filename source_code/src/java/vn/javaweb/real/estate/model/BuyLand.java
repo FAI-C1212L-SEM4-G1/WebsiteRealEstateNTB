@@ -30,7 +30,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "BuyLand.findByNote", query = "SELECT b FROM BuyLand b WHERE b.note = :note"),
     @NamedQuery(name = "BuyLand.findByBuyDate", query = "SELECT b FROM BuyLand b WHERE b.buyDate = :buyDate"),
     @NamedQuery(name = "BuyLand.findByTotalPaid", query = "SELECT b FROM BuyLand b WHERE b.totalPaid = :totalPaid"),
-    @NamedQuery(name = "BuyLand.findByHavePay", query = "SELECT b FROM BuyLand b WHERE b.havePay = :havePay")})
+    @NamedQuery(name = "BuyLand.findByHavePay", query = "SELECT b FROM BuyLand b WHERE b.havePay = :havePay"),
+    @NamedQuery(name = "BuyLand.findBuyerFinish", query = "SELECT b FROM BuyLand b WHERE b.havePay = b.totalPaid AND b.username.role = 2"),
+    @NamedQuery(name = "BuyLand.findBuyerIng", query = "SELECT b FROM BuyLand b WHERE b.totalPaid > b.havePay AND b.username.role = 2"),
+    @NamedQuery(name = "BuyLand.findBuyerWait", query = "SELECT b FROM BuyLand b WHERE b.username.status = 'WAITING' AND b.username.role = 2")
+})
 public class BuyLand implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -146,10 +150,7 @@ public class BuyLand implements Serializable {
             return false;
         }
         BuyLand other = (BuyLand) object;
-        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
-            return false;
-        }
-        return true;
+        return !((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code)));
     }
 
     @Override
