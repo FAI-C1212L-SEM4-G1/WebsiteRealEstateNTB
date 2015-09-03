@@ -558,6 +558,8 @@
                                                 <th scope="col" style="text-align:center">Buy date</th>
                                                 <th scope="col" style="text-align:center">Full name</th>                                                
                                                 <th scope="col" style="text-align:center">Email</th>
+                                                <th scope="col" style="text-align:center">Paid</th>
+                                                <th scope="col" style="text-align:center">Payable</th>
                                                 <th scope="col" style="text-align:center">Actions</th>
                                             </tr>
                                         </thead>
@@ -569,6 +571,8 @@
                                                     <td class="text-center" align="center" style="width:30px;"> ${buyland.buyDate} </td>
                                                     <td class="text-center" align="center" style="width:30px;"> ${buyland.username.person.fullname} </td>
                                                     <td class="Visible text-center" align="left" style="width:45px;"> ${buyland.username.person.email} </td>
+                                                    <td class="Visible text-center" align="left" style="width:45px;"> ${buyland.havePay} </td>
+                                                    <td class="Visible text-center" align="left" style="width:45px;"> ${buyland.totalPaid - buyland.havePay} </td>
                                                     <td class="Visible text-center" align="center" style="width:45px;">
                                                         <a class="action-link-button" title="Sent mail this buyer" href="${pageContext.request.contextPath}/ControllerCustomer?action=sentmail&code=${buyland.code}">
                                                             <i class="fa fa-envelope-o"></i>
@@ -576,8 +580,8 @@
                                                         <a class="action-link-button" title="Edit this buyer" href="${pageContext.request.contextPath}/ControllerCustomer?action=edit&code=${buyland.code}">
                                                             <i class="fa fa-pencil-square-o"></i>
                                                         </a>                                                        
-                                                        <a class="action-link-button" title="Delete this buyer" href="${pageContext.request.contextPath}/ControllerCustomer?action=delete&code=${buyland.code}">
-                                                            <i class=" fa fa-trash"> </i>
+                                                        <a class="action-link-button" title="View transactions details" href="${pageContext.request.contextPath}/ControllerCustomer?action=viewtrans&code=${buyland.code}">
+                                                            <i class="fa fa-money"></i>
                                                         </a>
                                                     </td>
                                                 </tr>

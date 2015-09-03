@@ -166,9 +166,16 @@ public class ControllerCustomer extends HttpServlet {
                 if (action.equalsIgnoreCase("edit")) {
                     String code = req.getParameter("code");
                     req.setAttribute("object", modelManage.getBuyLandModelManage().findByCode(code));
+                    req.setAttribute("readonly", " ");
                     forward = INSERT_OR_EDIT;
                 } else {
-                    if (action.equalsIgnoreCase("listwait")) {
+                    if(action.equalsIgnoreCase("viewdetails")){
+                        String code = req.getParameter("code");
+                        req.setAttribute("object", modelManage.getBuyLandModelManage().findByCode(code));
+                        req.setAttribute("readonly", "readonly");
+                        forward = INSERT_OR_EDIT;
+                    } else {
+                       if (action.equalsIgnoreCase("listwait")) {
                         int page = 1;
                         int recordsPerPage = 15;
                         if (req.getParameter("page") != null) {
@@ -255,7 +262,8 @@ public class ControllerCustomer extends HttpServlet {
                                 }
                             }
                         }
-                    }
+                    } 
+                    }                    
                 }
             }
             req.getRequestDispatcher(forward).forward(req, resp);

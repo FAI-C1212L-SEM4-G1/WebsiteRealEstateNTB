@@ -579,7 +579,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>            
-                                                                            <input id="password" class="validate[required] text" type="password" placeholder="Enter password ..." value="${object.username.password}" name="password" >
+                                                                            <input id="password" class="validate[required] text" type="password" placeholder="Enter password ..." value="${object.username.password}" name="password" ${readonly} />
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Password </p>
@@ -594,7 +594,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>            
-                                                                            <input id="password" class="validate[required] text" type="password" placeholder="Re-password ..." value="${object.username.password}" name="re-password" >
+                                                                            <input id="password" class="validate[required] text" type="password" placeholder="Re-password ..." value="${object.username.password}" name="re-password" ${readonly} />
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Re-password </p>
@@ -608,7 +608,7 @@
                                                                             Status                                                                            
                                                                         </td>
                                                                         <td>
-                                                                            <select id="status" name="status">                                                                                
+                                                                            <select id="status" name="status" <core:if test="${readonly eq 'readonly'}"><core:out value="disabled"></core:out></core:if>>                                                                                
                                                                                 <option value="waiting" <core:if test="${object.username.status eq 'WAITING'}"><core:out value="selected"></core:out></core:if>>Waiting</option>
                                                                                 <option value="active" <core:if test="${object.username.status eq 'ACTIVE'}"><core:out value="selected"></core:out></core:if>>Active</option>
                                                                                 <option value="inactive" <core:if test="${object.username.status eq 'INACTIVE'}"><core:out value="selected"></core:out></core:if>>Inactive</option>
@@ -663,7 +663,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="id" class="validate[required] text" type="text" name="id" value="${object.username.person.id}" required>
+                                                                            <input id="id" class="validate[required] text" type="text" name="id" value="${object.username.person.id}" required ${readonly} />
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Person Id </p>
@@ -678,7 +678,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="fullname" class="validate[required] text" type="text" name="fullname" value="${object.username.person.fullname}">
+                                                                            <input id="fullname" class="validate[required] text" type="text" name="fullname" value="${object.username.person.fullname}" ${readonly} />
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Full name </p>
@@ -692,7 +692,7 @@
                                                                             Birthday                                                                           
                                                                         </td>
                                                                         <td>
-                                                                            <input id="birthday" class="validate[custom[date]] text hasDatepicker" type="date" name="birthday" value="${object.username.person.birthday.toString()}">
+                                                                            <input id="birthday" class="validate[custom[date]] text hasDatepicker" type="date" name="birthday" value="${object.username.person.birthday.toString()}" ${readonly} />
                                                                             <span class="tooltip-help"></span>
                                                                         </td>
                                                                     </tr>
@@ -701,7 +701,7 @@
                                                                             Gender                                                                            
                                                                         </td>
                                                                         <td>
-                                                                            <select id="gender" name="gender">                                                                                
+                                                                            <select id="gender" name="gender" <core:if test="${readonly eq 'readonly'}"><core:out value="disabled"></core:out></core:if>>                                                                                
                                                                                 <option value="male" <core:if test="${object.username.person.gender eq 'male'}"><core:out value="selected"></core:out></core:if>>Male</option>
                                                                                 <option value="female" <core:if test="${object.username.person.gender eq 'female'}"><core:out value="selected"></core:out></core:if>>Female</option>
                                                                                 <option value="other" <core:if test="${object.username.person.gender eq 'other'}"><core:out value="selected"></core:out></core:if>>Other</option>
@@ -733,7 +733,7 @@
                                                                             Telephone
                                                                         </td>
                                                                         <td>
-                                                                            <input id="tel" class="validate[required] text" type="text" name="tel" value="${object.username.person.tel}">
+                                                                            <input id="tel" class="validate[required] text" type="text" name="tel" value="${object.username.person.tel}" ${readonly} />
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Telephone </p>
@@ -748,7 +748,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <input id="email" class="validate[required] text" type="text" name="email" value="${object.username.person.email}" required>
+                                                                            <input id="email" class="validate[required] text" type="text" name="email" value="${object.username.person.email}" required ${readonly} />
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Email </p>
@@ -762,7 +762,7 @@
                                                                             Address
                                                                         </td>
                                                                         <td>
-                                                                            <input id="address" class="validate[required] text" type="text" name="address" value="${object.username.person.address}">
+                                                                            <input id="address" class="validate[required] text" type="text" name="address" value="${object.username.person.address}" ${readonly} />
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Address </p>
@@ -776,7 +776,7 @@
                                                                             Note
                                                                         </td>
                                                                         <td>
-                                                                            <input id="note" class="validate[required] text" type="text" name="note" value="${object.username.person.note}">
+                                                                            <input id="note" class="validate[required] text" type="text" name="note" value="${object.username.person.note}" ${readonly} />
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Note </p>
