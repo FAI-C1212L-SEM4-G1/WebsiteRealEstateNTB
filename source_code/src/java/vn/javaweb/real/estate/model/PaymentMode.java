@@ -100,21 +100,18 @@ public class PaymentMode implements Serializable {
         this.codeProfileLand = codeProfileLand;
     }
     
-    public List<SessionPay> getTimePayment() throws ParseException{
+    public List<SessionPay> getSessionPays() throws ParseException{
         List<SessionPay> sprintPays = new ArrayList<>();
-        String[] splitPercentPay = percentPay.split(",");
-        
-            System.out.println("Ngay thang nam: " + splitPercentPay.length + "--" + splitPercentPay[0]);
-        
-        
+        String[] splitPercentPay = percentPay.split(",");                                    
         String[] splitTimePay = note.split(",");
         for(int i = 0; i < countPay; i++){
             SessionPay sprintPay = new SessionPay();
-            sprintPay.setId(i+1);
-            sprintPay.setTimePay(new SimpleDateFormat("dd/MM/yyyy").parse(splitTimePay[i]));
+            sprintPay.setId(i+1);            
+            sprintPay.setTimePay(new SimpleDateFormat("yyyy-MM-dd").parse(splitTimePay[i]));
             sprintPay.setPercentPay(Double.parseDouble(splitPercentPay[i]));
-            sprintPay.setPricePay((Double.parseDouble(codeProfileLand.getCodeRegional().getUnitPrice()) * codeProfileLand.getRoomArea() * 30 / 100) + "");
+            sprintPay.setPricePay((Double.parseDouble(codeProfileLand.getCodeRegional().getUnitPrice()) * codeProfileLand.getRoomArea() * sprintPay.getPercentPay() / 100) + "");
             sprintPays.add(sprintPay);
+            
         }        
         return sprintPays;
     }

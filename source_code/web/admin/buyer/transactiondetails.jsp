@@ -5,6 +5,7 @@
 
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="core" uri="http://java.sun.com/jstl/core_rt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -471,7 +472,7 @@
                             </li>
                             <li class="Last">
                                 <span>      
-                                    Create account
+                                    Details of customer payments
                                 </span>
                             </li>
                         </ul>
@@ -481,7 +482,7 @@
                         <div class="widget">
                             <div class="widget-body">
                                 <div>
-                                    <form id="form-add-profile-land" method="POST" action="${pageContext.request.contextPath}/ControllerAccount">
+                                    <form id="form-add-profile-land" method="POST" action="${pageContext.request.contextPath}/ControllerCustomer">
                                         <core:if test="${sessionScope.modelManage==null}">
                                             <jsp:useBean id="modelManage" class="vn.javaweb.real.estate.model.ConfigConnection" scope="session" />
                                         </core:if>
@@ -490,7 +491,7 @@
                                                 <div class="widget-title">
                                                     <h4>
                                                         <i class="fa fa-file-text-o"></i>
-                                                        Create new account
+                                                        Details of customer payments
                                                     </h4>
                                                     <div class="ui-corner-top ui-corner-bottom">
                                                         <div id="toolbox">
@@ -499,7 +500,7 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <td align="center">
-                                                                                <button class="toolbar btn btn-info" type="submit" value="save">
+                                                                                <button class="toolbar btn btn-info" type="submit" value="saveTrans">
                                                                                     <i class="fa fa-floppy-o"></i>
                                                                                     Save
                                                                                 </button>
@@ -519,7 +520,7 @@
                                                     <div id="hiddenToolBarScroll" class="scrollBox hidden">
                                                         <h4>
                                                             <i class="icon-reorder"></i>
-                                                            Create new account
+                                                            Details of customer payments
                                                         </h4>
                                                         <div class="FloatMenuBar">
                                                             <div class="ui-corner-top ui-corner-bottom">
@@ -529,7 +530,7 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td align="center">
-                                                                                        <button class="toolbar btn btn-info" type="submit" value="save">
+                                                                                        <button class="toolbar btn btn-info" type="submit" value="saveTrans">
                                                                                             <i class="fa fa-floppy-o"></i>
                                                                                             Save
                                                                                         </button>
@@ -595,25 +596,31 @@
                                                                             <hr/>
                                                                         </td>
                                                                     </tr>
-                                                                    <core:forEach items="${object.codeProfileLand.paymentMode.getTimePayment()}" var="sessionPay">
+                                                                    <core:forEach items="${object.codeProfileLand.paymentMode.getSessionPays()}" var="sessionPay">
                                                                         <tr>
                                                                             <td class="key">                                                                                  
-                                                                                <p>Session pay ${sessionPay.id}</p>
-                                                                                <p>Percent pay ${sessionPay.percentPay} <core:out value=" : $"></core:out> ${sessionPay.pricePay}</p>
-                                                                                <p>Deadline pay ${sessionPay.timePay}</p>
+                                                                                <p>Session pay ${sessionPay.id}</p>                                                                                
                                                                             </td>
                                                                             <td>
-                                                                                <table>
-                                                                                    <core:set var="transaction" value="${object.invoiceTransactionList[0]}"></core:set>
+                                                                                <core:set var="transaction" value="${object.invoiceTransactionList[sessionPay.id-1]}"></core:set>
+                                                                                <fieldset>
+                                                                                    <legend>Session pay ${sessionPay.id}</legend>
+                                                                                    <p>Percent pay:&nbsp;${sessionPay.percentPay}</p>
+                                                                                    <p>Price pay:&nbsp;${sessionPay.pricePay}</p>
+                                                                                    <p>Deadline pay:&nbsp;<fmt:formatDate pattern="dd/MM/yyyy" value="${sessionPay.timePay}" /></p>
+                                                                                    <hr/>
+                                                                                
+                                                                                <table>                                                                                    
                                                                                     <tr>                                                                                        
                                                                                         <td>Paid</td>
-                                                                                        <td><input id="paid${sessionPay.id}" class="validate[required] text" type="text" name="paid${sessionPay.id}" value="${transaction.paid}"></td>
+                                                                                        <td><input id="paid${sessionPay.id}" class="validate[required] text" type="text" name="paid${sessionPay.id}" value="${transaction.paid}"/></td>
                                                                                     </tr>
                                                                                     <tr>                                                                                        
                                                                                         <td>Date paid</td>
-                                                                                        <td><input id="datepaid${sessionPay.id}" class="validate[required] text" type="text" name="datepaid${sessionPay.id}" value="${transaction.dateTrans}"></td>
+                                                                                        <td><input id="datepaid${sessionPay.id}" class="validate[required] text" type="date" name="datepaid${sessionPay.id}" value="${transaction.dateTrans}"/></td>
                                                                                     </tr>
-                                                                                </table>                                                                                
+                                                                                </table>  
+                                                                                </fieldset>
                                                                             </td>
                                                                         </tr> 
                                                                     </core:forEach>
