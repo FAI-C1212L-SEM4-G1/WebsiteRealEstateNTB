@@ -103,6 +103,10 @@ public class PaymentMode implements Serializable {
     public List<SessionPay> getTimePayment() throws ParseException{
         List<SessionPay> sprintPays = new ArrayList<>();
         String[] splitPercentPay = percentPay.split(",");
+        
+            System.out.println("Ngay thang nam: " + splitPercentPay.length + "--" + splitPercentPay[0]);
+        
+        
         String[] splitTimePay = note.split(",");
         for(int i = 0; i < countPay; i++){
             SessionPay sprintPay = new SessionPay();

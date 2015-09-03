@@ -40,6 +40,7 @@ public class ControllerCustomer extends HttpServlet {
     private final String LIST_VIEW_WAIT = "/admin/buyer/listbuyerwaiting.jsp";
     private final String LIST_VIEW_ING = "/admin/buyer/listbuyer-ing.jsp";
     private final String LIST_VIEW_ED = "/admin/buyer/listbuyer-ed.jsp";
+    private final String LIST_TRANS = "/admin/buyer/transactiondetails.jsp";
 
     public ControllerCustomer() {
     }
@@ -209,42 +210,48 @@ public class ControllerCustomer extends HttpServlet {
                                 req.setAttribute("currentPage", page);
                                 forward = LIST_VIEW_ED;
                             } else {
-                                if (action.equalsIgnoreCase("Search")) {
-                                    String txtSearch = req.getParameter("txtSearch");
-                                    String type = req.getParameter("typeSearch");
-                                    int page = 1;
-                                    int recordsPerPage = 15;
-                                    List<ProfileLand> listData = new ArrayList<>();
-                                    if (type.equalsIgnoreCase("byName")) {
-                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByName(txtSearch);
-                                    } else {
-                                        if (type.equalsIgnoreCase("byTypeOf")) {
-                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByTypeOf(txtSearch);
+                                if (action.equalsIgnoreCase("viewtrans")) {
+                                    String code = req.getParameter("code");
+                                    req.setAttribute("object", modelManage.getBuyLandModelManage().findByCode(code));
+                                    forward = LIST_TRANS;
+                                } else {
+                                    if (action.equalsIgnoreCase("Search")) {
+                                        String txtSearch = req.getParameter("txtSearch");
+                                        String type = req.getParameter("typeSearch");
+                                        int page = 1;
+                                        int recordsPerPage = 15;
+                                        List<ProfileLand> listData = new ArrayList<>();
+                                        if (type.equalsIgnoreCase("byName")) {
+                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByName(txtSearch);
                                         } else {
-                                            if (type.equalsIgnoreCase("byLocation")) {
-                                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByLocation(txtSearch);
+                                            if (type.equalsIgnoreCase("byTypeOf")) {
+                                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByTypeOf(txtSearch);
                                             } else {
-                                                if (type.equalsIgnoreCase("byDateNotStarted")) {
-                                                    listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.NotStarted);
+                                                if (type.equalsIgnoreCase("byLocation")) {
+                                                    listData = ConfigConnection.getInstance().getProfileLandModelManage().findByLocation(txtSearch);
                                                 } else {
-                                                    if (type.equalsIgnoreCase("byDateUnder")) {
-                                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.UnderConstruction);
+                                                    if (type.equalsIgnoreCase("byDateNotStarted")) {
+                                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.NotStarted);
                                                     } else {
-                                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.Completed);
+                                                        if (type.equalsIgnoreCase("byDateUnder")) {
+                                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.UnderConstruction);
+                                                        } else {
+                                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.Completed);
+                                                        }
                                                     }
                                                 }
                                             }
                                         }
+                                        //TODO: Xu ly phan trang cho tim kiem (Xem lai)
+                                        int noOfRecords = listData.size();
+                                        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                                        req.setAttribute("listData", listData);
+                                        req.setAttribute("noOfPages", noOfPages);
+                                        req.setAttribute("currentPage", page);
+                                        forward = LIST_VIEW_WAIT;
+                                    } else {
+                                        forward = INSERT_OR_EDIT;
                                     }
-                                    //TODO: Xu ly phan trang cho tim kiem (Xem lai)
-                                    int noOfRecords = listData.size();
-                                    int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-                                    req.setAttribute("listData", listData);
-                                    req.setAttribute("noOfPages", noOfPages);
-                                    req.setAttribute("currentPage", page);
-                                    forward = LIST_VIEW_WAIT;
-                                } else {
-                                    forward = INSERT_OR_EDIT;
                                 }
                             }
                         }

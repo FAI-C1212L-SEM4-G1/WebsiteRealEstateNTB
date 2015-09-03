@@ -12,15 +12,15 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/web/customerorder.jsp</file>
-            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/actionservlet/clientpage/ControllerCustomerClient.java</file>
-            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/web/listing.jsp</file>
+            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/web/admin/buyer/transactiondetails.jsp</file>
+            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/manage/BuyLandModelManage.java</file>
+            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/model/BuyLand.java</file>
+            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/model/InvoiceTransaction.java</file>
             <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/model/ProfileLand.java</file>
-            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/model/RegionalPrice.java</file>
-            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/web/admin/account/addaccount.jsp</file>
-            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/actionservlet/clientpage/ControllerProfileLandClient.java</file>
-            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/web/detail.jsp</file>
-            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/web/admin/buyer/addbuyer.jsp</file>
+            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/model/SessionPay.java</file>
+            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/web/admin/buyer/listbuyer-ed.jsp</file>
+            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/actionservlet/adminpage/ControllerCustomer.java</file>
+            <file>file:/C:/Users/NguyenNgoc/Desktop/WebsiteRealEstateNTB/source_code/src/java/vn/javaweb/real/estate/model/PaymentMode.java</file>
         </group>
     </open-files>
 </project-private>

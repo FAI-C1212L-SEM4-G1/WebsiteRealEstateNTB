@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vn.javaweb.real.estate.model;
 
 import java.io.Serializable;
@@ -21,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author NguyenNgoc
+ * @author PhanAnh
  */
 @Entity
 @Table(catalog = "RealEstate", schema = "dbo")
@@ -102,10 +97,7 @@ public class InvoiceTransaction implements Serializable {
             return false;
         }
         InvoiceTransaction other = (InvoiceTransaction) object;
-        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
-            return false;
-        }
-        return true;
+        return !((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code)));
     }
 
     @Override
