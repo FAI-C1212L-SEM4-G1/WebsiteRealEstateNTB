@@ -597,8 +597,8 @@
                                                                         </td>
                                                                     </tr>
                                                                     <core:forEach items="${object.codeProfileLand.paymentMode.getSessionPays()}" var="sessionPay">
-                                                                        <tr>
-                                                                            <td class="key">                                                                                  
+                                                                        <tr class="session-id">
+                                                                            <td class="session-key">                                                                                  
                                                                                 <p>Session pay ${sessionPay.id}</p>                                                                                
                                                                             </td>
                                                                             <td>
@@ -613,11 +613,11 @@
                                                                                 <table>                                                                                    
                                                                                     <tr>                                                                                        
                                                                                         <td>Paid</td>
-                                                                                        <td><input id="paid${sessionPay.id}" class="validate[required] text" type="text" name="paid${sessionPay.id}" value="${transaction.paid}"/></td>
+                                                                                        <td><input id="paid${sessionPay.id}" class="session-text" type="text" name="paid${sessionPay.id}" value="${transaction.paid}"/></td>
                                                                                     </tr>
                                                                                     <tr>                                                                                        
                                                                                         <td>Date paid</td>
-                                                                                        <td><input id="datepaid${sessionPay.id}" class="validate[required] text" type="date" name="datepaid${sessionPay.id}" value="${transaction.dateTrans}"/></td>
+                                                                                        <td><input id="datepaid${sessionPay.id}" class="session-text" type="date" name="datepaid${sessionPay.id}" value="${transaction.dateTrans}"/></td>
                                                                                     </tr>
                                                                                 </table>  
                                                                                 </fieldset>

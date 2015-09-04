@@ -651,6 +651,10 @@ ul.sidebar-menu span.icon-box  {
 /* general form */
 form legend {
     margin: 15px 0px 10px 0px !important;
+    background-color: #22c0cb;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .form-actions {
@@ -3952,6 +3956,17 @@ jQuery UI Datepicker(new in v1.2.2)
     font-size: 14px;
     vertical-align:top;
 }
+
+.session-key{
+    display: none !important; 
+}
+
+.session-text {
+    width: 150px !important;
+    border-radius: 5px !important;
+    height: 28px !important;
+}
+
 .admintable tr {
     display:block;
     margin-bottom:12px;
@@ -4449,4 +4464,14 @@ a.SiteName, a.SiteName:link, a.SiteName:hover, a.SiteName:visited {
 {
     float: right;
     margin-right: 21px;
+}
+
+.session-id {
+    border: 1px solid #27a9e3;
+    width: 200px;
+    float: left;
+    margin-right: 50px;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
 }

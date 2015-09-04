@@ -499,16 +499,16 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <td align="center">
-                                                                                <button class="toolbar btn btn-info" type="submit" value="save">
+                                                                                <button class="toolbar btn btn-info" type="submit" value="saveNew">
                                                                                     <i class="fa fa-floppy-o"></i>
                                                                                     Save
                                                                                 </button>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <a class="toolbar btn btn-info" href="#" title="Back">
+                                                                                <button class="toolbar btn btn-info" type="submit" value="sentMail">
                                                                                     <i class="fa fa-arrow-circle-o-right"></i>
                                                                                     Mail active
-                                                                                </a>
+                                                                                </button>
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -529,16 +529,16 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td align="center">
-                                                                                        <button class="toolbar btn btn-info" type="submit" value="save">
+                                                                                        <button class="toolbar btn btn-info" type="submit" value="saveNew">
                                                                                             <i class="fa fa-floppy-o"></i>
                                                                                             Save
                                                                                         </button>
                                                                                     </td>
                                                                                     <td align="center">
-                                                                                        <a class="toolbar btn btn-info" href="#" title="Back">
+                                                                                        <button class="toolbar btn btn-info" type="submit" value="sentMail">
                                                                                             <i class="fa fa-arrow-circle-o-right"></i>
                                                                                             Mail active
-                                                                                        </a>
+                                                                                        </button>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
