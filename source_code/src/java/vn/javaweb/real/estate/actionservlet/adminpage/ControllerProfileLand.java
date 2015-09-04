@@ -169,22 +169,22 @@ public class ControllerProfileLand extends HttpServlet {
                 ConfigConnection.getInstance().getProfileLandModelManage().create(profileLand);
                 
                 String hitspay = req.getParameter("hitspay");
-                if(hitspay != null && hitspay.equals("") && hitspay.equals("0")){
+                if(hitspay != null && !hitspay.equals("") && !hitspay.equals("0")){
                     int count = Integer.parseInt(hitspay);
                     String percentPay = "";
                     String note = "";
                     PaymentMode paymentMode = new PaymentMode();
                     paymentMode.setCode("PM" + new SimpleDateFormat("yyMMddHHmmss").format(new Date()));
                     paymentMode.setCountPay(count);
-                    for(int i = 0; i < count; i++){
+                    for(int i = 1; i <= count; i++){
                         String percent = req.getParameter("percent"+i);
                         String deadlineDate = req.getParameter("deadlineDate"+i);
                         if(percent == null || percent.equals(""))
                             percent = "0";
                         if(deadlineDate == null || deadlineDate.equals(""))
                             deadlineDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                        percentPay = percentPay + "," + percent;
-                        note = note + "," + deadlineDate;
+                        percentPay = percentPay + (i>1?",":"") + percent;
+                        note = note + (i>1?",":"") + deadlineDate;
                     }
                     paymentMode.setPercentPay(percentPay);
                     paymentMode.setNote(note);
@@ -214,21 +214,21 @@ public class ControllerProfileLand extends HttpServlet {
                 ConfigConnection.getInstance().getProfileLandModelManage().edit(profileLand);
                 
                 String hitspay = req.getParameter("hitspay");
-                if(hitspay != null && hitspay.equals("") && hitspay.equals("0")){
+                if(hitspay != null && !hitspay.equals("") && !hitspay.equals("0")){
                     int count = Integer.parseInt(hitspay);
                     String percentPay = "";
                     String note = "";
                     PaymentMode paymentMode = profileLand.getPaymentMode();
                     paymentMode.setCountPay(count);
-                    for(int i = 0; i < count; i++){
+                    for(int i = 1; i <= count; i++){
                         String percent = req.getParameter("percent"+i);
                         String deadlineDate = req.getParameter("deadlineDate"+i);
                         if(percent == null || percent.equals(""))
                             percent = "0";
                         if(deadlineDate == null || deadlineDate.equals(""))
                             deadlineDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                        percentPay = percentPay + "," + percent;
-                        note = note + "," + deadlineDate;
+                        percentPay = percentPay + (i>1?",":"") + percent;
+                        note = note + (i>1?",":"") + deadlineDate;
                     }
                     paymentMode.setPercentPay(percentPay);
                     paymentMode.setNote(note);
