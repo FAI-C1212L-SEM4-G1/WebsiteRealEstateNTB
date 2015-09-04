@@ -27,8 +27,10 @@ import vn.javaweb.real.estate.manage.exceptions.RollbackFailureException;
 import vn.javaweb.real.estate.model.Account;
 import vn.javaweb.real.estate.model.BuyLand;
 import vn.javaweb.real.estate.model.ConfigConnection;
+import vn.javaweb.real.estate.model.InvoiceTransaction;
 import vn.javaweb.real.estate.model.Person;
 import vn.javaweb.real.estate.model.ProfileLand;
+import vn.javaweb.real.estate.model.SessionPay;
 
 /**
  *
@@ -54,12 +56,8 @@ public class ControllerCustomer extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String forward = "";
         String action = req.getParameter("action");
-        HttpSession session = req.getSession();
-        ConfigConnection modelManage = (ConfigConnection) session.getAttribute("modelManage");
-        if (modelManage == null) {
-            modelManage = ConfigConnection.getInstance();
-            session.setAttribute("modelManage", modelManage);
-        }
+        ConfigConnection modelManage = getSessionModel(req);
+        
         if (action.equalsIgnoreCase("sentmail")) {
             String codeBuyLand = req.getParameter("code");
             BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeBuyLand);
@@ -272,6 +270,26 @@ public class ControllerCustomer extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        if (action.equalsIgnoreCase("saveadd")) {
+            actionCreateCustomer(req, resp); 
+        } else {
+            if(action.equalsIgnoreCase("saveedit")){
+                actionEditCustomer(req, resp);
+            } else {
+                if(action.equalsIgnoreCase("sendmail")) {
+                    actionSendMail(req, resp);
+                } else {
+                    if(action.equalsIgnoreCase("saveTrans")) {
+                        actionSaveTransaction(req, resp);
+                    }
+                }
+            }            
+        }
+
+    }
+    
+    private void actionCreateCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Account
         String loginId = req.getParameter("loginId");
         String password = req.getParameter("password");
@@ -289,18 +307,13 @@ public class ControllerCustomer extends HttpServlet {
         //Profile Land
         String codeProfileLand = req.getParameter("codeProfileLand");
         String codeHome = req.getParameter("codeHome");
-        String action = req.getParameter("action");
+//        String action = req.getParameter("action");
 
         boolean flag = false;
         try {
-            HttpSession session = req.getSession();
-            ConfigConnection modelManage = (ConfigConnection) session.getAttribute("modelManage");
-            if (modelManage == null) {
-                modelManage = ConfigConnection.getInstance();
-                session.setAttribute("modelManage", modelManage);
-            }
+            ConfigConnection modelManage = getSessionModel(req);
             ProfileLand profileLand = modelManage.getProfileLandModelManage().findByCode(codeProfileLand);
-            if (action.equalsIgnoreCase("add")) {
+//            if (action.equalsIgnoreCase("add")) {
                 Account account = new Account();
                 account.setLoginId(loginId);
                 account.setPassword(password);
@@ -331,22 +344,22 @@ public class ControllerCustomer extends HttpServlet {
                 buyLand.setTotalPaid(Double.toString(totalPrice));
                 buyLand.setHavePay("0");
                 modelManage.getBuyLandModelManage().create(buyLand);
-            } else {
-                BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeHome);
-                Account account = buyLand.getUsername();
-                account.setPassword(password);
-                account.setStatus(status.toUpperCase());
-                Person person = account.getPerson();
-                person.setFullname(fullname);
-                person.setBirthday(birthday);
-                person.setGender(gender);
-                person.setAvatar(avatar);
-                person.setAddress(address);
-                person.setTel(tel);
-                person.setEmail(email);
-                person.setNote(note);
-                modelManage.getBuyLandModelManage().edit(buyLand);
-            }
+//            } else {
+//                BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeHome);
+//                Account account = buyLand.getUsername();
+//                account.setPassword(password);
+//                account.setStatus(status.toUpperCase());
+//                Person person = account.getPerson();
+//                person.setFullname(fullname);
+//                person.setBirthday(birthday);
+//                person.setGender(gender);
+//                person.setAvatar(avatar);
+//                person.setAddress(address);
+//                person.setTel(tel);
+//                person.setEmail(email);
+//                person.setNote(note);
+//                modelManage.getBuyLandModelManage().edit(buyLand);
+//            }
             flag = true;
         } catch (RollbackFailureException ex) {
             Logger.getLogger(ControllerCustomer.class.getName()).log(Level.SEVERE, null, ex);
@@ -363,7 +376,195 @@ public class ControllerCustomer extends HttpServlet {
             out.println("alert('Error! Not suscess');");
             out.println("</script>");
         }
+    }
+    
+    private void actionEditCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //Account
+        String password = req.getParameter("password");
+        String status = req.getParameter("status");
+        //Person
+        String fullname = req.getParameter("fullname");
+        String birthday = req.getParameter("birthday");
+        String gender = req.getParameter("gender");
+        String avatar = req.getParameter("avatar");
+        String address = req.getParameter("address");
+        String tel = req.getParameter("tel");
+        String email = req.getParameter("email");
+        String note = req.getParameter("note");
+        //Profile Land
+        String codeHome = req.getParameter("codeHome");
 
+        boolean flag = false;
+        try {
+            ConfigConnection modelManage = getSessionModel(req);
+
+            BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeHome);
+            Account account = buyLand.getUsername();
+            account.setPassword(password);
+            account.setStatus(status.toUpperCase());
+            Person person = account.getPerson();
+            person.setFullname(fullname);
+            person.setBirthday(birthday);
+            person.setGender(gender);
+            person.setAvatar(avatar);
+            person.setAddress(address);
+            person.setTel(tel);
+            person.setEmail(email);
+            person.setNote(note);
+            modelManage.getBuyLandModelManage().edit(buyLand);
+
+            flag = true;
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(ControllerCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ControllerCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (flag) {
+            resp.sendRedirect(req.getContextPath() + "/ControllerAccount?action=list");
+        } else {
+            PrintWriter out = resp.getWriter();
+            resp.setContentType("text/html");
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Error! Not suscess');");
+            out.println("</script>");
+        }
+    }
+    
+    private void actionSendMail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ConfigConnection modelManage = getSessionModel(req);
+        String codeBuyLand = req.getParameter("code");
+        BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeBuyLand);
+        Account account = buyLand.getUsername();
+
+        final String username = "anhnnp.hdn.vn@gmail.com";
+        final String password = "hdn142676301";
+            // Recipient's email ID needs to be mentioned.
+        // String to = "phananhhdnit@gmail.com"
+        String to = account.getPerson().getEmail();
+        // Sender's email ID needs to be mentioned
+        String from = username;
+        // Get system properties
+        Properties props = new Properties();
+        // Setup mail server SSL
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        // Get the default Session object.
+        Session sessionMail = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        // Set response content type
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        try {
+            // Create a default MimeMessage object.
+            Message message = new MimeMessage(sessionMail);
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(from));
+            // Set To: header field of the header.
+            message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            // Set Subject: header field
+            message.setSubject("(NTB Real Estate) Account Information housing");
+            // Content send
+            String content = "<h1>Hi " + account.getPerson().getFullname() + " !</h1>"
+                    + "<p>I represent the company NTB resubmit your account information to register your property as follows:</p>"
+                    + "<hr/>"
+                    + "Name profile land: " + buyLand.getCodeProfileLand().getName() + "<br/>"
+                    + "Location: " + buyLand.getCodeProfileLand().getLocation() + "<br/>"
+                    + "Unit price: " + buyLand.getCodeProfileLand().getCodeRegional().getUnitPrice() + "$<br/>"
+                    + "-------------------Account----------------------<br/>"
+                    + "<a href=&quot;#&quot;/>Link URL click here</a><p>"
+                    + "<b>Username: <i>" + account.getLoginId() + "</i></b><br/>"
+                    + "<b>Password: <i>" + account.getPassword() + "</i></b></p>"
+                    + "<hr/>"
+                    + "<h5>Please contact us if you need support us hotline: +84 933 866 89</h5>";
+            // Send the actual HTML message, as big as you like
+            message.setContent(content, "text/html; charset=utf-8");
+            // Send message
+            Transport.send(message);
+
+            System.out.println("Done send mail ...");
+
+            String title = "Send Email";
+            String res = "Sent message successfully....";
+            String docType
+                    = "<!doctype html public \"-//w3c//dtd html 4.0 "
+                    + "transitional//en\">\n";
+            out.println(docType
+                    + "<html>\n"
+                    + "<head><title>" + title + "</title></head>\n"
+                    + "<body bgcolor=\"#f0f0f0\">\n"
+                    + "<h1 align=\"center\">" + title + "</h1>\n"
+                    + "<p align=\"center\">" + res + "</p>\n"
+                    + "</body></html>");
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+    }
+    
+    private void actionSaveTransaction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ConfigConnection modelManage = getSessionModel(req);
+        String codeBuyLand = req.getParameter("codeBuyLand");
+        BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeBuyLand);
+        int countPay = buyLand.getCodeProfileLand().getPaymentMode().getCountPay();
+        List<InvoiceTransaction> invoiceTransactions = buyLand.getInvoiceTransactionList();
+        if(invoiceTransactions == null) invoiceTransactions = new ArrayList<>();       
+        for(int i = 1; i <= countPay; i++){
+            String paid = req.getParameter("paid"+i);
+            String datepaid = req.getParameter("datepaid"+i);
+            if(paid != null && !paid.equals("")){
+                InvoiceTransaction transaction;
+                if(invoiceTransactions.size() >= i)
+//                    transaction = invoiceTransactions.get(i-1);
+                    System.out.println("");
+                else {
+                    transaction = new InvoiceTransaction();
+                    invoiceTransactions.add(i-1, transaction);
+                }
+                transaction = invoiceTransactions.get(i-1);
+                transaction.setCode("IT" + new SimpleDateFormat("yyMMddHHmmss").format(new Date()));
+                transaction.setCodeBuyLand(buyLand);
+                transaction.setPaid(paid);
+                if(datepaid != null && !datepaid.equals(""))
+                    transaction.setDateTrans(datepaid);
+                else transaction.setDateTrans(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+                
+                try {
+                    modelManage.getInvoiceTransactionModelManage().create(transaction);                    
+                } catch (RollbackFailureException ex) {
+                    Logger.getLogger(ControllerCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(ControllerCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            buyLand.setInvoiceTransactionList(invoiceTransactions);
+            try {
+                modelManage.getBuyLandModelManage().create(buyLand);
+            } catch (RollbackFailureException ex) {
+                Logger.getLogger(ControllerCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(ControllerCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private ConfigConnection getSessionModel(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        ConfigConnection modelManage = (ConfigConnection) session.getAttribute("modelManage");
+        if (modelManage == null) {
+            modelManage = ConfigConnection.getInstance();
+            session.setAttribute("modelManage", modelManage);
+        }
+        return modelManage;
     }
 
     @Override

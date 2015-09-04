@@ -492,6 +492,16 @@
                                                         <i class="fa fa-file-text-o"></i>
                                                         Create new customer
                                                     </h4>
+                                                    <core:choose>
+                                                        <core:when test="${param.action eq 'add'}">
+                                                            <core:set value="add" var="paramAction"/>
+                                                            <core:set value="Back" var="nameButton2"/>
+                                                        </core:when>
+                                                        <core:otherwise>
+                                                            <core:set value="edit" var="paramAction"/>
+                                                            <core:set value="Send mail" var="nameButton2"/>
+                                                        </core:otherwise>
+                                                    </core:choose>
                                                     <div class="ui-corner-top ui-corner-bottom">
                                                         <div id="toolbox">
                                                             <div class="toolbox-content" style="float: right;">
@@ -499,15 +509,15 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <td align="center">
-                                                                                <button class="toolbar btn btn-info" type="submit" value="saveNew">
+                                                                                <button class="toolbar btn btn-info" type="submit" name="action" value="save${paramAction}">
                                                                                     <i class="fa fa-floppy-o"></i>
                                                                                     Save
                                                                                 </button>
                                                                             </td>
                                                                             <td align="center">
-                                                                                <button class="toolbar btn btn-info" type="submit" value="sentMail">
+                                                                                <button class="toolbar btn btn-info" type="submit" name="action" value="sendmail">
                                                                                     <i class="fa fa-arrow-circle-o-right"></i>
-                                                                                    Mail active
+                                                                                    <core:out value="${nameButton2}" />                                                                                   
                                                                                 </button>
                                                                             </td>
                                                                         </tr>
@@ -529,15 +539,15 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td align="center">
-                                                                                        <button class="toolbar btn btn-info" type="submit" value="saveNew">
+                                                                                        <button class="toolbar btn btn-info" type="submit" name="action" value="save${paramAction}">
                                                                                             <i class="fa fa-floppy-o"></i>
                                                                                             Save
                                                                                         </button>
                                                                                     </td>
                                                                                     <td align="center">
-                                                                                        <button class="toolbar btn btn-info" type="submit" value="sentMail">
+                                                                                        <button class="toolbar btn btn-info" type="submit" name="action" value="sendmail">
                                                                                             <i class="fa fa-arrow-circle-o-right"></i>
-                                                                                            Mail active
+                                                                                            <core:out value="${nameButton2}" />  
                                                                                         </button>
                                                                                     </td>
                                                                                 </tr>
@@ -567,10 +577,10 @@
                                                                                     <p class="tooltipmessage"> ... </p>
                                                                                 </span>
                                                                             </span>
-                                                                            <% String action = request.getParameter("action");
+                                                                            <%--<% String action = request.getParameter("action");
                                                                                     if (action.equalsIgnoreCase("add")) { %>
                                                                                 <input type="hidden" name="action" value="add">
-                                                                            <% } else { %> <input type="hidden" name="action" value="edit"><% }%>
+                                                                            <% } else { %> <input type="hidden" name="action" value="edit"><% }%> --%>                                                                                                                                                   
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
