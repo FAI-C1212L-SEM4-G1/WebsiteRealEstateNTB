@@ -6,6 +6,7 @@
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="core" uri="http://java.sun.com/jstl/core_rt" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -106,7 +107,6 @@
             <div id="container" class="row-fluid">
                 <div class="clear" style="height: 10px">
                 </div>
-
 
                 <style type="text/css">
                     .boder_menu
@@ -509,7 +509,7 @@
                                                                     <tbody>
                                                                         <tr>
                                                                             <td align="center">
-                                                                                <button class="toolbar btn btn-info" type="submit">
+                                                                                <button class="toolbar btn btn-info" type="submit" name="action" value="saveadd">
                                                                                     <i class="fa fa-floppy-o"></i>
                                                                                     Save
                                                                                 </button>
@@ -580,7 +580,7 @@
                                                                                     if (action.equalsIgnoreCase("add")) { %>
                                                                                 <input type="hidden" name="action" value="add">
                                                                                 <script>
-                                                                                    var d = new Date();                                                      ;
+                                                                                    var d = new Date();                                                      
                                                                                     document.getElementById("code").value = "PL" + ("0" + d.getDate()).slice(-2) + ("0" + (d.getMonth() + 1)).slice(-2) +
                                                                                             ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + d.getSeconds() + d.getMilliseconds();                                                                                
                                                                                 </script>  
@@ -593,7 +593,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>            
-                                                                            <input id="name" class="validate[required] text" type="text" placeholder="Example: Homeland Platinum condo project, ..." value="${object.name}" name="name" >
+                                                                            <input id="name" class="validate[required] text" type="text" placeholder="Example: Homeland Platinum condo project, ..." value="${object.name}" name="name" required />
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Name of project construction </p>
@@ -799,7 +799,77 @@
                                                                         <td>
                                                                             <textarea id="txt_detail" class="validate[required]" style="visibility: visible; display: block;" rows="10" name="details" cols="20">${object.description}</textarea>
                                                                         </td>
-                                                                    </tr>                                                                                                              
+                                                                    </tr>  
+                                                                    <tr>
+                                                                        <td class="key"> Installment payment </td>
+                                                                        <td>
+                                                                             <script type='text/javascript'>
+                                                                                function addFields(){
+                                                                                    // Number of inputs to create
+                                                                                    var number = document.getElementById("hitspay").value;
+                                                                                    // Container <div> where dynamic content will be placed
+                                                                                    var container = document.getElementById("addInputDynamic");
+                                                                                    // Clear previous contents of the container
+                                                                                    while (container.hasChildNodes()) {
+                                                                                        container.removeChild(container.lastChild);
+                                                                                    }
+                                                                                    document.getElementById("addInputDynamic").style.display = "none";
+                                                                                    if(number > 5)
+                                                                                        number = 5;
+                                                                                    for (i=0;i<number;i++){
+                                                                                        // Append a node with a random text
+                                                                                        container.appendChild(document.createTextNode("Percent " + (i+1)));
+                                                                                        // Create an <input> element, set its type and name attributes
+                                                                                        var inputPercent = document.createElement("input");
+                                                                                        inputPercent.type = "text";
+                                                                                        inputPercent.className = "stylePercent";                                                                                        
+                                                                                        inputPercent.name = "percent" + i;
+                                                                                        // Create an <input> element, set its type and name attributes
+                                                                                        var inputDate = document.createElement("input");
+                                                                                        inputDate.type = "date";
+                                                                                        inputDate.className = "styleDate"; 
+                                                                                        inputDate.name = "deadlineDate" + i;                                                                                        
+                                                                                        
+                                                                                        container.appendChild(inputPercent);
+                                                                                        container.appendChild(document.createTextNode("Date " + (i+1)));
+                                                                                        container.appendChild(inputDate);
+                                                                                        // Append a line break 
+                                                                                        container.appendChild(document.createElement("br"));   
+                                                                                        
+                                                                                        // Set style sheet
+                                                                                        document.getElementById("addInputDynamic").style.display = "block";
+                                                                                        
+                                                                                        // Add style sheet
+                                                                                        var stylePercent = document.getElementsByClassName("stylePercent");
+                                                                                        var k = 0;
+                                                                                        for(k = 0; k < stylePercent.length; k++){
+                                                                                            stylePercent[k].style.display = "inline";
+                                                                                            stylePercent[k].style.width = "200px";
+                                                                                            stylePercent[k].style.margin = "0px 20px"; 
+                                                                                        } 
+//                                                                                        
+                                                                                        var styleDate = document.getElementsByClassName("styleDate");
+                                                                                        var j = 0;
+                                                                                        for(j = 0; j < styleDate.length; j++){
+                                                                                            styleDate[j].style.width = "200px";
+                                                                                            styleDate[j].style.margin = "0px 20px";
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            </script>
+                                                                            <core:if test="${object.paymentMode ne null}"><core:set value="${object.paymentMode.getSessionPays()}" var="sessionPays" /></core:if>
+                                                                            <span style="margin-right: 15px;">Hits pay (max. 5)</span><input type="text" id="hitspay" name="hitspay" style="width:150px;" value="${sessionPays.size()}" onkeyup="addFields()"/>
+                                                                            <div id="addInputDynamic" style="border: 1px solid gainsboro; box-sizing: border-box; border-radius: 5px; line-height: 35px; padding: 10px 0px 10px 20px; margin-top: 10px; <core:if test="${sessionPays eq null || sessionPays.size() le 0}">display: none;</core:if>">
+                                                                                <core:forEach items="${sessionPays}" var="sessionPay">
+                                                                                    <core:out value="Percent${sessionPay.id}" />
+                                                                                    <input type="text" class="stylePercent" name="percent${sessionPay.id}" value="${sessionPay.percentPay}" style="display:inline;width:200px;margin:0px 20px;"/>
+                                                                                    <core:out value="Date${sessionPay.id}" />
+                                                                                    <input type="date" class="styleDate" name="deadlineDate${sessionPay.id}" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${sessionPay.timePay}" />" style="width:200px;margin:0px 20px;" />
+                                                                                    <br/>                                                                                    
+                                                                                </core:forEach>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr> 
                                                                 </tbody>
                                                             </table>
                                                         </div>

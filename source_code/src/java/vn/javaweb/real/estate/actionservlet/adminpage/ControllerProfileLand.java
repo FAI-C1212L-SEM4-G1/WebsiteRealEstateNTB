@@ -2,7 +2,9 @@ package vn.javaweb.real.estate.actionservlet.adminpage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +17,7 @@ import vn.javaweb.real.estate.manage.ProfileLandModelManage;
 import vn.javaweb.real.estate.manage.exceptions.NonexistentEntityException;
 import vn.javaweb.real.estate.manage.exceptions.RollbackFailureException;
 import vn.javaweb.real.estate.model.ConfigConnection;
+import vn.javaweb.real.estate.model.PaymentMode;
 import vn.javaweb.real.estate.model.ProfileLand;
 import vn.javaweb.real.estate.model.RegionalPrice;
 
@@ -139,8 +142,8 @@ public class ControllerProfileLand extends HttpServlet {
         String introduction = req.getParameter("description");
         String description = req.getParameter("details");
         String image = req.getParameter("Choose picture");
-        String action = req.getParameter("action");
-
+        String action = req.getParameter("action");        
+        
         boolean flag = false;
         try {
             RegionalPrice regionalPrice = ConfigConnection.getInstance().getRegionalPriceModelManage().findByCode(codeRegional);
@@ -164,6 +167,31 @@ public class ControllerProfileLand extends HttpServlet {
                 profileLand.setDescription(description);
                 profileLand.setImage(image);
                 ConfigConnection.getInstance().getProfileLandModelManage().create(profileLand);
+                
+                String hitspay = req.getParameter("hitspay");
+                if(hitspay != null && hitspay.equals("") && hitspay.equals("0")){
+                    int count = Integer.parseInt(hitspay);
+                    String percentPay = "";
+                    String note = "";
+                    PaymentMode paymentMode = new PaymentMode();
+                    paymentMode.setCode("PM" + new SimpleDateFormat("yyMMddHHmmss").format(new Date()));
+                    paymentMode.setCountPay(count);
+                    for(int i = 0; i < count; i++){
+                        String percent = req.getParameter("percent"+i);
+                        String deadlineDate = req.getParameter("deadlineDate"+i);
+                        if(percent == null || percent.equals(""))
+                            percent = "0";
+                        if(deadlineDate == null || deadlineDate.equals(""))
+                            deadlineDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                        percentPay = percentPay + "," + percent;
+                        note = note + "," + deadlineDate;
+                    }
+                    paymentMode.setPercentPay(percentPay);
+                    paymentMode.setNote(note);
+                    paymentMode.setCodeProfileLand(profileLand);
+
+                    ConfigConnection.getInstance().getPaymentModeModelManage().create(paymentMode);
+                }
             } else {
                 ProfileLand profileLand = ConfigConnection.getInstance().getProfileLandModelManage().findByCode(code);
                 profileLand.setCode(code);
@@ -184,7 +212,31 @@ public class ControllerProfileLand extends HttpServlet {
                 profileLand.setDescription(description);
                 profileLand.setImage(image);
                 ConfigConnection.getInstance().getProfileLandModelManage().edit(profileLand);
-            }
+                
+                String hitspay = req.getParameter("hitspay");
+                if(hitspay != null && hitspay.equals("") && hitspay.equals("0")){
+                    int count = Integer.parseInt(hitspay);
+                    String percentPay = "";
+                    String note = "";
+                    PaymentMode paymentMode = profileLand.getPaymentMode();
+                    paymentMode.setCountPay(count);
+                    for(int i = 0; i < count; i++){
+                        String percent = req.getParameter("percent"+i);
+                        String deadlineDate = req.getParameter("deadlineDate"+i);
+                        if(percent == null || percent.equals(""))
+                            percent = "0";
+                        if(deadlineDate == null || deadlineDate.equals(""))
+                            deadlineDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                        percentPay = percentPay + "," + percent;
+                        note = note + "," + deadlineDate;
+                    }
+                    paymentMode.setPercentPay(percentPay);
+                    paymentMode.setNote(note);
+                    paymentMode.setCodeProfileLand(profileLand);
+
+                    ConfigConnection.getInstance().getPaymentModeModelManage().edit(paymentMode);
+                }
+            }                        
             
             flag = true;
         } catch (RollbackFailureException ex) {
