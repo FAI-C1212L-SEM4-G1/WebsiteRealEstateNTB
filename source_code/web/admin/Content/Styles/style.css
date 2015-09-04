@@ -3957,10 +3957,6 @@ jQuery UI Datepicker(new in v1.2.2)
     vertical-align:top;
 }
 
-.session-key{
-    display: none !important; 
-}
-
 .session-text {
     width: 150px !important;
     border-radius: 5px !important;
@@ -4467,11 +4463,16 @@ a.SiteName, a.SiteName:link, a.SiteName:hover, a.SiteName:visited {
 }
 
 .session-id {
-    border: 1px solid #27a9e3;
-    width: 200px;
+    width: 250px;
     float: left;
     margin-right: 50px;
     padding: 5px;
     box-sizing: border-box;
     border-radius: 5px;
+}
+
+.session-id fieldset {
+    padding: 0px 10px !important;
+    margin: auto !important;
+    border: 1px solid #27a9e3 !important;
 }

@@ -598,25 +598,30 @@
                                                                     </tr>
                                                                     <core:forEach items="${object.codeProfileLand.paymentMode.getSessionPays()}" var="sessionPay">
                                                                         <tr class="session-id">
-                                                                            <td class="session-key">                                                                                  
-                                                                                <p>Session pay ${sessionPay.id}</p>                                                                                
-                                                                            </td>
+                                                                            
                                                                             <td>
                                                                                 <core:set var="transaction" value="${object.invoiceTransactionList[sessionPay.id-1]}"></core:set>
                                                                                 <fieldset>
                                                                                     <legend>Session pay ${sessionPay.id}</legend>
-                                                                                    <p>Percent pay:&nbsp;${sessionPay.percentPay}</p>
-                                                                                    <p>Price pay:&nbsp;${sessionPay.pricePay}</p>
-                                                                                    <p>Deadline pay:&nbsp;<fmt:formatDate pattern="dd/MM/yyyy" value="${sessionPay.timePay}" /></p>
-                                                                                    <hr/>
-                                                                                
-                                                                                <table>                                                                                    
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <td style="width: 70px"><i class="fa fa-stack-overflow"></i> Percent :</td>
+                                                                                        <td>${sessionPay.percentPay}%</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width: 70px"><i class="fa fa-usd"></i> Price :</td>
+                                                                                        <td>${sessionPay.pricePay}$</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width: 70px"><i class="fa fa-clock-o"></i> Deadline :</td>
+                                                                                        <td><fmt:formatDate pattern="dd/MM/yyyy" value="${sessionPay.timePay}" /></td>
+                                                                                    </tr>                                                                                                                                                                                                                                                                                                                                      
                                                                                     <tr>                                                                                        
-                                                                                        <td>Paid</td>
+                                                                                        <td style="width: 70px; <core:if test="${transaction.paid eq null || transaction.paid eq ''}"> color:red;</core:if>">Paid($)</span></td>
                                                                                         <td><input id="paid${sessionPay.id}" class="session-text" type="text" name="paid${sessionPay.id}" value="${transaction.paid}"/></td>
                                                                                     </tr>
                                                                                     <tr>                                                                                        
-                                                                                        <td>Date paid</td>
+                                                                                        <td style="width: 70px">Date paid</span></td>
                                                                                         <td><input id="datepaid${sessionPay.id}" class="session-text" type="date" name="datepaid${sessionPay.id}" value="${transaction.dateTrans}"/></td>
                                                                                     </tr>
                                                                                 </table>  
