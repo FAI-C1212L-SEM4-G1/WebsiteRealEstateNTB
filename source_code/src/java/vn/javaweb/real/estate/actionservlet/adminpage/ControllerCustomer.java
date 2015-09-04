@@ -30,7 +30,6 @@ import vn.javaweb.real.estate.model.ConfigConnection;
 import vn.javaweb.real.estate.model.InvoiceTransaction;
 import vn.javaweb.real.estate.model.Person;
 import vn.javaweb.real.estate.model.ProfileLand;
-import vn.javaweb.real.estate.model.SessionPay;
 
 /**
  *
@@ -57,7 +56,7 @@ public class ControllerCustomer extends HttpServlet {
         String forward = "";
         String action = req.getParameter("action");
         ConfigConnection modelManage = getSessionModel(req);
-        
+
         if (action.equalsIgnoreCase("sentmail")) {
             String codeBuyLand = req.getParameter("code");
             BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeBuyLand);
@@ -167,101 +166,101 @@ public class ControllerCustomer extends HttpServlet {
                     req.setAttribute("readonly", " ");
                     forward = INSERT_OR_EDIT;
                 } else {
-                    if(action.equalsIgnoreCase("viewdetails")){
+                    if (action.equalsIgnoreCase("viewdetails")) {
                         String code = req.getParameter("code");
                         req.setAttribute("object", modelManage.getBuyLandModelManage().findByCode(code));
                         req.setAttribute("readonly", "readonly");
                         forward = INSERT_OR_EDIT;
                     } else {
-                       if (action.equalsIgnoreCase("listwait")) {
-                        int page = 1;
-                        int recordsPerPage = 15;
-                        if (req.getParameter("page") != null) {
-                            page = Integer.parseInt(req.getParameter("page"));
-                        }
-                        List<BuyLand> listData = modelManage.getBuyLandModelManage().findBuyerWaitBetween((page - 1) * recordsPerPage, page * recordsPerPage);
-                        int noOfRecords = modelManage.getBuyLandModelManage().findBuyerWait().size();
-                        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-                        req.setAttribute("listData", listData);
-                        req.setAttribute("noOfPages", noOfPages);
-                        req.setAttribute("currentPage", page);
-                        forward = LIST_VIEW_WAIT;
-                    } else {
-                        if (action.equalsIgnoreCase("listpayi")) {
+                        if (action.equalsIgnoreCase("listwait")) {
                             int page = 1;
                             int recordsPerPage = 15;
                             if (req.getParameter("page") != null) {
                                 page = Integer.parseInt(req.getParameter("page"));
                             }
-                            List<BuyLand> listData = modelManage.getBuyLandModelManage().findBuyerIngBetween((page - 1) * recordsPerPage, page * recordsPerPage);
-                            int noOfRecords = modelManage.getBuyLandModelManage().findBuyerIng().size();
+                            List<BuyLand> listData = modelManage.getBuyLandModelManage().findBuyerWaitBetween((page - 1) * recordsPerPage, page * recordsPerPage);
+                            int noOfRecords = modelManage.getBuyLandModelManage().findBuyerWait().size();
                             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
                             req.setAttribute("listData", listData);
                             req.setAttribute("noOfPages", noOfPages);
                             req.setAttribute("currentPage", page);
-                            forward = LIST_VIEW_ING;
+                            forward = LIST_VIEW_WAIT;
                         } else {
-                            if (action.equalsIgnoreCase("listpayf")) {
+                            if (action.equalsIgnoreCase("listpayi")) {
                                 int page = 1;
                                 int recordsPerPage = 15;
                                 if (req.getParameter("page") != null) {
                                     page = Integer.parseInt(req.getParameter("page"));
                                 }
-                                List<BuyLand> listData = modelManage.getBuyLandModelManage().findBuyerEdBetween((page - 1) * recordsPerPage, page * recordsPerPage);
-                                int noOfRecords = modelManage.getBuyLandModelManage().findBuyerEd().size();
+                                List<BuyLand> listData = modelManage.getBuyLandModelManage().findBuyerIngBetween((page - 1) * recordsPerPage, page * recordsPerPage);
+                                int noOfRecords = modelManage.getBuyLandModelManage().findBuyerIng().size();
                                 int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
                                 req.setAttribute("listData", listData);
                                 req.setAttribute("noOfPages", noOfPages);
                                 req.setAttribute("currentPage", page);
-                                forward = LIST_VIEW_ED;
+                                forward = LIST_VIEW_ING;
                             } else {
-                                if (action.equalsIgnoreCase("viewtrans")) {
-                                    String code = req.getParameter("code");
-                                    req.setAttribute("object", modelManage.getBuyLandModelManage().findByCode(code));
-                                    forward = LIST_TRANS;
+                                if (action.equalsIgnoreCase("listpayf")) {
+                                    int page = 1;
+                                    int recordsPerPage = 15;
+                                    if (req.getParameter("page") != null) {
+                                        page = Integer.parseInt(req.getParameter("page"));
+                                    }
+                                    List<BuyLand> listData = modelManage.getBuyLandModelManage().findBuyerEdBetween((page - 1) * recordsPerPage, page * recordsPerPage);
+                                    int noOfRecords = modelManage.getBuyLandModelManage().findBuyerEd().size();
+                                    int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                                    req.setAttribute("listData", listData);
+                                    req.setAttribute("noOfPages", noOfPages);
+                                    req.setAttribute("currentPage", page);
+                                    forward = LIST_VIEW_ED;
                                 } else {
-                                    if (action.equalsIgnoreCase("Search")) {
-                                        String txtSearch = req.getParameter("txtSearch");
-                                        String type = req.getParameter("typeSearch");
-                                        int page = 1;
-                                        int recordsPerPage = 15;
-                                        List<ProfileLand> listData = new ArrayList<>();
-                                        if (type.equalsIgnoreCase("byName")) {
-                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByName(txtSearch);
-                                        } else {
-                                            if (type.equalsIgnoreCase("byTypeOf")) {
-                                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByTypeOf(txtSearch);
+                                    if (action.equalsIgnoreCase("viewtrans")) {
+                                        String code = req.getParameter("code");
+                                        req.setAttribute("object", modelManage.getBuyLandModelManage().findByCode(code));
+                                        forward = LIST_TRANS;
+                                    } else {
+                                        if (action.equalsIgnoreCase("Search")) {
+                                            String txtSearch = req.getParameter("txtSearch");
+                                            String type = req.getParameter("typeSearch");
+                                            int page = 1;
+                                            int recordsPerPage = 15;
+                                            List<ProfileLand> listData = new ArrayList<>();
+                                            if (type.equalsIgnoreCase("byName")) {
+                                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByName(txtSearch);
                                             } else {
-                                                if (type.equalsIgnoreCase("byLocation")) {
-                                                    listData = ConfigConnection.getInstance().getProfileLandModelManage().findByLocation(txtSearch);
+                                                if (type.equalsIgnoreCase("byTypeOf")) {
+                                                    listData = ConfigConnection.getInstance().getProfileLandModelManage().findByTypeOf(txtSearch);
                                                 } else {
-                                                    if (type.equalsIgnoreCase("byDateNotStarted")) {
-                                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.NotStarted);
+                                                    if (type.equalsIgnoreCase("byLocation")) {
+                                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByLocation(txtSearch);
                                                     } else {
-                                                        if (type.equalsIgnoreCase("byDateUnder")) {
-                                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.UnderConstruction);
+                                                        if (type.equalsIgnoreCase("byDateNotStarted")) {
+                                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.NotStarted);
                                                         } else {
-                                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.Completed);
+                                                            if (type.equalsIgnoreCase("byDateUnder")) {
+                                                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.UnderConstruction);
+                                                            } else {
+                                                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.Completed);
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
+                                            //TODO: Xu ly phan trang cho tim kiem (Xem lai)
+                                            int noOfRecords = listData.size();
+                                            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                                            req.setAttribute("listData", listData);
+                                            req.setAttribute("noOfPages", noOfPages);
+                                            req.setAttribute("currentPage", page);
+                                            forward = LIST_VIEW_WAIT;
+                                        } else {
+                                            forward = INSERT_OR_EDIT;
                                         }
-                                        //TODO: Xu ly phan trang cho tim kiem (Xem lai)
-                                        int noOfRecords = listData.size();
-                                        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-                                        req.setAttribute("listData", listData);
-                                        req.setAttribute("noOfPages", noOfPages);
-                                        req.setAttribute("currentPage", page);
-                                        forward = LIST_VIEW_WAIT;
-                                    } else {
-                                        forward = INSERT_OR_EDIT;
                                     }
                                 }
                             }
                         }
-                    } 
-                    }                    
+                    }
                 }
             }
             req.getRequestDispatcher(forward).forward(req, resp);
@@ -272,23 +271,23 @@ public class ControllerCustomer extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         if (action.equalsIgnoreCase("saveadd")) {
-            actionCreateCustomer(req, resp); 
+            actionCreateCustomer(req, resp);
         } else {
-            if(action.equalsIgnoreCase("saveedit")){
+            if (action.equalsIgnoreCase("saveedit")) {
                 actionEditCustomer(req, resp);
             } else {
-                if(action.equalsIgnoreCase("sendmail")) {
+                if (action.equalsIgnoreCase("sendmail")) {
                     actionSendMail(req, resp);
                 } else {
-                    if(action.equalsIgnoreCase("saveTrans")) {
+                    if (action.equalsIgnoreCase("saveTrans")) {
                         actionSaveTransaction(req, resp);
                     }
                 }
-            }            
+            }
         }
 
     }
-    
+
     private void actionCreateCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Account
         String loginId = req.getParameter("loginId");
@@ -307,59 +306,43 @@ public class ControllerCustomer extends HttpServlet {
         //Profile Land
         String codeProfileLand = req.getParameter("codeProfileLand");
         String codeHome = req.getParameter("codeHome");
-//        String action = req.getParameter("action");
 
         boolean flag = false;
         try {
             ConfigConnection modelManage = getSessionModel(req);
             ProfileLand profileLand = modelManage.getProfileLandModelManage().findByCode(codeProfileLand);
-//            if (action.equalsIgnoreCase("add")) {
-                Account account = new Account();
-                account.setLoginId(loginId);
-                account.setPassword(password);
-                account.setStatus(status.toUpperCase());
-                account.setRole(2);
-                modelManage.getAccountModelManage().create(account);
 
-                Person person = new Person();
-                person.setId(id);
-                person.setUsername(account);
-                person.setFullname(fullname);
-                person.setBirthday(birthday);
-                person.setGender(gender);
-                person.setAvatar(avatar);
-                person.setAddress(address);
-                person.setTel(tel);
-                person.setEmail(email);
-                person.setNote(note);
-                modelManage.getPersonModelManage().create(person);
+            Account account = new Account();
+            account.setLoginId(loginId);
+            account.setPassword(password);
+            account.setStatus(status.toUpperCase());
+            account.setRole(2);
+            modelManage.getAccountModelManage().create(account);
 
-                BuyLand buyLand = new BuyLand();
-                buyLand.setCode(codeHome);
-                buyLand.setCodeProfileLand(profileLand);
-                buyLand.setUsername(account);
-                buyLand.setNote(note);
-                buyLand.setBuyDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-                double totalPrice = profileLand.getRoomArea() * Double.parseDouble(profileLand.getCodeRegional().getUnitPrice());
-                buyLand.setTotalPaid(Double.toString(totalPrice));
-                buyLand.setHavePay("0");
-                modelManage.getBuyLandModelManage().create(buyLand);
-//            } else {
-//                BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeHome);
-//                Account account = buyLand.getUsername();
-//                account.setPassword(password);
-//                account.setStatus(status.toUpperCase());
-//                Person person = account.getPerson();
-//                person.setFullname(fullname);
-//                person.setBirthday(birthday);
-//                person.setGender(gender);
-//                person.setAvatar(avatar);
-//                person.setAddress(address);
-//                person.setTel(tel);
-//                person.setEmail(email);
-//                person.setNote(note);
-//                modelManage.getBuyLandModelManage().edit(buyLand);
-//            }
+            Person person = new Person();
+            person.setId(id);
+            person.setUsername(account);
+            person.setFullname(fullname);
+            person.setBirthday(birthday);
+            person.setGender(gender);
+            person.setAvatar(avatar);
+            person.setAddress(address);
+            person.setTel(tel);
+            person.setEmail(email);
+            person.setNote(note);
+            modelManage.getPersonModelManage().create(person);
+
+            BuyLand buyLand = new BuyLand();
+            buyLand.setCode(codeHome);
+            buyLand.setCodeProfileLand(profileLand);
+            buyLand.setUsername(account);
+            buyLand.setNote(note);
+            buyLand.setBuyDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+            double totalPrice = profileLand.getRoomArea() * Double.parseDouble(profileLand.getCodeRegional().getUnitPrice());
+            buyLand.setTotalPaid(Double.toString(totalPrice));
+            buyLand.setHavePay("0");
+            modelManage.getBuyLandModelManage().create(buyLand);
+
             flag = true;
         } catch (RollbackFailureException ex) {
             Logger.getLogger(ControllerCustomer.class.getName()).log(Level.SEVERE, null, ex);
@@ -377,7 +360,7 @@ public class ControllerCustomer extends HttpServlet {
             out.println("</script>");
         }
     }
-    
+
     private void actionEditCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Account
         String password = req.getParameter("password");
@@ -430,7 +413,7 @@ public class ControllerCustomer extends HttpServlet {
             out.println("</script>");
         }
     }
-    
+
     private void actionSendMail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ConfigConnection modelManage = getSessionModel(req);
         String codeBuyLand = req.getParameter("code");
@@ -439,7 +422,7 @@ public class ControllerCustomer extends HttpServlet {
 
         final String username = "anhnnp.hdn.vn@gmail.com";
         final String password = "hdn142676301";
-            // Recipient's email ID needs to be mentioned.
+        // Recipient's email ID needs to be mentioned.
         // String to = "phananhhdnit@gmail.com"
         String to = account.getPerson().getEmail();
         // Sender's email ID needs to be mentioned
@@ -510,36 +493,40 @@ public class ControllerCustomer extends HttpServlet {
             mex.printStackTrace();
         }
     }
-    
+
     private void actionSaveTransaction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ConfigConnection modelManage = getSessionModel(req);
         String codeBuyLand = req.getParameter("codeBuyLand");
         BuyLand buyLand = modelManage.getBuyLandModelManage().findByCode(codeBuyLand);
         int countPay = buyLand.getCodeProfileLand().getPaymentMode().getCountPay();
         List<InvoiceTransaction> invoiceTransactions = buyLand.getInvoiceTransactionList();
-        if(invoiceTransactions == null) invoiceTransactions = new ArrayList<>();       
-        for(int i = 1; i <= countPay; i++){
-            String paid = req.getParameter("paid"+i);
-            String datepaid = req.getParameter("datepaid"+i);
-            if(paid != null && !paid.equals("")){
+        if (invoiceTransactions == null) {
+            invoiceTransactions = new ArrayList<>();
+        }
+        for (int i = 1; i <= countPay; i++) {
+            String paid = req.getParameter("paid" + i);
+            String datepaid = req.getParameter("datepaid" + i);
+            if (paid != null && !paid.equals("")) {
                 InvoiceTransaction transaction;
-                if(invoiceTransactions.size() >= i)
-//                    transaction = invoiceTransactions.get(i-1);
+                if (invoiceTransactions.size() >= i) //                    transaction = invoiceTransactions.get(i-1);
+                {
                     System.out.println("");
-                else {
+                } else {
                     transaction = new InvoiceTransaction();
-                    invoiceTransactions.add(i-1, transaction);
+                    invoiceTransactions.add(i - 1, transaction);
                 }
-                transaction = invoiceTransactions.get(i-1);
+                transaction = invoiceTransactions.get(i - 1);
                 transaction.setCode("IT" + new SimpleDateFormat("yyMMddHHmmss").format(new Date()));
                 transaction.setCodeBuyLand(buyLand);
                 transaction.setPaid(paid);
-                if(datepaid != null && !datepaid.equals(""))
+                if (datepaid != null && !datepaid.equals("")) {
                     transaction.setDateTrans(datepaid);
-                else transaction.setDateTrans(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-                
+                } else {
+                    transaction.setDateTrans(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+                }
+
                 try {
-                    modelManage.getInvoiceTransactionModelManage().create(transaction);                    
+                    modelManage.getInvoiceTransactionModelManage().create(transaction);
                 } catch (RollbackFailureException ex) {
                     Logger.getLogger(ControllerCustomer.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (Exception ex) {
@@ -556,7 +543,7 @@ public class ControllerCustomer extends HttpServlet {
             }
         }
     }
-    
+
     private ConfigConnection getSessionModel(HttpServletRequest req) {
         HttpSession session = req.getSession();
         ConfigConnection modelManage = (ConfigConnection) session.getAttribute("modelManage");
