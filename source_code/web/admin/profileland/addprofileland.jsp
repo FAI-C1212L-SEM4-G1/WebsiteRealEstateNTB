@@ -491,7 +491,7 @@
                         <div class="widget">
                             <div class="widget-body">
                                 <div>
-                                    <form id="form-add-profile-land" method="POST" action="${pageContext.request.contextPath}/ControllerProfileLand">
+                                    <form id="form-add-profile-land" method="POST" enctype="multipart/form-data" action="${pageContext.request.contextPath}/ControllerProfileLand">
                                         <core:if test="${sessionScope.modelManage==null}">
                                             <jsp:useBean id="modelManage" class="vn.javaweb.real.estate.model.ConfigConnection" scope="session" />
                                         </core:if>
@@ -608,7 +608,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <select id="codeRegional" name="codeRegional">
+                                                                            <select id="codeRegional" name="codeRegional" multiple="true">
                                                                                 <option value="null">Select one option</option>
                                                                                 <core:forEach var="regionalPrice" items="${modelManage.regionalPriceModelManage.findAll()}" >                     
                                                                                     <option value="${regionalPrice.code}" <core:if test="${object.codeRegional.code eq regionalPrice.code}">selected</core:if> >${regionalPrice.regionalName}</option>  
@@ -776,14 +776,14 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="key">
-                                                                            Photo description
+                                                                            Select sample image
                                                                         </td>
                                                                         <td>
-                                                                            <input id="image" class="validate[required] text" type="file" name="Choose picture" />                              
+                                                                            <input id="image" class="validate[required] text" type="file" name="fileimage" />                              
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
-                                                                                    <p class="tooltiptitle"> Photo description </p>
-                                                                                    <p class="tooltipmessage"> Artwork Collection Project </p>
+                                                                                    <p class="tooltiptitle"> Select sample image </p>
+                                                                                    <p class="tooltipmessage"> Picture general pattern for your project </p>
                                                                                 </span>
                                                                             </span>
                                                                         </td>

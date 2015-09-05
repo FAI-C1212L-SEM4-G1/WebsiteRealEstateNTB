@@ -1,5 +1,6 @@
 package vn.javaweb.real.estate.actionservlet.adminpage;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -13,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import vn.javaweb.real.estate.manage.ProfileLandModelManage;
 import vn.javaweb.real.estate.manage.exceptions.NonexistentEntityException;
 import vn.javaweb.real.estate.manage.exceptions.RollbackFailureException;
@@ -42,12 +46,8 @@ public class ControllerProfileLand extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String forward = "";
         String action = req.getParameter("action");
-        HttpSession session = req.getSession();        
-        ConfigConnection modelManage = (ConfigConnection)session.getAttribute("modelManage");
-        if(modelManage == null){
-            modelManage = ConfigConnection.getInstance(); 
-            session.setAttribute("modelManage", modelManage);
-        }
+        ConfigConnection modelManage = getSessionModel(req);
+        
         if (action.equalsIgnoreCase("delete")) {
             String code = req.getParameter("code");
             try {
@@ -70,9 +70,10 @@ public class ControllerProfileLand extends HttpServlet {
                 if (action.equalsIgnoreCase("list")) {
                     int page = 1;
                     int recordsPerPage = 15;
-                    if(req.getParameter("page") != null)
+                    if (req.getParameter("page") != null) {
                         page = Integer.parseInt(req.getParameter("page"));
-                    List<ProfileLand> listData = modelManage.getProfileLandModelManage().findBetween((page-1)*recordsPerPage, page*recordsPerPage);
+                    }
+                    List<ProfileLand> listData = modelManage.getProfileLandModelManage().findBetween((page - 1) * recordsPerPage, page * recordsPerPage);
                     int noOfRecords = modelManage.getProfileLandModelManage().getProfileLandCount();
                     int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
                     req.setAttribute("listData", listData);
@@ -80,28 +81,28 @@ public class ControllerProfileLand extends HttpServlet {
                     req.setAttribute("currentPage", page);
                     forward = LIST_VIEW;
                 } else {
-                    if(action.equalsIgnoreCase("Search")){
+                    if (action.equalsIgnoreCase("Search")) {
                         String txtSearch = req.getParameter("txtSearch");
                         String type = req.getParameter("typeSearch");
                         int page = 1;
                         int recordsPerPage = 15;
                         List<ProfileLand> listData = new ArrayList<>();
                         if (type.equalsIgnoreCase("byName")) {
-                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByName(txtSearch);                            
+                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByName(txtSearch);
                         } else {
-                            if(type.equalsIgnoreCase("byTypeOf")){
-                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByTypeOf(txtSearch);                            
+                            if (type.equalsIgnoreCase("byTypeOf")) {
+                                listData = ConfigConnection.getInstance().getProfileLandModelManage().findByTypeOf(txtSearch);
                             } else {
-                                if(type.equalsIgnoreCase("byLocation")){
-                                    listData = ConfigConnection.getInstance().getProfileLandModelManage().findByLocation(txtSearch);                            
+                                if (type.equalsIgnoreCase("byLocation")) {
+                                    listData = ConfigConnection.getInstance().getProfileLandModelManage().findByLocation(txtSearch);
                                 } else {
-                                    if(type.equalsIgnoreCase("byDateNotStarted")){
-                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.NotStarted);                            
+                                    if (type.equalsIgnoreCase("byDateNotStarted")) {
+                                        listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.NotStarted);
                                     } else {
-                                        if(type.equalsIgnoreCase("byDateUnder")){
-                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.UnderConstruction);                            
+                                        if (type.equalsIgnoreCase("byDateUnder")) {
+                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.UnderConstruction);
                                         } else {
-                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.Completed);                            
+                                            listData = ConfigConnection.getInstance().getProfileLandModelManage().findByConstructionStatus(ProfileLandModelManage.ConstructionStatus.Completed);
                                         }
                                     }
                                 }
@@ -117,43 +118,86 @@ public class ControllerProfileLand extends HttpServlet {
                     } else {
                         forward = INSERT_OR_EDIT;
                     }
-                } 
+                }
             }
         }
         req.getRequestDispatcher(forward).forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {        
-        String code = req.getParameter("code");
-        String codeRegional = req.getParameter("codeRegional");
-        String name = req.getParameter("name");
-        String location = req.getParameter("location");
-        String typeOf = req.getParameter("typeOf");
-        String totalArea = req.getParameter("totalArea");
-        String capitalInvestment = req.getParameter("capitalInvestment");
-        String dateStart = req.getParameter("dateStart");
-        String dateEnd = req.getParameter("dateEnd");
-        String currentStatus = req.getParameter("currentStatus");
-        String populationSize = req.getParameter("populationSize");
-        String totalRoom = req.getParameter("totalRoom");
-        String totalFloor = req.getParameter("totalFloor");
-        String roomArea = req.getParameter("roomArea");
-        String introduction = req.getParameter("description");
-        String description = req.getParameter("details");
-        String image = req.getParameter("Choose picture");
-        String action = req.getParameter("action");        
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String code = "", codeRegional = "", name = "", location = "", typeOf = "", totalArea = "", capitalInvestment = "", dateStart = "", dateEnd = "";
+        String currentStatus = "", populationSize = "", totalRoom = "", totalFloor = "", roomArea = "", introduction = "", description = "", imageName = "", action = "";
         
+        if (ServletFileUpload.isMultipartContent(req)) {
+            try {
+                List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(req);
+                String directoryUpload = req.getSession().getAttribute("directory.root") + File.separator + "web" + File.separator + "images";
+                for (FileItem item : multiparts) {
+                    if (!item.isFormField()) {
+                        imageName = new File(item.getName()).getName();
+                        if (!imageName.equals("")) {
+                            item.write(new File(directoryUpload + File.separator + imageName));
+                            System.out.println("Uploaded image successfully: " + imageName);                            
+                        } else {
+                            System.out.println("Not choose file!");
+                        }
+                    } else {
+                        if(item.getFieldName().equals("code"))
+                            code = item.getString();
+                        if(item.getFieldName().equals("codeRegional"))
+                            codeRegional = item.getString();
+                        if(item.getFieldName().equals("name"))
+                            name = item.getString();
+                        if(item.getFieldName().equals("location"))
+                            location = item.getString();
+                        if(item.getFieldName().equals("typeOf"))
+                            typeOf = item.getString();
+                        if(item.getFieldName().equals("totalArea"))
+                            totalArea = item.getString();
+                        if(item.getFieldName().equals("capitalInvestment"))
+                            capitalInvestment = item.getString();
+                        if(item.getFieldName().equals("dateStart"))
+                            dateStart = item.getString();
+                        if(item.getFieldName().equals("dateEnd"))
+                            dateEnd = item.getString();
+                        if(item.getFieldName().equals("currentStatus"))
+                            currentStatus = item.getString();
+                        if(item.getFieldName().equals("populationSize"))
+                            populationSize = item.getString();
+                        if(item.getFieldName().equals("totalRoom"))
+                            totalRoom = item.getString();
+                        if(item.getFieldName().equals("totalFloor"))
+                            totalFloor = item.getString();
+                        if(item.getFieldName().equals("roomArea"))
+                            roomArea = item.getString();
+                        if(item.getFieldName().equals("description"))
+                            introduction = item.getString();
+                        if(item.getFieldName().equals("details"))
+                            description = item.getString();
+                        if(item.getFieldName().equals("action"))
+                            action = item.getString();                 
+                    }
+                }
+            } catch (Exception ex) {
+                System.out.println("File Upload Failed due to " + ex);
+            }
+        } else {
+            System.out.println("Sorry this Servlet only handles file upload request");
+        }
+
         boolean flag = false;
         try {
-            RegionalPrice regionalPrice = ConfigConnection.getInstance().getRegionalPriceModelManage().findByCode(codeRegional);
-            if(action.equalsIgnoreCase("add")){
+            ConfigConnection modelManage = getSessionModel(req);
+            RegionalPrice regionalPrice = modelManage.getRegionalPriceModelManage().findByCode(codeRegional);
+            if (action.equalsIgnoreCase("add")) {
                 ProfileLand profileLand = new ProfileLand();
                 profileLand.setCode(code);
                 profileLand.setCodeRegional(regionalPrice);
                 profileLand.setName(name);
                 profileLand.setLocation(location);
                 profileLand.setTypeOf(typeOf);
+                profileLand.setInvestors("National Territory Builders (NTB)");
                 profileLand.setTotalArea(Double.parseDouble(totalArea));
                 profileLand.setCapitalInvestment(capitalInvestment);
                 profileLand.setDateStart(dateStart);
@@ -165,35 +209,37 @@ public class ControllerProfileLand extends HttpServlet {
                 profileLand.setRoomArea(Integer.parseInt(roomArea));
                 profileLand.setIntroduction(introduction);
                 profileLand.setDescription(description);
-                profileLand.setImage(image);
-                ConfigConnection.getInstance().getProfileLandModelManage().create(profileLand);
-                
+                profileLand.setImage(imageName);                
+                modelManage.getProfileLandModelManage().create(profileLand);
+
                 String hitspay = req.getParameter("hitspay");
-                if(hitspay != null && !hitspay.equals("") && !hitspay.equals("0")){
+                if (hitspay != null && !hitspay.equals("") && !hitspay.equals("0")) {
                     int count = Integer.parseInt(hitspay);
                     String percentPay = "";
                     String note = "";
                     PaymentMode paymentMode = new PaymentMode();
                     paymentMode.setCode("PM" + new SimpleDateFormat("yyMMddHHmmss").format(new Date()));
                     paymentMode.setCountPay(count);
-                    for(int i = 1; i <= count; i++){
-                        String percent = req.getParameter("percent"+i);
-                        String deadlineDate = req.getParameter("deadlineDate"+i);
-                        if(percent == null || percent.equals(""))
+                    for (int i = 1; i <= count; i++) {
+                        String percent = req.getParameter("percent" + i);
+                        String deadlineDate = req.getParameter("deadlineDate" + i);
+                        if (percent == null || percent.equals("")) {
                             percent = "0";
-                        if(deadlineDate == null || deadlineDate.equals(""))
+                        }
+                        if (deadlineDate == null || deadlineDate.equals("")) {
                             deadlineDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                        percentPay = percentPay + (i>1?",":"") + percent;
-                        note = note + (i>1?",":"") + deadlineDate;
+                        }
+                        percentPay = percentPay + (i > 1 ? "," : "") + percent;
+                        note = note + (i > 1 ? "," : "") + deadlineDate;
                     }
                     paymentMode.setPercentPay(percentPay);
                     paymentMode.setNote(note);
                     paymentMode.setCodeProfileLand(profileLand);
 
-                    ConfigConnection.getInstance().getPaymentModeModelManage().create(paymentMode);
+                    modelManage.getPaymentModeModelManage().create(paymentMode);
                 }
             } else {
-                ProfileLand profileLand = ConfigConnection.getInstance().getProfileLandModelManage().findByCode(code);
+                ProfileLand profileLand = modelManage.getProfileLandModelManage().findByCode(code);
                 profileLand.setCode(code);
                 profileLand.setCodeRegional(regionalPrice);
                 profileLand.setName(name);
@@ -210,34 +256,36 @@ public class ControllerProfileLand extends HttpServlet {
                 profileLand.setRoomArea(Integer.parseInt(roomArea));
                 profileLand.setIntroduction(introduction);
                 profileLand.setDescription(description);
-                profileLand.setImage(image);
-                ConfigConnection.getInstance().getProfileLandModelManage().edit(profileLand);
-                
+                profileLand.setImage(imageName);
+                modelManage.getProfileLandModelManage().edit(profileLand);
+
                 String hitspay = req.getParameter("hitspay");
-                if(hitspay != null && !hitspay.equals("") && !hitspay.equals("0")){
+                if (hitspay != null && !hitspay.equals("") && !hitspay.equals("0")) {
                     int count = Integer.parseInt(hitspay);
                     String percentPay = "";
                     String note = "";
                     PaymentMode paymentMode = profileLand.getPaymentMode();
                     paymentMode.setCountPay(count);
-                    for(int i = 1; i <= count; i++){
-                        String percent = req.getParameter("percent"+i);
-                        String deadlineDate = req.getParameter("deadlineDate"+i);
-                        if(percent == null || percent.equals(""))
+                    for (int i = 1; i <= count; i++) {
+                        String percent = req.getParameter("percent" + i);
+                        String deadlineDate = req.getParameter("deadlineDate" + i);
+                        if (percent == null || percent.equals("")) {
                             percent = "0";
-                        if(deadlineDate == null || deadlineDate.equals(""))
+                        }
+                        if (deadlineDate == null || deadlineDate.equals("")) {
                             deadlineDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                        percentPay = percentPay + (i>1?",":"") + percent;
-                        note = note + (i>1?",":"") + deadlineDate;
+                        }
+                        percentPay = percentPay + (i > 1 ? "," : "") + percent;
+                        note = note + (i > 1 ? "," : "") + deadlineDate;
                     }
                     paymentMode.setPercentPay(percentPay);
                     paymentMode.setNote(note);
                     paymentMode.setCodeProfileLand(profileLand);
 
-                    ConfigConnection.getInstance().getPaymentModeModelManage().edit(paymentMode);
+                    modelManage.getPaymentModeModelManage().edit(paymentMode);
                 }
-            }                        
-            
+            }
+
             flag = true;
         } catch (RollbackFailureException ex) {
             Logger.getLogger(ControllerRegionalPrice.class.getName()).log(Level.SEVERE, null, ex);
@@ -254,6 +302,16 @@ public class ControllerProfileLand extends HttpServlet {
             out.println("alert('Error! Not suscess');");
             out.println("</script>");
         }
+    }
+
+    private ConfigConnection getSessionModel(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        ConfigConnection modelManage = (ConfigConnection) session.getAttribute("modelManage");
+        if (modelManage == null) {
+            modelManage = ConfigConnection.getInstance();
+            session.setAttribute("modelManage", modelManage);
+        }
+        return modelManage;
     }
 
     @Override

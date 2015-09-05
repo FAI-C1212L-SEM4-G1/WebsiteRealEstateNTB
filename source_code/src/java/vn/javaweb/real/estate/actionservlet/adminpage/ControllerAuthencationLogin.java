@@ -1,5 +1,6 @@
 package vn.javaweb.real.estate.actionservlet.adminpage;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -44,6 +45,9 @@ public class ControllerAuthencationLogin extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.setAttribute("account", account);
             session.setAttribute("modelManage", modelManage);
+            String path = getServletContext().getRealPath("/");
+            String directoryUpload = path.substring(0, path.lastIndexOf("\\build"));
+            session.setAttribute("directory.root", directoryUpload);
             response.sendRedirect(request.getContextPath() + "/ControllerProfileLand?action=list");            
         } else {
             PrintWriter pw = response.getWriter();

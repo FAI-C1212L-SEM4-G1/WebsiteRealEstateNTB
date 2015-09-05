@@ -1,7 +1,5 @@
 package vn.javaweb.real.estate.maintest;
 
-import vn.javaweb.real.estate.manage.ProfileLandModelManage;
-
 /**
  *
  * @author PhanAnh
