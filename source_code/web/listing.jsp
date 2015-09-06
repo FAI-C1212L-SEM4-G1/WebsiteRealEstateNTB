@@ -5,6 +5,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="core" uri="http://java.sun.com/jstl/core_rt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,26 +15,25 @@
         <link href="font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style_listing.css" rel="stylesheet" type="text/css"/>
         <link href="css/mobile.css" rel="stylesheet" type="text/css"/>
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="javascript.js" type="text/javascript"></script>
-    </head>
-    <body>
-<script>
-    $(function () {       
-        $('.menu-show').click(function () {
-            $('nav ul').toggleClass('showing');
-           
-        });        
-    });
-    function kiemtra()
-    {
-        $(".insBackToTop").click(function () {
-            $("html, body").animate({scrollTop: 0}, 800);
-            return false;
-        });
-    };
-</script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         
+        <script>
+            $(function () {       
+                $('.menu-show').click(function () {
+                    $('nav ul').toggleClass('showing');
+
+                });        
+            });
+            function kiemtra()
+            {
+                $(".insBackToTop").click(function () {
+                    $("html, body").animate({scrollTop: 0}, 800);
+                    return false;
+                });
+            };
+        </script>
+    </head>
+    <body>                
         <div id="wapper">
             <header id="header">
                 <div id="top">
@@ -59,190 +59,113 @@
                 </div>
                 <div class="clear"></div>
                 <nav>
-           <div class="menu-show">
-                <i style="font-size: 18px;margin-top: 5px;" class="fa fa-bars"></i>
-            </div>
-            <ul>
-                <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
-                <li><a href="${pageContext.request.contextPath}/listing.jsp">LISTINGS</a></li>
-                <li><a href="#">GALAXY</a></li>
-                <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
-                <li><a href="#">ABOUT US</a></li>
-                <li><a href="${pageContext.request.contextPath}/admin/login.jsp">SIGN IN</a></li>
-            </ul>
-           
-        </nav>
+                    <div class="menu-show">
+                         <i style="font-size: 18px;margin-top: 5px;" class="fa fa-bars"></i>
+                     </div>
+                     <ul>
+                         <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
+                         <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
+                         <li><a href="#">GALAXY</a></li>
+                         <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
+                         <li><a href="#">ABOUT US</a></li>
+                         <li><a href="${pageContext.request.contextPath}/admin/login.jsp">SIGN IN</a></li>
+                     </ul>           
+                 </nav>
                 <div class="clear"></div>
             </header>
             <div id="title-listing">
-                <h1>listing</h1>
+                <h1>List of projects</h1>
             </div>
             <div id="container-title">
-                <section class="title-top">
-                    <form class="form-filter" action="index.jsp" method="POST">
-                        <ul class="list-filter">
+                <core:if test="${sessionScope.modelManage==null}">
+                    <jsp:useBean id="modelManage" class="vn.javaweb.real.estate.model.ConfigConnection" scope="session" />
+                </core:if>
+                <section class="title-top">  
+                    <form class="form-filter" action="" method="GET" >
+                        <ul class="list-filter">   
                             <li>
-                               <label>Location</label>
-                            </li>
-                            <li>
-                        <select class="list-option-filter1">
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                             
-                        </select>
+                                 <label>Keyword</label>
                             </li>
                             <li>
-                                 <label>Property type:</label>
-                            </li>
-                            <li>
-                            <select class="list-option-filter1">
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                            </select>
-                            </li>
-                             <li>
-                                 <label>Rooms:</label>
-                            </li>
-                            <li>
-                             <select class="list-option-filter2">
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                            </select>
-                            </li>
-                              <li>
-                                 <label>Beds:</label>
-                            </li>
-                            <li>
-                             <select class="list-option-filter2">
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                            <option>thứ 1</option>
-                            </select>
+                                <input class="list-option-filter1" type="text" name="txtSearch" />
                             </li>
                             
-                        <ul>
-                            <input id="filter" class="filter" type="submit" value="filter"/>
+                            <li>
+                               <label>Regional</label>
+                            </li>
+                            <li>
+                                <select class="list-option-filter1" id="codeRegional" name="codeRegional" >
+                                    <option value="">Select one option</option>
+                                    <core:forEach var="regionalPrice" items="${sessionScope.modelManage.regionalPriceModelManage.findAll()}" >                     
+                                        <option value="${regionalPrice.code}" <core:if test="${object.codeRegional.code eq regionalPrice.code}">selected</core:if> >${regionalPrice.regionalName}</option>  
+                                    </core:forEach>
+                                </select>                                
+                            </li>
+
+                            <li>
+                                 <label>Status building</label>
+                            </li>
+                            <li>
+                                <select class="list-option-filter1" id="typeSearch" name="typeSearch">
+                                    <option value="byDateNotStarted">Not started</option>
+                                    <option value="byDateUnder">Under construction</option>
+                                    <option value="byDateCompleted">Completed</option>
+                                </select>
+                            </li>                                                        
+                        </ul>
+                        <input id="filter" class="filter" type="submit" name="action" value="filter"/>    
                     </form>
-                </section>
+                </section>                                                
                 <section id="houses">
-                  <div class="houses_list">
-                    <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span><br>
-                            <a class="house__more" href="detail.jsp">More</a>
-
-                        </div>
-                    </article>
-                    <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span></br>
-                            <a class="house__more" href="#">More</a>
-
-                        </div>
-                    </article>
-                    <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span></br>
-                            <a class="house__more" href="#">More</a>
-
-                        </div>
-                    </article>
-                    <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span><br>
-                            <a class="house__more" href="#">More</a>
-
-                        </div>
-                    </article>
-                      <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span><br>
-                            <a class="house__more" href="#">More</a>
-
-                        </div>
-                    </article>
-                      <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span><br>
-                            <a class="house__more" href="#">More</a>
-
-                        </div>
-                    </article>
-                      <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span><br>
-                            <a class="house__more" href="#">More</a>
-
-                        </div>
-                    </article>
-                      <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span><br>
-                            <a class="house__more" href="#">More</a>
-
-                        </div>
-                    </article>
-                    
-                
-                    
+                    <div class="houses_list">
+                        <core:forEach items="${requestScope.listData}" var="profileLand">
+                            <core:set var="lengthIntroduction" value="${fn:length(profileLand.introduction)}" />
+                            <core:choose>
+                                <core:when test="${lengthIntroduction ge 100}" >
+                                    <core:set var="introduction" value="${fn:substring(profileLand.introduction, 0, 100)}" />
+                                </core:when>
+                                <core:when test="${lengthIntroduction le 5}" >
+                                    <core:set var="introduction" value="The data for the project has not been fully provided. We'll update the article as soon as possible. Sorry for inconvenience" />
+                                </core:when>
+                                <core:otherwise>
+                                    <core:set var="introduction" value="${profileLand.introduction}" />
+                                </core:otherwise>
+                            </core:choose>
+                            <article class="box-house">
+                                <div class="houses-images">
+                                    <img src="images/${profileLand.image}" alt="This is image ${profileLand.name}" title="${profileLand.name}" style="height: 216px; border-top-left-radius: 5px; border-bottom-left-radius: 5px;" />
+                                </div>
+                                <div class="houses-title">
+                                    <h1>${profileLand.name}</h1>
+                                    <p>${introduction} ...</p>
+                                    <span>$&nbsp;${profileLand.codeRegional.unitPrice}</span><br>
+                                    <a class="house__more" href="${pageContext.request.contextPath}/ServletProfileLandClient?action=details&code=${profileLand.code}">Details</a>
+                                </div>
+                            </article>
+                        </core:forEach>                                                                       
                 </div>
                     <div class="container-page-list">
                         <ul class="page-list">
-                            <li><a class="back-list" href="#"><i class="fa fa-angle-left"></i></a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">6</a></li>
-                            <li><a class="next-list" href="#"><i class="fa fa-angle-right"></i></a></li>
+                            <core:if test="${currentPage gt '1'}">
+                                <li><a class="back-list" href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list&page=1"><i class="fa fa-angle-left"></i></a></li>                                
+                            </core:if>
+                            <core:forEach begin="1" end="${noOfPages}" var="i" >
+                                <core:choose>
+                                    <core:when test="${currentPage eq i}">
+                                        <li class="active">
+                                            <a>${i}</a>
+                                        </li>
+                                    </core:when>
+                                    <core:otherwise>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list&page=${i}">${i}</a>
+                                        </li>
+                                    </core:otherwise>  
+                                </core:choose>                                                                                                              
+                            </core:forEach>
+                            <core:if test="${currentPage lt noOfPages}">
+                                <li><a class="next-list" href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list&page=${currentPage+1}"><i class="fa fa-angle-right"></i></a></li>                                
+                            </core:if>         
                         </ul>
                     </div>
                 </section>

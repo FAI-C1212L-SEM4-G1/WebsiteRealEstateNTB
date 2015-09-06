@@ -381,4 +381,42 @@ public class ProfileLandModelManage implements Serializable {
         }
     }
     
+    /** CLIENT
+     * TIM KIEM THEO DIEU KIEN: TEN DU AN + MA KHU VUC + TRANG THAI DU AN
+     * @param name
+     * @param codeRegional
+     * @param constructionStatus
+     * @return List<>()
+     */
+    
+    public List<ProfileLand> findConditions(String name, String codeRegional, ConstructionStatus constructionStatus) {
+        Calendar calendar = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String dateCurrent = dateFormat.format(calendar.getTime());
+        String condsDate;
+        if (constructionStatus.compareTo(ConstructionStatus.NotStarted) == 0) {
+                condsDate = " AND p.dateStart > '" + dateCurrent + "' ";              
+        } else {
+            if (constructionStatus.compareTo(ConstructionStatus.UnderConstruction) == 0) {
+                condsDate = " AND p.dateStart <= '"+ dateCurrent +"' AND p.dateEnd >= '" + dateCurrent + "' "; 
+            } else {
+                if (constructionStatus.compareTo(ConstructionStatus.UnderConstruction) == 0) {
+                    condsDate = " AND p.dateEnd <= '" + dateCurrent + "' "; 
+                } else {
+                    condsDate = "";
+                }                
+            }
+        }
+        
+        codeRegional = "".equals(codeRegional)?"":(" AND p.codeRegional = '" + codeRegional + "' ");
+                
+        EntityManager em = getEntityManager();   
+        try {
+            String q = "SELECT * FROM [RealEstate].[dbo].[ProfileLand] p WHERE p.name LIKE '%"+name+"%' " + codeRegional + condsDate + " ";
+            Query query = em.createNativeQuery(q, ProfileLand.class);
+            return (List<ProfileLand>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
 }

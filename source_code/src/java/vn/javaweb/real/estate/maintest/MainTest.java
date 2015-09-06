@@ -1,5 +1,7 @@
 package vn.javaweb.real.estate.maintest;
 
+import vn.javaweb.real.estate.manage.ProfileLandModelManage;
+
 /**
  *
  * @author PhanAnh
@@ -11,10 +13,10 @@ public class MainTest {
 //        RegionalPriceTest();
         
         /** Test ho so du an */
-//        ProfileLandTest();
+        ProfileLandTest();
         
         /** Test account*/
-        AccountTest();
+//        AccountTest();
     }
     
     public static void main(String args[]){
@@ -55,7 +57,10 @@ public class MainTest {
 //        testProfileLand.testProfileLandCount();
         
         /** Tim kiem theo ten */
-        testProfileLand.testFindByName("Chung cư 219 Trung Kính");
+//        testProfileLand.testFindByName("Chung cư 219 Trung Kính");
+        
+        /** Test tim kiem phia client */
+        testProfileLand.testFindConditions("", "", ProfileLandModelManage.ConstructionStatus.Completed);
     }
     
     private void AccountTest(){

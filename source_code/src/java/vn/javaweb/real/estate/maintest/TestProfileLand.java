@@ -55,4 +55,13 @@ public class TestProfileLand {
         }  
         System.out.println("Tong so ket qua: " + list.size());
     }
+    
+    protected void testFindConditions(String name, String codeRegional, ProfileLandModelManage.ConstructionStatus constructionStatus){
+        ConfigConnection configConnection = ConfigConnection.getInstance();
+        List<ProfileLand> list = configConnection.getProfileLandModelManage().findConditions(name, codeRegional, constructionStatus);
+        for(ProfileLand pl : list){
+            System.out.println(pl.toString()); 
+        }  
+        System.out.println("Tong so ket qua: " + list.size());
+    }
 }

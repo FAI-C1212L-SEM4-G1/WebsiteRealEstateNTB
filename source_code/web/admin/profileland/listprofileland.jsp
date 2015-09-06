@@ -606,7 +606,7 @@
                                                     </core:forEach>
                                                     <core:if test="${currentPage lt noOfPages}">
                                                         <li class="PagedList-skipToNext">
-                                                            <a rel="next" href="${pageContext.request.contextPath}/ControllerProfileLand?action=list&page=${i+1}">»</a>
+                                                            <a rel="next" href="${pageContext.request.contextPath}/ControllerProfileLand?action=list&page=${currentPage+1}">»</a>
                                                         </li>
                                                     </core:if>                                                    
                                                 </ul>

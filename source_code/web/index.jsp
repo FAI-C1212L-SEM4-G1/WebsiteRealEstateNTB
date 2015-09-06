@@ -87,7 +87,7 @@
                     </div>
                     <ul>
                         <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
-                        <li><a href="${pageContext.request.contextPath}/listing.jsp">LISTINGS</a></li>
+                        <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
                         <li><a href="#">GALAXY</a></li>
                         <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
                         <li><a href="#">ABOUT US</a></li>
@@ -151,7 +151,7 @@
                 </div>
 
                 <div class="houses_list">
-                    <core:forEach items="${modelManage.profileLandModelManage.findBetween(0, 4)}" var="profileLand" >
+                    <core:forEach items="${sessionScope.modelManage.profileLandModelManage.findBetween(0, 4)}" var="profileLand" >
                         <core:set var="lengthIntroduction" value="${fn:length(profileLand.introduction)}" />
                         <core:choose>
                             <core:when test="${lengthIntroduction ge 100}" >
@@ -166,7 +166,7 @@
                         </core:choose>
                         <article class="box-house">
                             <div class="houses-images">
-                                <img src="images/${profileLand.image}" alt="This is images ${profileLand.name}" style="height: 216px; border-top-left-radius: 5px; border-bottom-left-radius: 5px;"/>
+                                <img src="images/${profileLand.image}" alt="This is image ${profileLand.name}" title="${profileLand.name}" style="height: 216px; border-top-left-radius: 5px; border-bottom-left-radius: 5px;"/>
                             </div>
                             <div class="houses-title">
                                 <h1>${profileLand.name}</h1>

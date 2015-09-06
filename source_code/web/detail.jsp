@@ -62,7 +62,7 @@
                     <div class="menu-show" style="font-size: 18px;margin-top: 5px;"></div >
                     <ul>
                         <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
-                        <li><a href="${pageContext.request.contextPath}/listing.jsp">LISTINGS</a></li>
+                        <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
                         <li><a href="#">GALAXY</a></li>
                         <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
                         <li><a href="#">ABOUT US</a></li>
