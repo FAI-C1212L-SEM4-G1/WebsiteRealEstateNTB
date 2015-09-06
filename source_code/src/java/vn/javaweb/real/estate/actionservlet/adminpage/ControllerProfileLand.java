@@ -126,8 +126,8 @@ public class ControllerProfileLand extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String code = "", codeRegional = "", name = "", location = "", typeOf = "", totalArea = "", capitalInvestment = "", dateStart = "", dateEnd = "";
-        String currentStatus = "", populationSize = "", totalRoom = "", totalFloor = "", roomArea = "", introduction = "", description = "", imageName = "", action = "";
+        String code = "", codeRegional = "", name = "", location = "", typeOf = "", totalArea = "0", capitalInvestment = "", dateStart = "", dateEnd = "";
+        String currentStatus = "", populationSize = "0", totalRoom = "0", totalFloor = "0", roomArea = "0", introduction = "", description = "", imageName = "", action = "";
         
         if (ServletFileUpload.isMultipartContent(req)) {
             try {
@@ -137,7 +137,7 @@ public class ControllerProfileLand extends HttpServlet {
                     if (!item.isFormField()) {
                         imageName = new File(item.getName()).getName();
                         if (!imageName.equals("")) {
-                            item.write(new File(directoryUpload + File.separator + imageName));
+                            item.write(new File(directoryUpload + File.separator + imageName));                            
                             System.out.println("Uploaded image successfully: " + imageName);                            
                         } else {
                             System.out.println("Not choose file!");

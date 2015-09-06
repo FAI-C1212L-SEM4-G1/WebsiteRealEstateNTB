@@ -15,9 +15,9 @@
         <title>Profile Land</title>
 
         <link rel="Shortcut Icon" href="http://static.bizwebmedia.net/favicon.ico" type="image/x-icon" />
-<%--        <c:set var="url">${pageContext.request.requestURL}</c:set>
-        <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" /> --%>
-        
+        <%--        <c:set var="url">${pageContext.request.requestURL}</c:set>
+                <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" /> --%>
+
         <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/admin/Content/Styles/bootstrap.css" />
         <link href="${pageContext.request.contextPath}/font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
@@ -72,13 +72,13 @@
         </script>
     </head>
     <body class="fixed-top">        
-       <div id="AjaxLoading"><img src="${pageContext.request.contextPath}/admin/Content/Images/Admin/ajax-load.gif" alt=""/>&nbsp; Loading ... Please waiting ...</div>
+        <div id="AjaxLoading"><img src="${pageContext.request.contextPath}/admin/Content/Images/Admin/ajax-load.gif" alt=""/>&nbsp; Loading ... Please waiting ...</div>
         <form method="POST" action="" id="form1">
             <script src="${pageContext.request.contextPath}/admin/Content/Scripts/jquery.mousewheel-3.0.6.pack.js" type="text/javascript"></script>            
             <script src="${pageContext.request.contextPath}/admin/Content/Scripts/jquery.fancybox.pack.js" type="text/javascript"></script>
             <div class="PageHeader">
                 <div class="LogoHeader">
-                    
+
                 </div>
                 <div class="SystemMenu">
                     <div>
@@ -107,7 +107,7 @@
             <div id="container" class="row-fluid">
                 <div class="clear" style="height: 10px">
                 </div>
-
+                
                 <style type="text/css">
                     .boder_menu
                     {
@@ -577,13 +577,13 @@
                                                                                 </span>
                                                                             </span>
                                                                             <% String action = request.getParameter("action");
-                                                                                    if (action.equalsIgnoreCase("add")) { %>
-                                                                                <input type="hidden" name="action" value="add">
-                                                                                <script>
-                                                                                    var d = new Date();                                                      
-                                                                                    document.getElementById("code").value = "PL" + ("0" + d.getDate()).slice(-2) + ("0" + (d.getMonth() + 1)).slice(-2) +
-                                                                                            ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + d.getSeconds() + d.getMilliseconds();                                                                                
-                                                                                </script>  
+                                                                                if (action.equalsIgnoreCase("add")) { %>
+                                                                            <input type="hidden" name="action" value="add">
+                                                                            <script>
+                                                                                var d = new Date();
+                                                                                document.getElementById("code").value = "PL" + ("0" + d.getDate()).slice(-2) + ("0" + (d.getMonth() + 1)).slice(-2) +
+                                                                                        ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2) + d.getSeconds() + d.getMilliseconds();
+                                                                            </script>  
                                                                             <% } else { %> <input type="hidden" name="action" value="edit"><% }%>
                                                                         </td>
                                                                     </tr>
@@ -608,7 +608,7 @@
                                                                             <span class="Required">*</span>
                                                                         </td>
                                                                         <td>
-                                                                            <select id="codeRegional" name="codeRegional" multiple="true">
+                                                                            <select id="codeRegional" name="codeRegional" >
                                                                                 <option value="null">Select one option</option>
                                                                                 <core:forEach var="regionalPrice" items="${modelManage.regionalPriceModelManage.findAll()}" >                     
                                                                                     <option value="${regionalPrice.code}" <core:if test="${object.codeRegional.code eq regionalPrice.code}">selected</core:if> >${regionalPrice.regionalName}</option>  
@@ -779,7 +779,48 @@
                                                                             Select sample image
                                                                         </td>
                                                                         <td>
-                                                                            <input id="image" class="validate[required] text" type="file" name="fileimage" />                              
+                                                                            <script>
+                                                                                function showMyImage(fileInput) {
+                                                                                    var files = fileInput.files;
+                                                                                    for (var i = 0; i < files.length; i++) {
+                                                                                        var file = files[i];
+                                                                                        var imageType = /image.*/;
+                                                                                        
+                                                                                        var fileInfo = document.getElementById("file-info");
+                                                                                        while (fileInfo.hasChildNodes()) {
+                                                                                        fileInfo.removeChild(container.lastChild);
+                                                                                        }
+                                                                                        
+                                                                                        if (!file.type.match(imageType)) {                                                                                            
+                                                                                            fileInfo.appendChild(document.createElement("LI").appendChild(document.createTextNode("Name: " + file.name)));
+                                                                                            fileInfo.appendChild(document.createElement("BR"));
+                                                                                            fileInfo.appendChild(document.createElement("LI").appendChild(document.createTextNode("Type: Please image type img or jpg")));
+                                                                                            document.getElementById("divimg").style.display = "none";
+                                                                                        } else {                                                                                            
+                                                                                            fileInfo.appendChild(document.createElement("LI").appendChild(document.createTextNode("Name: " + file.name)));
+                                                                                            fileInfo.appendChild(document.createElement("BR"));
+                                                                                            fileInfo.appendChild(document.createElement("LI").appendChild(document.createTextNode("Type: " + file.type)));
+                                                                                            document.getElementById("divimg").style.display = "block";
+                                                                                        }
+                                                                                        var img = document.getElementById("thumbnil");
+                                                                                        img.file = file;
+                                                                                        var reader = new FileReader();
+                                                                                        reader.onload = (function (aImg) {
+                                                                                            return function (e) {
+                                                                                                aImg.src = e.target.result;
+                                                                                            };
+                                                                                        })(img);
+                                                                                        reader.readAsDataURL(file);
+                                                                                    }
+                                                                                }
+                                                                            </script>
+                                                                            <input id="image" class="validate[required] text" type="file" name="fileimage" accept="image/*" onchange="showMyImage(this)" />                              
+                                                                            <div style="display: inline; float: left;">
+                                                                                <core:out value="${object.image}" />
+                                                                                <h4 <core:if test="${object.image eq null || object.image eq ''}"> style="display: none;"</core:if>>File Info:</h4>
+                                                                                <ul id="file-info"></ul>
+                                                                                <span id="divimg" <core:if test="${object.image eq null || object.image eq ''}"> style="display: none;"</core:if>><img id="thumbnil" style="width:20%; margin-top:5px;" src="../../images/${object.image}" alt="image" /></span>                                                                           
+                                                                            </div>                                                                            
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">
                                                                                     <p class="tooltiptitle"> Select sample image </p>
@@ -803,8 +844,8 @@
                                                                     <tr>
                                                                         <td class="key"> Installment payment </td>
                                                                         <td>
-                                                                             <script type='text/javascript'>
-                                                                                function addFields(){
+                                                                            <script type='text/javascript'>
+                                                                                function addFields() {
                                                                                     // Number of inputs to create
                                                                                     var number = document.getElementById("hitspay").value;
                                                                                     // Container <div> where dynamic content will be placed
@@ -814,43 +855,43 @@
                                                                                         container.removeChild(container.lastChild);
                                                                                     }
                                                                                     document.getElementById("addInputDynamic").style.display = "none";
-                                                                                    if(number > 5)
+                                                                                    if (number > 5)
                                                                                         number = 5;
-                                                                                    for (i=0;i<number;i++){
+                                                                                    for (i = 0; i < number; i++) {
                                                                                         // Append a node with a random text
-                                                                                        container.appendChild(document.createTextNode("Percent " + (i+1)));
+                                                                                        container.appendChild(document.createTextNode("Percent " + (i + 1)));
                                                                                         // Create an <input> element, set its type and name attributes
                                                                                         var inputPercent = document.createElement("input");
                                                                                         inputPercent.type = "text";
-                                                                                        inputPercent.className = "stylePercent";                                                                                        
+                                                                                        inputPercent.className = "stylePercent";
                                                                                         inputPercent.name = "percent" + i;
                                                                                         // Create an <input> element, set its type and name attributes
                                                                                         var inputDate = document.createElement("input");
                                                                                         inputDate.type = "date";
-                                                                                        inputDate.className = "styleDate"; 
-                                                                                        inputDate.name = "deadlineDate" + i;                                                                                        
-                                                                                        
+                                                                                        inputDate.className = "styleDate";
+                                                                                        inputDate.name = "deadlineDate" + i;
+
                                                                                         container.appendChild(inputPercent);
-                                                                                        container.appendChild(document.createTextNode("Date " + (i+1)));
+                                                                                        container.appendChild(document.createTextNode("Date " + (i + 1)));
                                                                                         container.appendChild(inputDate);
                                                                                         // Append a line break 
-                                                                                        container.appendChild(document.createElement("br"));   
-                                                                                        
+                                                                                        container.appendChild(document.createElement("br"));
+
                                                                                         // Set style sheet
                                                                                         document.getElementById("addInputDynamic").style.display = "block";
-                                                                                        
+
                                                                                         // Add style sheet
                                                                                         var stylePercent = document.getElementsByClassName("stylePercent");
                                                                                         var k = 0;
-                                                                                        for(k = 0; k < stylePercent.length; k++){
+                                                                                        for (k = 0; k < stylePercent.length; k++) {
                                                                                             stylePercent[k].style.display = "inline";
                                                                                             stylePercent[k].style.width = "200px";
-                                                                                            stylePercent[k].style.margin = "0px 20px"; 
-                                                                                        } 
+                                                                                            stylePercent[k].style.margin = "0px 20px";
+                                                                                        }
 //                                                                                        
                                                                                         var styleDate = document.getElementsByClassName("styleDate");
                                                                                         var j = 0;
-                                                                                        for(j = 0; j < styleDate.length; j++){
+                                                                                        for (j = 0; j < styleDate.length; j++) {
                                                                                             styleDate[j].style.width = "200px";
                                                                                             styleDate[j].style.margin = "0px 20px";
                                                                                         }
