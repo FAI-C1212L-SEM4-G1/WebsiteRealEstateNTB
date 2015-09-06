@@ -814,12 +814,19 @@
                                                                                     }
                                                                                 }
                                                                             </script>
-                                                                            <input id="image" class="validate[required] text" type="file" name="fileimage" accept="image/*" onchange="showMyImage(this)" />                              
+                                                                            <input type = "button" value = "Choose image" onclick ="javascript:document.getElementById('imageFile').click();">
+                                                                            <input id="imageFile" class="validate[required] text" type="file" name="fileimage" accept="image/*" onchange="showMyImage(this)" style="display:none;"/>                              
                                                                             <div style="display: inline; float: left;">
-                                                                                <core:out value="${object.image}" />
+                                                                                
                                                                                 <h4 <core:if test="${object.image eq null || object.image eq ''}"> style="display: none;"</core:if>>File Info:</h4>
-                                                                                <ul id="file-info"></ul>
-                                                                                <span id="divimg" <core:if test="${object.image eq null || object.image eq ''}"> style="display: none;"</core:if>><img id="thumbnil" style="width:20%; margin-top:5px;" src="../../images/${object.image}" alt="image" /></span>                                                                           
+                                                                                <ul id="file-info">
+                                                                                    <core:if test="${object.image ne null || object.image ne ''}">
+                                                                                        <input type="hidden" name="image" value="${object.image}" />
+                                                                                        <li>Name:&nbsp;<core:out value="${object.image}" /></li>
+                                                                                        <li>Type:&nbsp;<core:out value="Image/*" /></li>
+                                                                                    </core:if>
+                                                                                </ul>                                                                                
+                                                                                <span id="divimg" <core:if test="${object.image eq null || object.image eq ''}"> style="display: none;"</core:if>><img id="thumbnil" style="width:20%; margin-top:5px;" src="${pageContext.request.contextPath}/images/${object.image}" alt="image" /></span>                                                                           
                                                                             </div>                                                                            
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">

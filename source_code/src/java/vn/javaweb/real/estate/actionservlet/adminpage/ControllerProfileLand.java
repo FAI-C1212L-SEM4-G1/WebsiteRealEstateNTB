@@ -127,19 +127,21 @@ public class ControllerProfileLand extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String code = "", codeRegional = "", name = "", location = "", typeOf = "", totalArea = "0", capitalInvestment = "", dateStart = "", dateEnd = "";
-        String currentStatus = "", populationSize = "0", totalRoom = "0", totalFloor = "0", roomArea = "0", introduction = "", description = "", imageName = "", action = "";
+        String currentStatus = "", populationSize = "0", totalRoom = "0", totalFloor = "0", roomArea = "0", introduction = "", description = "", imageName = "", image = "", action = "";
         
         if (ServletFileUpload.isMultipartContent(req)) {
             try {
                 List<FileItem> multiparts = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(req);
                 String directoryUpload = req.getSession().getAttribute("directory.root") + File.separator + "web" + File.separator + "images";
+                boolean flagImage = false;
                 for (FileItem item : multiparts) {
                     if (!item.isFormField()) {
                         imageName = new File(item.getName()).getName();
                         if (!imageName.equals("")) {
+                            flagImage = true;
                             item.write(new File(directoryUpload + File.separator + imageName));                            
                             System.out.println("Uploaded image successfully: " + imageName);                            
-                        } else {
+                        } else {                            
                             System.out.println("Not choose file!");
                         }
                     } else {
@@ -175,10 +177,13 @@ public class ControllerProfileLand extends HttpServlet {
                             introduction = item.getString();
                         if(item.getFieldName().equals("details"))
                             description = item.getString();
+                        if(item.getFieldName().equals("image"))
+                            image = item.getString();
                         if(item.getFieldName().equals("action"))
                             action = item.getString();                 
                     }
                 }
+                if(!flagImage) imageName = image;
             } catch (Exception ex) {
                 System.out.println("File Upload Failed due to " + ex);
             }
@@ -186,7 +191,7 @@ public class ControllerProfileLand extends HttpServlet {
             System.out.println("Sorry this Servlet only handles file upload request");
         }
 
-        boolean flag = false;
+        boolean flagAction = false;
         try {
             ConfigConnection modelManage = getSessionModel(req);
             RegionalPrice regionalPrice = modelManage.getRegionalPriceModelManage().findByCode(codeRegional);
@@ -286,14 +291,14 @@ public class ControllerProfileLand extends HttpServlet {
                 }
             }
 
-            flag = true;
+            flagAction = true;
         } catch (RollbackFailureException ex) {
             Logger.getLogger(ControllerRegionalPrice.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(ControllerRegionalPrice.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (flag) {
+        if (flagAction) {
             resp.sendRedirect(req.getContextPath() + "/ControllerProfileLand?action=list");
         } else {
             PrintWriter out = resp.getWriter();
