@@ -32,8 +32,8 @@
                             <i class="fa fa-thumb-tack"></i>
                         </span>
                         <select class="intro-form-select" id="codeProfileLand" name="codeProfileLand">                                 
-                            <core:forEach items="${modelManage.profileLandModelManage.findStartUnderConstruction()}" var="profileLand">
-                                <option value="${profileLand.code}" <core:if test="${requestScope.code eq profileLand.code}">selected</core:if>>${profileLand.name}</option>
+                            <core:forEach items="${modelManage.profileLandModelManage.findAll()}" var="profileLand">
+                                <option value="${profileLand.code}" <core:if test="${object.code eq profileLand.code}">selected</core:if>>${profileLand.name}</option>
                             </core:forEach>
                         </select>
                     </div>

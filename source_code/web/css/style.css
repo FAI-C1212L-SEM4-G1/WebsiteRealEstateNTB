@@ -55,12 +55,12 @@ nav ul li:hover{background:rgb(178, 234, 244);}
 #contact .container-contact {max-width: 960px;display: table;margin: 0 auto;}
 #contact .container-contact  .container-contact-left .title-contact {display: table;margin:25px auto 35px 0;width: 100%;}
 #contact .container-contact  .container-contact-left .title-contact h1 {font-size: 31px;font-weight: bold;color: #171c26;}
-#contact .container-contact .container-contact-left {float: left;margin-right: 1.06383%; width: 77.4681%;height: auto;}
+#contact .container-contact .container-contact-left {float: left;margin-right: 1.06383%; width: auto;height: auto;}
 #contact .container-contact .container-contact-left .box-contact {width: 100%;height: auto;}
-#contact .container-contact .container-contact-left .box-contact .box-contact-box {width: 220px;height: auto;background: #fff;transition: all 0.5s;transform: translate(0px,0px);float: left;margin-left: 10px;margin-right: 10px;margin-bottom: 60px;}
+#contact .container-contact .container-contact-left .box-contact .box-contact-box {width: 200px;height: auto;background: #fff;transition: all 0.5s;transform: translate(0px,0px);float: left;margin-left: 10px;margin-right: 10px;margin-bottom: 60px;}
 #contact .container-contact .container-contact-left .box-contact .box-contact-box:hover{transform: translate(0px,-10px);opacity: 0.5}
 #contact .container-contact .container-contact-left .box-contact .box-contact-box  .images-contact {width: 188px;height: 188px;margin: 0 auto;}
-#contact .container-contact .container-contact-left .box-contact .box-contact-box  .images-contact img {width: 188px;border-radius: 50%;margin-top: 18px;}
+#contact .container-contact .container-contact-left .box-contact .box-contact-box  .images-contact img {width: 180px;border-radius: 50%;margin-top: 18px;}
 .title-contact{width: 220px;text-align: center;}
 #contact .container-contact .container-contact-left .box-contact .box-contact-box .title-contact span {color: #171c26;font-size: 14px;font-weight: 600;margin-bottom: 5px;text-transform: none; text-align: center;}
 #contact .container-contact .container-contact-left .box-contact .box-contact-box .title-contact p {color: #a6a6a6;font-size: 0.916667em;font-weight: 600;margin-bottom: 8.63636%;text-transform: none; margin-top: 5px;} 
@@ -70,7 +70,7 @@ nav ul li:hover{background:rgb(178, 234, 244);}
 #contact .container-contact .container-contact-left .box-contact .box-contact-box .title-contact .list-agent li a:hover {color:rgb(92, 180, 197); }
 
 
-#contact .container-contact .container-contact-right { float: right;margin-left: 1.06383%;width: 19.4043%;height: auto;}
+#contact .container-contact .container-contact-right { float: right;margin-left: 1%;width: 20%;height: auto;}
 #contact .container-contact .container-contact-right .title-contact_-title { color: #171c26;display: block;font-family: RalewayBlack,sans-serif;font-size: 2.66667em;margin-bottom: 30px;text-transform: none;margin: 25px auto 35px 0;width: 100%;}
 #contact .container-contact .container-contact-right  .box-contact-right h1{ color: #6c5122;font-size: 1.45455em;font-weight: 600;margin-bottom: 5%;text-transform: none;}
 #contact .container-contact .container-contact-right  .box-contact-right p {font-weight: 500;line-height: 1.6;}

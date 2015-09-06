@@ -36,8 +36,10 @@ public class ControllerProfileLandClient extends HttpServlet {
             req.setAttribute("object", profileLand);
             req.getRequestDispatcher("/detail.jsp").forward(req, resp);
         } else {
-            if(action.equals("order")){
-            
+            if(action.equals("register")){
+                ProfileLand profileLand = modelManage.getProfileLandModelManage().findByCode(code);
+                req.setAttribute("object", profileLand);
+                req.getRequestDispatcher("/customerorder.jsp").forward(req, resp);
             } else {
 
             }

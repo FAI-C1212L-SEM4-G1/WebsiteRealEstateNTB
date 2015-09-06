@@ -1,10 +1,10 @@
 <%-- 
-    Document   : listing
-    Created on : Aug 10, 2015, 6:14:31 PM
-    Author     : sang
+    Document   : Listing
+    Author     : PhanAnh
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="core" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,14 +19,19 @@
     </head>
     <body>
 <script>
-    $(function () {
-       
+    $(function () {       
         $('.menu-show').click(function () {
             $('nav ul').toggleClass('showing');
            
-        });
-        
+        });        
     });
+    function kiemtra()
+    {
+        $(".insBackToTop").click(function () {
+            $("html, body").animate({scrollTop: 0}, 800);
+            return false;
+        });
+    };
 </script>
         
         <div id="wapper">
@@ -56,17 +61,14 @@
                 <nav>
            <div class="menu-show">
                 <i style="font-size: 18px;margin-top: 5px;" class="fa fa-bars"></i>
-            </div >
-            <ul   >
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                   
-     
+            </div>
+            <ul>
+                <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
+                <li><a href="${pageContext.request.contextPath}/listing.jsp">LISTINGS</a></li>
+                <li><a href="#">GALAXY</a></li>
+                <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/login.jsp">SIGN IN</a></li>
             </ul>
            
         </nav>

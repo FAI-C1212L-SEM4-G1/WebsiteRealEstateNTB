@@ -86,13 +86,12 @@
                         <i style="font-size: 18px;margin-top: 5px;" class="fa fa-bars"></i>
                     </div>
                     <ul>
-                        <li><a href="/index.jsp">HOME</a></li>
-                        <li><a href="/listing">LISTINGS</a></li>
-                        <li><a href="#">SELLERS</a></li>
+                        <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
+                        <li><a href="${pageContext.request.contextPath}/listing.jsp">LISTINGS</a></li>
                         <li><a href="#">GALAXY</a></li>
-                        <li><a href="/customerorder.jsp">CONTACT US</a></li>
+                        <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
                         <li><a href="#">ABOUT US</a></li>
-                        <li><a href="/admin/login.jsp">LOGIN</a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/login.jsp">SIGN IN</a></li>
                     </ul>
                 </nav>
                 <div class="clear"></div>

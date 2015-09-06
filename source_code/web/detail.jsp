@@ -14,7 +14,8 @@
         <link href="css/style_detail.css" rel="stylesheet" type="text/css"/>
         <link href="font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <link href="css/mobile.css" rel="stylesheet" type="text/css"/>
+        <link href="css/mobile.css" rel="stylesheet" type="text/css"/>   
+        
     </head>
     <body>
         <script>
@@ -26,6 +27,14 @@
                 });
 
             });
+            function kiemtra()
+            {
+                $(".insBackToTop").click(function () {
+                    $("html, body").animate({scrollTop: 0}, 800);
+                    return false;
+                });
+            }
+            ;
         </script>
         <div id="wapper">
             <header id="header">
@@ -51,71 +60,76 @@
                 <div class="clear"></div>
                 <nav>
                     <div class="menu-show" style="font-size: 18px;margin-top: 5px;"></div >
-                    <ul   >
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Home</a></li>
+                    <ul>
+                        <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
+                        <li><a href="${pageContext.request.contextPath}/listing.jsp">LISTINGS</a></li>
+                        <li><a href="#">GALAXY</a></li>
+                        <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
+                        <li><a href="#">ABOUT US</a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/login.jsp">SIGN IN</a></li>
                     </ul>
                 </nav>
                 <div class="clear"></div>
             </header>
             <section id="content">
                 <div class="container">
-                    <h1 class="mainTitle">Listing</h1>
+                    <h1 class="mainTitle">Project details</h1>
                     <div class="listingTop cf">
                         <div class="listingSlider">
+                            <img src="images/${requestScope.object.image}" alt="" title="Image ${requestScope.object.name}" style="height: 100%; width: 100%;"/>
                         </div>
                         <div class="listingEntry">
                             <h1 class="listingEntry__title">${requestScope.object.name}</h1>
-                            <p>${requestScope.object.introduction}</p>
+                            <p style="display: block; margin-top: 20px;">${requestScope.object.introduction}</p>
                             <ul class="details">
                                 <li class="details__item">
                                     <i class="fa fa-map-marker"></i>
-                                    Amsterdam
+                                    ${requestScope.object.codeRegional.city}
                                 </li>
                                 <li class="details__item">
-                                    <i class="fa fa-arrows-alt"></i>
-                                    2 800 Sq Ft
+                                    <i class="fa fa-calendar"></i>
+                                    ${requestScope.object.dateStart}
                                 </li>
                                 <li class="details__item">
-                                    <i class="fa fa-car"></i>
-                                    Garrage
+                                    <i class="fa fa-building-o"></i>
+                                    ${requestScope.object.typeOf}
                                 </li>
                                 <li class="details__item">
-                                    <i class="fa fa-wifi"></i>
-                                    Internet
+                                    <i class="fa fa-usd"></i>
+                                    ${requestScope.object.codeRegional.unitPrice}
                                 </li>
                             </ul>
                             <div class="listingEntry__price">$ ${requestScope.object.codeRegional.unitPrice}</div>
                             <div class="Oder">
-                                <a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=order&code=${requestScope.object.code}">Register</a>
+                                <a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=register&code=${requestScope.object.code}">Register</a>
                             </div>
                         </div>
                         <div class="clear"></div>
                     </div>                    
-                    <p>${requestScope.object.description}</p>
-                    <hr class="line_secondType">
+                    <p style="margin: 20px;">${requestScope.object.description}</p>
+                    <hr class="line_secondType" style="margin: 10px 0px;">
                     <h1 class="titleSecondType">Features</h1>
-
                     <ul class="markeredList">
-                        <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i>In an ideal world this website wouldn’t exist</li>
-                        <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i>Needless to say it’s very important, content is king and people are beginning to understand tha</li>
-                        <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i>However, back over in reality some project schedules and with the web copy.</li>
-                        <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i>We want you think about how numbers, symbols and bullet points will look.</li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Name of project</b>:&nbsp;<span>${requestScope.object.name}</span></li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Location detail</b>:&nbsp;<span>${requestScope.object.location}</span></li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Project type</b>:&nbsp;<span>${requestScope.object.typeOf}</span></li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Total building area</b>:&nbsp;<span>${requestScope.object.totalArea}&nbsp;m2</span></li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Total investment planned</b>:&nbsp;<span>$${requestScope.object.capitalInvestment}</span></li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Land project status</b>:&nbsp;<span>${requestScope.object.currentStatus}</span></li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Population size estimates</b>:&nbsp;<span>${requestScope.object.populationSize}&nbsp;people</span></li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Total rooms</b>:&nbsp;<span>${requestScope.object.totalRoom}</span></li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Total floors</b>:&nbsp;<span>${requestScope.object.totalFloor}</span></li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>The average room area</b>:&nbsp;<span>${requestScope.object.roomArea}&nbsp;m2</span></li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Date of commencement</b>:&nbsp;<span>${requestScope.object.dateStart}</span></li>
+                            <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Expected completion date</b>:&nbsp;<span>${requestScope.object.dateEnd}</span></li>
                     </ul>
                     <div id="secondMap" style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden;">
-                    </div>
-
-
+                    </div>                    
                     <div class="map_housing">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d8857.50163386489!2d105.78625163852972!3d21.0278565262789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x3135ab4d2797975f%3A0x6d0fba1dc994204a!2zVMO0biBUaOG6pXQgVGh1eeG6v3Q!3m2!1d21.0278384!2d105.7834778!4m5!1s0x3135ab9bd9861ca1%3A0xe7887f7b72ca17a9!2zSMOgIE5vaSwgSG_DoG4gS2nhur9tLCBIw6AgTuG7mWksIFZp4buHdCBOYW0!3m2!1d21.0277644!2d105.8341598!5e0!3m2!1svi!2s!4v1439807464901" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
-
             </section>
+                    
             <footer id="footer">
                 <div class="container-footer">
                     <div class="footer-top">
