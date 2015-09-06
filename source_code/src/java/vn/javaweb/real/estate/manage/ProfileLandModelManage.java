@@ -366,7 +366,7 @@ public class ProfileLandModelManage implements Serializable {
         profileLands = (this.findByConstructionStatus(ConstructionStatus.NotStarted));
         profileLands.addAll(this.findByConstructionStatus(ConstructionStatus.UnderConstruction));
         return profileLands;
-    }
+    }        
     
     public int getProfileLandCount() {
         EntityManager em = getEntityManager();
@@ -380,5 +380,5 @@ public class ProfileLandModelManage implements Serializable {
             em.close();
         }
     }
-
+    
 }

@@ -4,15 +4,15 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="core" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile Land</title>
+        <title>Profile Land Details</title>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/style_detail.css" rel="stylesheet" type="text/css"/>
         <link href="font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        <script src="javascript.js" type="text/javascript"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <link href="css/mobile.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -92,7 +92,7 @@
                             </ul>
                             <div class="listingEntry__price">$ ${requestScope.object.codeRegional.unitPrice}</div>
                             <div class="Oder">
-                                <a href="${pageContext.request.contextPath}/customerorder.jsp?code=${requestScope.object.code}">Register</a>
+                                <a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=order&code=${requestScope.object.code}">Register</a>
                             </div>
                         </div>
                         <div class="clear"></div>

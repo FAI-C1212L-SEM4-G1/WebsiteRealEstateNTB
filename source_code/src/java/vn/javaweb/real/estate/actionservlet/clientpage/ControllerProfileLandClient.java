@@ -28,11 +28,20 @@ public class ControllerProfileLandClient extends HttpServlet {
             modelManage = ConfigConnection.getInstance();
             session.setAttribute("modelManage", modelManage);
         }
-        
+        String action = req.getParameter("action");
         String code = req.getParameter("code");
-        ProfileLand profileLand = modelManage.getProfileLandModelManage().findByCode(code);
-        req.setAttribute("object", profileLand);
-        req.getRequestDispatcher("/detail.jsp").forward(req, resp);
+        
+        if(action.equals("details")){
+            ProfileLand profileLand = modelManage.getProfileLandModelManage().findByCode(code);
+            req.setAttribute("object", profileLand);
+            req.getRequestDispatcher("/detail.jsp").forward(req, resp);
+        } else {
+            if(action.equals("order")){
+            
+            } else {
+
+            }
+        }        
     }
 
     @Override

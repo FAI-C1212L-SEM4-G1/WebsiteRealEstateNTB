@@ -370,4 +370,16 @@ public class AccountModelManage implements Serializable {
     public int getUserCount(){
          return this.findAllIsUser().size();
     }
+
+    // CLIENT: Lấy danh sách người bán [số kết quả trả về] -- Người bán role = 1
+    public List<Account> getSellers(int numberResult){
+        EntityManager em = getEntityManager();   
+        try {
+            String q = "SELECT TOP "+ numberResult +" * FROM [RealEstate].[dbo].[Account] WHERE [RealEstate].[dbo].[Account].[role] = 1";
+            Query query = em.createNativeQuery(q, Account.class);
+            return (List<Account>)query.getResultList(); 
+        } finally {
+            em.close();
+        }
+    }
 }

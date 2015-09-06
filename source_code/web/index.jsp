@@ -1,9 +1,11 @@
 <%-- 
-    Document   : index
-    Author     : sang
+    Document   : Homepage
+    Author     : PhanAnh
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +14,6 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
 
         <link href="font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        <script src="javascript.js" type="text/javascript"></script>
         <link href="css/slider-show/css/nivo-slider.css" rel="stylesheet" type="text/css"/>
         <script src="css/slider-show/js/jquery.js" type="text/javascript"></script>
         <script src="css/slider-show/js/jquery.nivo.slider.pack.js" type="text/javascript"></script>
@@ -34,6 +35,13 @@
                     captionOpacity: 0.9
                 });
             });
+            function kiemtra()
+            {
+                $(".insBackToTop").click(function () {
+                    $("html, body").animate({scrollTop: 0}, 800);
+                    return false;
+                });
+            };
         </script>
         <title>National Territory Builders</title>
     </head>
@@ -78,13 +86,13 @@
                         <i style="font-size: 18px;margin-top: 5px;" class="fa fa-bars"></i>
                     </div>
                     <ul>
-                        <li><a href="/index.jsp">Home</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="/index.jsp">HOME</a></li>
+                        <li><a href="/listing">LISTINGS</a></li>
+                        <li><a href="#">SELLERS</a></li>
+                        <li><a href="#">GALAXY</a></li>
+                        <li><a href="/customerorder.jsp">CONTACT US</a></li>
+                        <li><a href="#">ABOUT US</a></li>
+                        <li><a href="/admin/login.jsp">LOGIN</a></li>
                     </ul>
                 </nav>
                 <div class="clear"></div>
@@ -96,200 +104,124 @@
             <div class="clear"></div>
             <section id="abount">
                 <div class="container">
+                    
                     <div class="abount-top">
-                        <h1>There are many variations of passages of Lorem Ipsum available</h1>
-
+                        <h1>National Territory Builders Company global presence with many historical buildings</h1>
                     </div>
+                    
                     <div class="abount-content">
-                        <span>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</span>
-
+                        <span>NATIONAL TERRITORY BUILDERS is one of the leading companies operating in the field of real estate business –consulting-managing-and marketing. We offer best services in the Real Estate in Vietnam to satisfy various needs from customers. Currently, we focus on product groups of apartment, Office Building, Villa which have been selected from a number of property development projects in Hanoi City. We maintain and develop professional, high quality, and committed staff having customer service skills and knowledge of real estate market. Meeting us, customers will be satisfied and feel confident of their decisions.</span>
                     </div>
+                    
                     <div class="abount-footer">
-
+                        
                         <div class="box1-abount">
-
                             <i style="font-size: 80px;float: left;margin-right:5px;color:#5cb4c5"  class="fa fa-television"></i>
-
-                            <h3>Lorem Ipsum</h3>
-                            <span>There are many variations of passages of<br> Lorem Ipsum available, but the majority have suffered alteration in some form</span>
-
+                            <h3>Quick and easy search</h3>
+                            <span>Providing the latest projects, customers can search the individual needs quickly convenient</span>
                         </div>
+                        
                         <div class="box2-abount">
                             <i style="font-size: 80px;float: left;margin-right:5px;color:#5cb4c5"  class="fa fa-heartbeat"></i>
-                            <h3>Lorem Ipsum</h3>
-                            <span>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form</span>
+                            <h3>Good after-sales service</h3>
+                            <span>We always meet the needs of customers with the best price and service after the sale of the best</span>
                         </div>
+                        
                         <div class="box3-abount">
                             <i style="font-size: 80px;float: left;margin-right:5px;color:#5cb4c5" class="fa fa-bullhorn"></i>
-                            <h3>Lorem Ipsum</h3>
-                            <span>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form</span>
+                            <h3>Development goals</h3>
+                            <span>We expanded global building with the desire to provide comprehensive solutions for real estate</span>
                         </div>
+                        
                     </div>
 
                 </div>
             </section>
             <div class="clear"></div>
+            
+            <core:if test="${sessionScope.modelManage==null}">
+                <jsp:useBean id="modelManage" class="vn.javaweb.real.estate.model.ConfigConnection" scope="session" />
+            </core:if>
+            
             <section id="houses">
                 <div class="houses__header">
                     <div class="houses-container">
-                        <h1>Featured Listings</h1>
-                        <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything<br>
-                            embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to</p>
+                        <h1>The latest project</h1>
+                        <p>List of the latest projects that we are building is shown below may be where future bustling center you desire<br/> Take a look and contact us to have the house and the best price</p>
                     </div>
                 </div>
 
                 <div class="houses_list">
-                    <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span><br>
-                            <a class="house__more" href="#">More</a>
-
-                        </div>
-                    </article>
-                    <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span></br>
-                            <a class="house__more" href="#">More</a>
-
-                        </div>
-                    </article>
-                    <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span></br>
-                            <a class="house__more" href="#">More</a>
-
-                        </div>
-                    </article>
-                    <article class="box-house">
-                        <div class="houses-images">
-                            <img src="images/01.png" alt="this is images"/>
-                        </div>
-                        <div class="houses-title">
-                            <h1>Newtown Square, PA</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                            <span>$ 120 000</span><br>
-                            <a class="house__more" href="#">More</a>
-
-                        </div>
-                    </article>
+                    <core:forEach items="${modelManage.profileLandModelManage.findBetween(0, 4)}" var="profileLand" >
+                        <core:set var="lengthIntroduction" value="${fn:length(profileLand.introduction)}" />
+                        <core:choose>
+                            <core:when test="${lengthIntroduction ge 100}" >
+                                <core:set var="introduction" value="${fn:substring(profileLand.introduction, 0, 100)}" />
+                            </core:when>
+                            <core:when test="${lengthIntroduction le 5}" >
+                                <core:set var="introduction" value="The data for the project has not been fully provided. We'll update the article as soon as possible. Sorry for inconvenience" />
+                            </core:when>
+                            <core:otherwise>
+                                <core:set var="introduction" value="${profileLand.introduction}" />
+                            </core:otherwise>
+                        </core:choose>
+                        <article class="box-house">
+                            <div class="houses-images">
+                                <img src="images/${profileLand.image}" alt="This is images ${profileLand.name}" style="height: 216px; border-top-left-radius: 5px; border-bottom-left-radius: 5px;"/>
+                            </div>
+                            <div class="houses-title">
+                                <h1>${profileLand.name}</h1>
+                                <p>${introduction} ...</p>
+                                <span>$&nbsp;${profileLand.codeRegional.unitPrice}</span><br>
+                                <a class="house__more" href="${pageContext.request.contextPath}/ServletProfileLandClient?action=details&code=${profileLand.code}">Details</a>
+                            </div>
+                        </article>
+                    </core:forEach>                                                          
                 </div>
-
             </section>
             <div class="clear"></div>
             <section id="contact">
                 <div class="container-contact">
                     <div class="container-contact-left">
                         <div class="title-contact">
-                            <h1> Best Agents</h1>
+                            <h1>Seller reputable</h1>
                         </div>
-
                         <div class="box-contact">
-                            <div class="box-contact-box">
-                                <div class="images-contact">
-                                    <img src="images/sang.jpg"/>
+                            <core:forEach items="${modelManage.accountModelManage.getSellers(3)}" var="account" >
+                                <div class="box-contact-box">                                
+                                    <div class="images-contact">
+                                        <img src="images/${account.person.avatar}" alt="This is images ${account.person.fullname}"/>
+                                    </div>
+                                    <div class="title-contact">
+                                        <span>${account.person.fullname}</span>
+                                        <p>Business staff</p>
+                                        <ul class="list-agent">
+                                            <li class="social__item">
+                                                <a class="icon_twitter" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-twitter-square"></i></a>
+                                            </li>
+                                            <li class="social__item">
+                                                <a class="icon_facebook" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-facebook-square"></i></a>
+                                            </li>
+                                            <li class="social__item">
+                                                <a class="icon_instagram" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-instagram"></i></a>
+                                            </li>
+                                            <li class="social__item">
+                                                <a class="icon_email" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-envelope-o"></i></a>
+                                            </li>
+                                        </ul>
+                                    </Div>
                                 </div>
-                                <div class="title-contact">
-
-                                    <span>Phan Sang</span>
-
-                                    <p >Lorem ipsum</p>
-                                    <ul class="list-agent">
-                                        <li class="social__item">
-                                            <a class="icon_twitter" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-twitter-square"></i></a>
-                                        </li>
-                                        <li class="social__item">
-                                            <a class="icon_facebook" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-facebook-square"></i></a>
-                                        </li>
-                                        <li class="social__item">
-                                            <a class="icon_instagram" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-instagram"></i></a>
-                                        </li>
-                                        <li class="social__item">
-                                            <a class="icon_email" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-envelope-o"></i></a>
-                                        </li>
-                                    </ul>
-                                </Div>
-                            </div>
-                            <div class="box-contact-box">
-                                <div class="images-contact">
-                                    <img src="images/phananh.jpg"/>
-                                </div>
-                                <div class="title-contact">
-
-                                    <span>Phan Anh</span>
-
-                                    <p >Lorem ipsum</p>
-                                    <ul class="list-agent">
-                                        <li class="social__item">
-                                            <a class="icon_twitter" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-twitter-square"></i></a>
-                                        </li>
-                                        <li class="social__item">
-                                            <a class="icon_facebook" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-facebook-square"></i></a>
-                                        </li>
-                                        <li class="social__item">
-                                            <a class="icon_instagram" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-instagram"></i></a>
-                                        </li>
-                                        <li class="social__item">
-                                            <a class="icon_email" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-envelope-o"></i></a>
-                                        </li>
-                                    </ul>
-                                </Div>
-                            </div>
-                            <div class="box-contact-box">
-                                <div class="images-contact">
-                                    <img src="images/nguyentuananh.jpg"/>
-                                </div>
-                                <div class="title-contact">
-
-                                    <span>Nguyen Tuan Anh</span>
-
-                                    <p >Lorem ipsum</p>
-                                    <ul class="list-agent">
-                                        <li class="social__item">
-                                            <a class="icon_twitter" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-twitter-square"></i></a>
-                                        </li>
-                                        <li class="social__item">
-                                            <a class="icon_facebook" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-facebook-square"></i></a>
-                                        </li>
-                                        <li class="social__item">
-                                            <a class="icon_instagram" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-instagram"></i></a>
-                                        </li>
-                                        <li class="social__item">
-                                            <a class="icon_email" target="_blank" href="#"><i style="font-size: 20px;" class="fa fa-envelope-o"></i></a>
-                                        </li>
-                                    </ul>
-                                </Div>
-                            </div>
+                            </core:forEach>
                         </div>
                     </div>
                     <div class="container-contact-right">
-                        <h1 class="title-contact_-title">Reviews</h1>
-                        <div class="box-contact-right">
-                            <h1>Samantah Gabler</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                        </div>
-                        <div class="box-contact-right">
-                            <h1>Samantah Gabler</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                        </div>
-                        <div class="box-contact-right">
-                            <h1>Samantah Gabler</h1>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in</p>
-                        </div>
+                        <h1 class="title-contact_-title">Introduce</h1>
+                        <core:forEach items="${modelManage.accountModelManage.getSellers(3)}" var="account" >
+                            <div class="box-contact-right">
+                                <h1>${account.person.fullname}</h1>
+                                <p>${account.person.note}</p>
+                            </div>                            
+                        </core:forEach>
                     </div>
                 </div>
             </section>
@@ -298,7 +230,7 @@
 
                 <div class="container-blog">
                     <div class="title-blog-show">
-                        <h1>Our Blog</h1>
+                        <h1>Newsletter & Magazine</h1>
                     </div>
                     <article class="blog-show">
                         <div class="images-blog-show">
@@ -353,9 +285,8 @@
             <section id="partner">
                 <div class="container-partner">
                     <div class="partner-top">
-                        <h1>Partner</h1>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority<br>
-                            have suffered alteration in some form</p>
+                        <h1>Manage payment</h1>
+                        <p>We link to many global banks, customers pay a transfer and management track project progress and financial online here</p>
 
                     </div>
                     <div class="partner-footer">
