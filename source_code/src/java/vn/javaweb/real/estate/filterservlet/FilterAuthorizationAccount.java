@@ -1,7 +1,6 @@
 package vn.javaweb.real.estate.filterservlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -32,21 +31,27 @@ public class FilterAuthorizationAccount implements Filter {
             HttpServletResponse servletResponse = (HttpServletResponse) response;
 
             String servletPath = servletRequest.getServletPath();
-            if (servletPath.contains("ControllerProfileLand") || servletPath.contains("ControllerRegionalPrice")
-                    || servletPath.contains("ControllerAccount") || servletPath.contains("ControllerCustomer")) {
-                String username = servletRequest.getParameter("txtUsername");
-                String password = servletRequest.getParameter("txtPassword");
+            HttpSession session = servletRequest.getSession(false);
+
+            if (servletPath.contains("customerinvoice.jsp")) {
+                if (session == null || session.getAttribute("object") == null) {
+                    servletResponse.sendRedirect(servletRequest.getContextPath() + "/login.html");
+                    return;
+                }
+            }
+
+            String username = servletRequest.getParameter("txtUsername");
+            String password = servletRequest.getParameter("txtPassword");
+            if (username != null && password != null) {
                 ConfigConnection modelManage = ConfigConnection.getInstance();
                 Account account = modelManage.getAccountModelManage().checkAccount(username, password);
                 if (account != null && account.getRole() == 2) {
-
-                    servletRequest.setAttribute("object", account.getBuyLandList().get(0));
-                    servletRequest.getRequestDispatcher("/customerinvoice.jsp").forward(servletRequest, servletResponse);
+                    servletRequest.getSession(true).setAttribute("object", account.getBuyLandList().get(0));
+                    servletResponse.sendRedirect(servletRequest.getContextPath() + "/customerinvoice.jsp");
                     return;
-
                 }
-                
             }
+
             chain.doFilter(request, response);
         }
     }

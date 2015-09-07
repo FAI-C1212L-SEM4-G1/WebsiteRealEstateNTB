@@ -41,6 +41,7 @@ public class FilterAuthencationLogin implements Filter {
                     return;
                 }
             }
+            System.out.println("QUa filter 1");
             chain.doFilter(request, response);
         }
     }
