@@ -1,10 +1,29 @@
-*{margin: 0px;padding: 0px;}
-body{background: url(../images/slider1.jpg) }
-.wapper{width:100%;height:auto;}
-.wapper .register-main-top {max-width: 960px;height: auto;margin: 0 auto;}
-.wapper .register-main{max-width: 960px;height:auto;margin: 0 auto;}
-.wapper .register-main .main-form {
+*{
+    margin: 0px;padding: 0px;
+}
 
+body{
+    background: url(../images/slider1.jpg) 
+}
+
+.wapper{
+    width:100%;
+    height:auto;
+}
+
+.wapper .register-main-top {
+    max-width: 960px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.wapper .register-main{
+    max-width: 960px;
+    height:auto;
+    margin: 0 auto;
+}
+
+.wapper .register-main .main-form {
     background: url(../images/slider1.jpg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -15,7 +34,8 @@ body{background: url(../images/slider1.jpg) }
     border-radius: 0 0 4px 4px;
     margin: 0 auto;
     max-width: 460px;
-    padding: 20px;}
+    padding: 20px;
+}
 
 .intro-form-input-ico {
     background-color: rgb(92, 180, 197);
@@ -86,7 +106,6 @@ body{background: url(../images/slider1.jpg) }
     background: rgb(92, 180, 197);
     color: #fff;
     box-sizing: border-box;
-
 }
 .title-register {
     background: rgb(92, 180, 197) none repeat scroll 0 0;
@@ -94,7 +113,7 @@ body{background: url(../images/slider1.jpg) }
     border-top-right-radius: 5px;
     margin: 0 auto;
     max-width: 499px;
-    padding-bottom: 28px;
+    padding-bottom: 15px;
     padding-top: 13px;
 }
 .title-register span {color: #fff;}
