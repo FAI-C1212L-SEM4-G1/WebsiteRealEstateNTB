@@ -28,6 +28,7 @@ public class ControllerAuthencationLogin extends HttpServlet {
         if(queryString != null && queryString.contains("action=logout")){
            HttpSession session = request.getSession(false);
            session.removeAttribute("account");
+           session.removeAttribute("object");
            session.invalidate();
            response.sendRedirect(request.getContextPath() + "/admin/login.jsp");
         } else {

@@ -61,12 +61,24 @@
                 <nav>
                     <div class="menu-show" style="font-size: 18px;margin-top: 5px;"></div >
                     <ul>
-                        <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
-                        <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
-                        <li><a href="#">GALAXY</a></li>
-                        <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
-                        <li><a href="#">ABOUT US</a></li>
-                        <li><a href="${pageContext.request.contextPath}/admin/login.jsp">SIGN IN</a></li>
+                        <core:choose>
+                            <core:when test="${sessionScope.object ne null}">
+                                <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
+                                <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
+                                <li><a href="${pageContext.request.contextPath}/customerinvoice.jsp">BUYING</a></li>
+                                <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
+                                <li><a href="#">ABOUT ME</a></li>
+                                <li><a href="${pageContext.request.contextPath}/login.html?action=logout">LOGOUT</a></li>
+                            </core:when>
+                            <core:otherwise>
+                                <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
+                                <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
+                                <li><a href="#">GALAXY</a></li>
+                                <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
+                                <li><a href="#">ABOUT US</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin/login.jsp">SIGN IN</a></li>
+                            </core:otherwise>
+                        </core:choose> 
                     </ul>
                 </nav>
                 <div class="clear"></div>

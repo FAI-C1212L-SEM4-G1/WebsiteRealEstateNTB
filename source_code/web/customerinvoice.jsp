@@ -63,10 +63,10 @@
                     <ul>
                         <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
                         <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
-                        <li><a href="#">GALAXY</a></li>
+                        <li><a href="${pageContext.request.contextPath}/customerinvoice.jsp">BUYING</a></li>
                         <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
-                        <li><a href="#">ABOUT US</a></li>
-                        <li><a href="${pageContext.request.contextPath}/admin/login.jsp">SIGN IN</a></li>
+                        <li><a href="#">ABOUT ME</a></li>
+                        <li><a href="${pageContext.request.contextPath}/login.html?action=logout">LOGOUT</a></li>
                     </ul>
                 </nav>
                 <div class="clear"></div>

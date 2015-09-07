@@ -47,13 +47,11 @@
                         </div>
                         <div class="top-content-right">
                             <div class="phone">
-                                <span style="color:#fff"><i class="fa fa-phone"></i> 01666202886</span>
+                                <span style="color:#fff"><i class="fa fa-phone"></i> Hotline: +84933 0866 89</span>
                             </div>
                             <div class="email">
-                                <span style="color:#5cb4c5;"><i class="fa fa-envelope-o"></i> admin@gmail.com</span>
-
+                                <span style="color:#5cb4c5;"><i class="fa fa-envelope-o"></i> Contact: NTBbuilders@express.com</span>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -63,12 +61,24 @@
                          <i style="font-size: 18px;margin-top: 5px;" class="fa fa-bars"></i>
                      </div>
                      <ul>
-                         <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
-                         <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
-                         <li><a href="#">GALAXY</a></li>
-                         <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
-                         <li><a href="#">ABOUT US</a></li>
-                         <li><a href="${pageContext.request.contextPath}/admin/login.jsp">SIGN IN</a></li>
+                        <core:choose>
+                            <core:when test="${sessionScope.object ne null}">
+                                <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
+                                <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
+                                <li><a href="${pageContext.request.contextPath}/customerinvoice.jsp">BUYING</a></li>
+                                <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
+                                <li><a href="#">ABOUT ME</a></li>
+                                <li><a href="${pageContext.request.contextPath}/login.html?action=logout">LOGOUT</a></li>
+                            </core:when>
+                            <core:otherwise>
+                                <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
+                                <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
+                                <li><a href="#">GALAXY</a></li>
+                                <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
+                                <li><a href="#">ABOUT US</a></li>
+                                <li><a href="${pageContext.request.contextPath}/admin/login.jsp">SIGN IN</a></li>
+                            </core:otherwise>
+                        </core:choose> 
                      </ul>           
                  </nav>
                 <div class="clear"></div>
@@ -97,7 +107,7 @@
                                 <select class="list-option-filter1" id="codeRegional" name="codeRegional" >
                                     <option value="">Select one option</option>
                                     <core:forEach var="regionalPrice" items="${sessionScope.modelManage.regionalPriceModelManage.findAll()}" >                     
-                                        <option value="${regionalPrice.code}" <core:if test="${object.codeRegional.code eq regionalPrice.code}">selected</core:if> >${regionalPrice.regionalName}</option>  
+                                        <option value="${regionalPrice.code}" <core:if test="${requestScope.object.codeRegional.code eq regionalPrice.code}">selected</core:if> >${regionalPrice.regionalName}</option>  
                                     </core:forEach>
                                 </select>                                
                             </li>
