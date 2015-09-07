@@ -65,7 +65,7 @@
                         <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
                         <li><a href="${pageContext.request.contextPath}/customerinvoice.jsp">BUYING</a></li>
                         <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
-                        <li><a href="#">ABOUT ME</a></li>
+                        <li><a href="${pageContext.request.contextPath}/aboutme.jsp">ABOUT ME</a></li>
                         <li><a href="${pageContext.request.contextPath}/login.html?action=logout">LOGOUT</a></li>
                     </ul>
                 </nav>
@@ -130,7 +130,7 @@
                             <tr class="session-id">                                                                            
                                 <td>
                                     <core:set var="transaction" value="${sessionScope.object.invoiceTransactionList[sessionPay.id-1]}"></core:set>
-                                    <fieldset <core:if test="${flagSessionPayId ne null && sessionPay.id-flagSessionPayId gt 0}">style="background-color: #bbb"</core:if>>                                        
+                                    <fieldset class="session_pay" <core:if test="${flagSessionPayId ne null && sessionPay.id-flagSessionPayId gt 0}">style="background-color: #66afe9"</core:if>>                                        
                                             <legend>Session pay ${sessionPay.id}</legend>
                                         <table>
                                             <tr>
@@ -147,11 +147,11 @@
                                             </tr>                                                                                                                                                                                                                                                                                                                                      
                                             <tr>                                                                                        
                                                 <td style="width: 70px; <core:if test="${transaction.paid eq null || transaction.paid eq ''}"> color:greenyellow;<core:if test="${flagSessionPayId eq null}"><core:set var="flagSessionPayId" value="${sessionPay.id}" /></core:if></core:if>">Paid ($)</span></td>
-                                                <td><input id="paid${sessionPay.id}" class="session-text" type="text" name="paid${sessionPay.id}" value="${transaction.paid}" <core:if test="${flagSessionPayId ne null && sessionPay.id-flagSessionPayId gt 0}">readonly</core:if>/></td>
+                                                <td><input id="paid${sessionPay.id}" class="session-text" type="text" name="paid${sessionPay.id}" value="${transaction.paid}" readonly</td>
                                             </tr>
                                             <tr>                                                                                        
                                                 <td style="width: 70px">Date paid</span></td>
-                                                <td><input id="datepaid${sessionPay.id}" class="session-text" type="date" name="datepaid${sessionPay.id}" value="${transaction.dateTrans}" <core:if test="${flagSessionPayId ne null && sessionPay.id-flagSessionPayId gt 0}">readonly</core:if> /></td>
+                                                <td><input id="datepaid${sessionPay.id}" class="session-text" type="date" name="datepaid${sessionPay.id}" value="${transaction.dateTrans}" readonly</td>
                                             </tr>
                                         </table>  
                                     </fieldset>

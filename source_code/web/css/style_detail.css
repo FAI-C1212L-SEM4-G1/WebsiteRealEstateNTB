@@ -4,7 +4,7 @@
 .listingSlider {
     float: left;
     width: 40%;
-    height: 100%;
+    height: 363px;
 }
 .listingEntry {
     background: #171c26 none repeat scroll 0 0 padding-box;
@@ -83,4 +83,36 @@
     color: #fff;
     display: inline-block;
 }
+
+.session-id {
+    width: 250px;
+    float: left;
+    margin-right: 50px;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.session-id fieldset {
+    padding: 0px 10px !important;
+    margin: auto !important;
+    border: 1px solid #27a9e3 !important;
+}
+
+legend {
+    margin: 15px 92px 10px !important;
+    background-color: #22C0CB;
+    color: #FFF;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 4px;
+    border-radius: 7px;
+    width: 95px;
+    box-sizing: border-box;
+    font-size: 12px;
+    height: 40px;
+    line-height: 30px;
+}
+
+
 
