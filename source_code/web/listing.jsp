@@ -39,7 +39,7 @@
                 <div id="top">
                     <div class="top-content">
                         <div class="top-content-left">
-                            <i style="color:#5cb4c5; " class="fa fa-map-marker"></i><span style="color: #fff;font-size: 13px;font-weight: bold"> Time City:</span><span style="color:#5cb4c5; "> Amsterdam</span>
+                            <i style="color:#5cb4c5; " class="fa fa-map-marker"></i><span style="color: #fff;font-size: 13px;font-weight: bold"> Time City:</span><span style="color:#5cb4c5; "> Hanoi, Vietnam</span>
                         </div>
                         <div class="top-content-logo">
 
@@ -47,11 +47,16 @@
                         </div>
                         <div class="top-content-right">
                             <div class="phone">
-                                <span style="color:#fff"><i class="fa fa-phone"></i> Hotline: +84933 0866 89</span>
+                                <span style="color:#fff"><i class="fa fa-phone"></i>&nbsp; Hotline: +84933 0866 89</span>
                             </div>
                             <div class="email">
                                 <span style="color:#5cb4c5;"><i class="fa fa-envelope-o"></i> Contact: NTBbuilders@express.com</span>
                             </div>
+                            <core:if test="${sessionScope.object ne null}">
+                                <div>
+                                    <span style="color: white; font-size: 20px;"><i class="fa fa-user" style="margin-top: 10px;"></i> Hello!&nbsp;${sessionScope.object.username.person.fullname}</span>
+                                </div>
+                            </core:if>
                         </div>
                     </div>
                 </div>

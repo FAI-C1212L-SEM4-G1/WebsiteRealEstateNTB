@@ -172,9 +172,9 @@ nav ul li:hover{background:rgb(178, 234, 244);}
     height: auto;
     float: left;
     margin-right: 16px;
-    line-height: 10px;
-    padding-top: 14px;
-    padding-bottom: 25px;
+    line-height: 20px;
+    padding-top: 5px;
+    padding-bottom: 15px;
     border-radius: 5px;
     margin-bottom: 15px;
     padding-left: 12px;
@@ -182,10 +182,15 @@ nav ul li:hover{background:rgb(178, 234, 244);}
 }
 
 .session-text {
-width: 181px;
-border-radius: 5px;
-border: 1px solid #646565;
-padding-left: 12px;
-height: 29px;
+    width: 181px;
+    border-radius: 5px;
+    border: 1px solid #646565;
+    padding-left: 12px;
+    height: 29px;
+}
+
+fieldset .session_pay table tr td {
+    width: 70px;
+    height: 25px;
 }
 

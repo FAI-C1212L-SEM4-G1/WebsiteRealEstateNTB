@@ -49,11 +49,16 @@
                         </div>
                         <div class="top-content-right">
                             <div class="phone">
-                                <span style="color:#fff"><i class="fa fa-phone"></i> Hotline: +84933 0866 89</span>
+                                <span style="color:#fff"><i class="fa fa-phone"></i>&nbsp; Hotline: +84933 0866 89</span>
                             </div>
                             <div class="email">
                                 <span style="color:#5cb4c5;"><i class="fa fa-envelope-o"></i> Contact: NTBbuilders@express.com</span>
                             </div>
+                            <core:if test="${sessionScope.object ne null}">
+                                <div>
+                                    <span style="color: white; font-size: 20px;"><i class="fa fa-user" style="margin-top: 10px;"></i> Hello!&nbsp;${sessionScope.object.username.person.fullname}</span>
+                                </div>
+                            </core:if>
                         </div>
                     </div>
                 </div>
@@ -99,9 +104,20 @@
                                     ${sessionScope.object.codeProfileLand.codeRegional.unitPrice}
                                 </li>
                             </ul>
-                            <div class="listingEntry__price">$ ${sessionScope.object.codeProfileLand.codeRegional.unitPrice}</div>
+                                <div class="listingEntry__price" style="font-size: 22px;">
+                                <span>Total money: <b>$ ${sessionScope.object.totalPaid}</b></span>
+                                <span style="margin: 0px 0px 0px 40px;">Payable: <b>$ ${sessionScope.object.totalPaid-sessionScope.object.havePay}</b></span>
+                            </div>
                             <div class="Oder">
-                                <a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=register&code=${sessionScope.object.code}">Register</a>
+                                <core:choose>
+                                    <core:when test="${sessionScope.object.totalPaid eq sessionScope.object.havePay}">
+                                        <a href="">Paid off</a>
+                                    </core:when>
+                                    <core:otherwise>
+                                        <a href="">On payment</a>
+                                    </core:otherwise>
+                                </core:choose>                                
+                                
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -124,34 +140,37 @@
                             <li class="markeredList__item"><i style="color: #70ccde;margin-right: 5px;" class="fa fa-star"></i><b>Expected completion date</b>:&nbsp;<span>${sessionScope.object.codeProfileLand.dateEnd}</span></li>
                     </ul>
                     <div id="secondMap" style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden;">
-                    </div>                    
+                    </div>
+                    <hr style="margin: 0px 0px 20px 0px;"/>
+                    <h1 class="titleSecondType">Payment details</h1>
                     <div class="map_housing">
                         <core:forEach items="${sessionScope.object.codeProfileLand.paymentMode.getSessionPays()}" var="sessionPay">
                             <tr class="session-id">                                                                            
                                 <td>
-                                    <core:set var="transaction" value="${sessionScope.object.invoiceTransactionList[sessionPay.id-1]}"></core:set>
-                                    <fieldset class="session_pay" <core:if test="${flagSessionPayId ne null && sessionPay.id-flagSessionPayId gt 0}">style="background-color: #66afe9"</core:if>>                                        
+                                    <core:set var="transaction" value="${sessionScope.object.invoiceTransactionList[sessionPay.id-1]}"></core:set>                                    
+                                    <fieldset class="session_pay" <core:if test="${transaction.paid eq null || transaction.paid eq ''}">style="background-color: #E0E0E0"</core:if>>                                        
                                             <legend>Session pay ${sessionPay.id}</legend>
                                         <table>
                                             <tr>
-                                                <td style="width: 70px"><i class="fa fa-stack-overflow"></i> Percent :</td>
+                                                <td><i class="fa fa-stack-overflow"></i> Percent </td>
                                                 <td>${sessionPay.percentPay}%</td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 70px"><i class="fa fa-usd"></i> Price :</td>
+                                                <td><i class="fa fa-usd"></i>&nbsp;&nbsp;Price </td>
                                                 <td>${sessionPay.pricePay}$</td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 70px"><i class="fa fa-clock-o"></i> Deadline :</td>
+                                                <td><i class="fa fa-clock-o"></i> Deadline </td>
                                                 <td><fmt:formatDate pattern="dd/MM/yyyy" value="${sessionPay.timePay}" /></td>
                                             </tr>                                                                                                                                                                                                                                                                                                                                      
-                                            <tr>                                                                                        
-                                                <td style="width: 70px; <core:if test="${transaction.paid eq null || transaction.paid eq ''}"> color:greenyellow;<core:if test="${flagSessionPayId eq null}"><core:set var="flagSessionPayId" value="${sessionPay.id}" /></core:if></core:if>">Paid ($)</span></td>
-                                                <td><input id="paid${sessionPay.id}" class="session-text" type="text" name="paid${sessionPay.id}" value="${transaction.paid}" readonly</td>
+                                            <tr> 
+                                                
+                                                <td>Paid ($)</span></td>
+                                                <td><input id="paid${sessionPay.id}" class="session-text" type="text" name="paid${sessionPay.id}" value="${transaction.paid}" readonly /></td>
                                             </tr>
                                             <tr>                                                                                        
-                                                <td style="width: 70px">Date paid</span></td>
-                                                <td><input id="datepaid${sessionPay.id}" class="session-text" type="date" name="datepaid${sessionPay.id}" value="${transaction.dateTrans}" readonly</td>
+                                                <td>Date paid</span></td>
+                                                <td><input id="datepaid${sessionPay.id}" class="session-text" type="date" name="datepaid${sessionPay.id}" value="${transaction.dateTrans}" readonly /></td>
                                             </tr>
                                         </table>  
                                     </fieldset>
@@ -244,7 +263,7 @@
                                 <img src="images/logo_secondType.png" all="fpt.aptech.ac.vn">
                             </a>
                             <div class="Logo">
-                                <p>under logo text</p>
+                                <p>- Real Estate -</p>
                             </div>
                         </div>
                     </div>
