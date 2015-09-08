@@ -1,17 +1,53 @@
 *{margin: 0px;padding: 0px;}
 body{background: rgb(255, 255, 255);}
-.wapper{width: 1024px;height: auto;}
-.wapper .title-infomation-user{background: rgb(97, 97, 97) none repeat scroll 0 0;border-radius: 5px;color: #fff;height: 50px;line-height: 50px;margin-left: 185px;margin-top: 20px;text-align: center;text-transform: uppercase;width: 273px;}
-.wapper .title-infomation-user h3 {text-decoration: none;}
-.content-right{float:right;}
-.content-right table tr td span {color: rgb(134, 134, 149);}
-.content-right table tr td input {width: 300px;height:28px;border-radius: 5px;border: 1px solid rgb(221, 221, 221);}
-.content-left{   float: left;margin-left: 207px;margin-top: 86px;}
+
+.wapper{
+    width: 1024px;
+    height: auto;
+}
+
+.wapper .title-infomation-user h3 {
+    text-decoration: none;
+}
+
+div.title-infomation-user span {
+    font-size: 35px;
+    font-weight: bold;
+    color: #171c26;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.content-right{
+    float: right;
+    margin: 20px 90px 50px 20px;
+}
+.content-right table tr td span {
+    color: rgb(134, 134, 149);
+}
+.content-right table tr td input {
+    width: 300px;
+    height:28px;
+    border-radius: 5px;
+    border: 1px solid rgb(221, 221, 221);
+}
+.content-left{   
+    float: left;
+    margin-left: 130px;
+    margin-top: 35px;
+}
+
+div.content-left img {
+    width: 250px;
+    height: 250px;
+}
 
 .content-right table tr td textarea{
     width: 300px;
-    border-radius: 5px; 
+    border-radius: 5px;
     border: 1px solid rgb(221, 221, 221);
+    margin-left: 10px;
+    height: 80px;
 }
 
 .content-right table tr td{
@@ -22,13 +58,16 @@ body{background: rgb(255, 255, 255);}
 .title-infomation-user{
     width: 100%;
     height: 50px;
-    background: #F00 none repeat scroll 0% 0%;
     text-align: center;
     line-height: 50px;
     font-size: 16px;
     text-transform: uppercase;
     margin-top: 15px;
     border-radius: 5px;
+}
+
+div.content-right table tr td input {
+    margin: 10px 0px 5px 10px;
 }
 
 

@@ -9,14 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile Land Details Transaction</title>
+        <title>Profile Customer</title>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/style_detail.css" rel="stylesheet" type="text/css"/>
         <link href="font/font-awesome-4.4.0/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <link href="css/mobile.css" rel="stylesheet" type="text/css"/>  
-        <link href="info_user/css/css_thongtincanhan.css" rel="stylesheet" type="text/css"/>        
-        
+        <link href="css/mobile.css" rel="stylesheet" type="text/css"/>         
+        <link href="css/css_thongtincanhan.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <script>
@@ -24,9 +23,7 @@
 
                 $('.menu-show').click(function () {
                     $('nav ul').toggleClass('showing');
-
                 });
-
             });
             function kiemtra()
             {
@@ -71,90 +68,73 @@
                         <li><a href="${pageContext.request.contextPath}/ServletProfileLandClient?action=list">LISTINGS</a></li>
                         <li><a href="${pageContext.request.contextPath}/customerinvoice.jsp">BUYING</a></li>
                         <li><a href="${pageContext.request.contextPath}/customerorder.jsp">CONTACT US</a></li>
-                        <li><a href="#">ABOUT ME</a></li>
+                        <li><a href="${pageContext.request.contextPath}/aboutme.jsp">ABOUT ME</a></li>
                         <li><a href="${pageContext.request.contextPath}/login.html?action=logout">LOGOUT</a></li>
                     </ul>
                 </nav>
                 <div class="clear"></div>
             </header>
             <section id="content">
-                   <div class="title-infomation-user">
-                <span>thông tin cá nhân</span>
-            </div>
-            <div class="content">
-                <div class="content-left">
-                    <img src="images/profile-pic.jpg" alt="infomation"/>
+                <div class="title-infomation-user">
+                    <span>Profile Information</span>
                 </div>
-                <div class="content-right">
-                    <form action="user.html" method="POST">
-                        <table>
+                <hr style="margin-bottom: 20px;"/>
+                <div class="content">
+                    <div class="content-left">
+                        <core:choose>
+                            <core:when test="${sessionScope.object.username.person.avatar ne null && sessionScope.object.username.person.avatar ne ''}">
+                                <img src="images/${sessionScope.object.username.person.avatar}" alt="infomation"/>
+                            </core:when>
+                            <core:otherwise>
+                                <img src="images/profile-pic.jpg" alt=""/>
+                            </core:otherwise>
+                        </core:choose>
+                    </div>
+                    <div class="content-right">
+                        <table>                            
                             <tr>
-
-                                <td><span>Mã đại lý:</span></td>
-
-                                <td><input type="text"/></td>
-                            </tr>  
+                                <td><span>Username</span></td>
+                                <td><input type="text" value="${sessionScope.object.username.loginId}" readonly /></td>
+                            </tr> 
                             <tr>
-                                <td><span>Họ tên:</span></td><td><input type="text"/></td>
+                                <td><span>Person ID</span></td>
+                                <td><input type="text" value="${sessionScope.object.username.person.id}" readonly /></td>
                             </tr>
                             <tr>
-                                <td><span>Ban nhóm:</span></td><td><input type="text"/></td>
+                                <td><span>Full name</span></td>
+                                <td><input type="text" value="${sessionScope.object.username.person.fullname}" readonly /></td>
                             </tr>
                             <tr>
-                                <td><span>Chức vụ:</span></td><td><input type="text"/></td>
+                                <td><span>Gender</span></td>
+                                <td><input type="text" value="${sessionScope.object.username.person.gender}" readonly /></td>
                             </tr>
                             <tr>
-                                <td><span>Ngày gia nhập:</span></td><td><input type="text"/></td>
+                                <td><span>Birthday</span></td>
+                                <td><input type="text" value="${sessionScope.object.username.person.birthday}" readonly /></td>
                             </tr>
                             <tr>
-                                <td><span>các khóa học hoàn thành:</span></td><td><input type="text"/></td>
+                                <td><span>Tel</span></td>
+                                <td><input type="text" value="${sessionScope.object.username.person.tel}" readonly /></td>
                             </tr>
                             <tr>
-                                <td><span>Thông tin cá nhân khác:</span></td><br>
+                                <td><span>Email</span></td>
+                                <td><input type="text" value="${sessionScope.object.username.person.email}" readonly /></td>
                             </tr>
                             <tr>
+                                <td><span>Address</span></td>
                                 <td>
-                                    <span>ngày sinh
+                                    <textarea>${sessionScope.object.username.person.address}</textarea>
                                 </td>
-
-                                <td><input type="text" /></td>
-                            </tr>
+                            </tr>                            
                             <tr>
-                                <td><span>giới tính</span></td>
-                                <td>Nam<input style="width:0px;" type="radio"/> Nữ<input style="width: 0px;" type="radio"/> </td>
-                            </tr>
-                            <tr>
-                                <td><span>Địa chỉ</span></td>
-
-
-                                <td><textarea></textarea></td>
-                            </tr>
-                            <tr>
-                                <td>   <span>Email</span></td>
-                                <td><input type="email"/></td>
-                            </tr>
-                            <tr>
-                                <td>  <span>Điện thoại</span></td>
-                                <td> <input type="text"/></td>
-                            </tr>
-
-
-
-
-
-
-
-
+                                <td><span>Note</span></td>
+                                <td><textarea style="height: 120px;">${sessionScope.object.username.person.note}</textarea></td>
+                            </tr>                                                        
                         </table>
-
-
-
-                    </form>
-
+                    </div>
                 </div>
-            </div>
             </section>
-                    
+
             <footer id="footer">
                 <div class="container-footer">
                     <div class="footer-top">
@@ -238,14 +218,12 @@
                                 <img src="images/logo_secondType.png" all="fpt.aptech.ac.vn">
                             </a>
                             <div class="Logo">
-                                <p>under logo text</p>
+                                <p>- Real Estate -</p>
                             </div>
                         </div>
                     </div>
                     <div class="clear"></div>
-
                 </div>
-
             </footer>
         </div>
     </body>
