@@ -6,7 +6,9 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -127,7 +129,9 @@ public class ControllerProfileLand extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String code = "", codeRegional = "", name = "", location = "", typeOf = "", totalArea = "0", capitalInvestment = "", dateStart = "", dateEnd = "";
-        String currentStatus = "", populationSize = "0", totalRoom = "0", totalFloor = "0", roomArea = "0", introduction = "", description = "", imageName = "", image = "", action = "";
+        String currentStatus = "", populationSize = "0", totalRoom = "0", totalFloor = "0", roomArea = "0", introduction = "", description = "", imageName = "", image = "", action = "", hitspay = "";
+        Map<String, String> percent = new HashMap<>(); 
+        Map<String, String> deadlineDate = new HashMap<>(); 
         
         if (ServletFileUpload.isMultipartContent(req)) {
             try {
@@ -179,6 +183,15 @@ public class ControllerProfileLand extends HttpServlet {
                             description = item.getString();
                         if(item.getFieldName().equals("image"))
                             image = item.getString();
+                        if(item.getFieldName().equals("hitspay"))
+                            hitspay = item.getString();
+                        if(item.getFieldName().equals("hitspay"))
+                            hitspay = item.getString();
+                        if(item.getFieldName().contains("percent")){
+                            percent.put(item.getFieldName(), item.getString());
+                        }
+                        if(item.getFieldName().contains("deadlineDate"))
+                            deadlineDate.put(item.getFieldName(), item.getString());
                         if(item.getFieldName().equals("action"))
                             action = item.getString();                 
                     }
@@ -217,8 +230,7 @@ public class ControllerProfileLand extends HttpServlet {
                 profileLand.setImage(imageName);                
                 modelManage.getProfileLandModelManage().create(profileLand);
 
-                String hitspay = req.getParameter("hitspay");
-                if (hitspay != null && !hitspay.equals("") && !hitspay.equals("0")) {
+                if (!hitspay.equals("") && !hitspay.equals("0")) {
                     int count = Integer.parseInt(hitspay);
                     String percentPay = "";
                     String note = "";
@@ -226,16 +238,16 @@ public class ControllerProfileLand extends HttpServlet {
                     paymentMode.setCode("PM" + new SimpleDateFormat("yyMMddHHmmss").format(new Date()));
                     paymentMode.setCountPay(count);
                     for (int i = 1; i <= count; i++) {
-                        String percent = req.getParameter("percent" + i);
-                        String deadlineDate = req.getParameter("deadlineDate" + i);
-                        if (percent == null || percent.equals("")) {
-                            percent = "0";
+                        String p = percent.get("percent"+i);
+                        String d = deadlineDate.get("deadlineDate" + i);
+                        if (p == null || p.equals("")) {
+                            p = "0";
                         }
-                        if (deadlineDate == null || deadlineDate.equals("")) {
-                            deadlineDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                        if (d == null || d.equals("")) {
+                            d = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                         }
-                        percentPay = percentPay + (i > 1 ? "," : "") + percent;
-                        note = note + (i > 1 ? "," : "") + deadlineDate;
+                        percentPay = percentPay + (i > 1 ? "," : "") + p;
+                        note = note + (i > 1 ? "," : "") + d;
                     }
                     paymentMode.setPercentPay(percentPay);
                     paymentMode.setNote(note);
@@ -264,24 +276,23 @@ public class ControllerProfileLand extends HttpServlet {
                 profileLand.setImage(imageName);
                 modelManage.getProfileLandModelManage().edit(profileLand);
 
-                String hitspay = req.getParameter("hitspay");
-                if (hitspay != null && !hitspay.equals("") && !hitspay.equals("0")) {
+                if (!hitspay.equals("") && !hitspay.equals("0")) {
                     int count = Integer.parseInt(hitspay);
                     String percentPay = "";
                     String note = "";
                     PaymentMode paymentMode = profileLand.getPaymentMode();
                     paymentMode.setCountPay(count);
                     for (int i = 1; i <= count; i++) {
-                        String percent = req.getParameter("percent" + i);
-                        String deadlineDate = req.getParameter("deadlineDate" + i);
-                        if (percent == null || percent.equals("")) {
-                            percent = "0";
+                        String p = percent.get("percent"+i);
+                        String d = deadlineDate.get("deadlineDate" + i);
+                        if (p == null || p.equals("")) {
+                            p = "0";
                         }
-                        if (deadlineDate == null || deadlineDate.equals("")) {
-                            deadlineDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                        if (d == null || d.equals("")) {
+                            d = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                         }
-                        percentPay = percentPay + (i > 1 ? "," : "") + percent;
-                        note = note + (i > 1 ? "," : "") + deadlineDate;
+                        percentPay = percentPay + (i > 1 ? "," : "") + p;
+                        note = note + (i > 1 ? "," : "") + d;
                     }
                     paymentMode.setPercentPay(percentPay);
                     paymentMode.setNote(note);

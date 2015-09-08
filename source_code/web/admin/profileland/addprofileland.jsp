@@ -312,13 +312,13 @@
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="#">
+                                        <a href="${pageContext.request.contextPath}/ControllerRegionalPrice?action=add">
                                             <span class="SubMenuText">Create regional price
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="${pageContext.request.contextPath}/ControllerRegionalPrice?action=list">
                                             <span class="SubMenuText">List regional price
                                             </span>
                                         </a>
@@ -871,12 +871,12 @@
                                                                                         var inputPercent = document.createElement("input");
                                                                                         inputPercent.type = "text";
                                                                                         inputPercent.className = "stylePercent";
-                                                                                        inputPercent.name = "percent" + i;
+                                                                                        inputPercent.name = "percent" + (i+1);
                                                                                         // Create an <input> element, set its type and name attributes
                                                                                         var inputDate = document.createElement("input");
                                                                                         inputDate.type = "date";
                                                                                         inputDate.className = "styleDate";
-                                                                                        inputDate.name = "deadlineDate" + i;
+                                                                                        inputDate.name = "deadlineDate" + (i+1);
 
                                                                                         container.appendChild(inputPercent);
                                                                                         container.appendChild(document.createTextNode("Date " + (i + 1)));

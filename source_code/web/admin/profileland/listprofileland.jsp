@@ -566,7 +566,7 @@
                                                 <tr>
                                                     <td class="Visible text-center" align="center" style="width:30px;">${profileLand.code}</td>
                                                     <td class="text-center" align="center" style="width:30px">
-                                                        <img alt="" src="#" style="width:32px;height:32px;">
+                                                        <img alt="" src="images/${profileLand.image}" style="width:32px;height:32px;">
                                                     </td>
                                                     <td class="Visible text-center" align="center" style="width:45px;"> ${profileLand.name} </td>
                                                     <td class="text-center" align="center" style="width:30px;"> ${profileLand.dateStart} </td>
