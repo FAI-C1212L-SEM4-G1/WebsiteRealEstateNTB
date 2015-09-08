@@ -406,7 +406,7 @@
                                 </a>
                                 <ul>
                                     <li class="SubFirst">
-                                        <a href="/admin.aspx?module=sitesetting&action=hangtotstoresetting">
+                                        <a href="${pageContext.request.contextPath}/admin/account/profileaccount.jsp">
                                             <span class="SubMenuText">View profile
                                             </span>
                                         </a>
