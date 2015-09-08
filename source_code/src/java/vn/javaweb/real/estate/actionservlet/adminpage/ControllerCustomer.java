@@ -63,7 +63,7 @@ public class ControllerCustomer extends HttpServlet {
             Account account = buyLand.getUsername();
 
             final String username = "anhnnp.hdn.vn@gmail.com";
-            final String password = "hdn142676301";
+            final String password = "hoichuamoibiet92";
             // Recipient's email ID needs to be mentioned.
             // String to = "phananhhdnit@gmail.com"
             String to = account.getPerson().getEmail();

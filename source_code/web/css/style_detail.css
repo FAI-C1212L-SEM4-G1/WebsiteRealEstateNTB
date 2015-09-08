@@ -4,7 +4,7 @@
 .listingSlider {
     float: left;
     width: 40%;
-    height: 363px;
+    height: 377px;
 }
 .listingEntry {
     background: #171c26 none repeat scroll 0 0 padding-box;
@@ -14,6 +14,7 @@
     height: 100%;
     padding: 2.5% 2% 4% 4%;
     width: 54%;
+    height: 315px;
 }
 .container p {line-height: 2;}
 .listingEntry__title {
