@@ -28,8 +28,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "RegionalPrice.findAll", query = "SELECT r FROM RegionalPrice r"),
     @NamedQuery(name = "RegionalPrice.findByCode", query = "SELECT r FROM RegionalPrice r WHERE r.code = :code"),
     @NamedQuery(name = "RegionalPrice.findByRegionalNameLike", query = "SELECT r FROM RegionalPrice r WHERE r.regionalName LIKE :regionalName"),
-    @NamedQuery(name = "RegionalPrice.findByCity", query = "SELECT r FROM RegionalPrice r WHERE r.city = :city"),
-    @NamedQuery(name = "RegionalPrice.findByCountry", query = "SELECT r FROM RegionalPrice r WHERE r.country = :country"),
+    @NamedQuery(name = "RegionalPrice.findByCity", query = "SELECT r FROM RegionalPrice r WHERE r.city LIKE :city"),
+    @NamedQuery(name = "RegionalPrice.findByCountry", query = "SELECT r FROM RegionalPrice r WHERE r.country LIKE :country"),
     @NamedQuery(name = "RegionalPrice.findByUnitPrice", query = "SELECT r FROM RegionalPrice r WHERE r.unitPrice = :unitPrice")})
 public class RegionalPrice implements Serializable {
     private static final long serialVersionUID = 1L;

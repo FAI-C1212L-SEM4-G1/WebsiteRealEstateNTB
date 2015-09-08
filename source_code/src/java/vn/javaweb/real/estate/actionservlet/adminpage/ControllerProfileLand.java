@@ -53,6 +53,8 @@ public class ControllerProfileLand extends HttpServlet {
         if (action.equalsIgnoreCase("delete")) {
             String code = req.getParameter("code");
             try {
+                ProfileLand profileLand = modelManage.getProfileLandModelManage().findByCode(code);
+                modelManage.getPaymentModeModelManage().deleteByCode(profileLand.getPaymentMode().getCode());
                 modelManage.getProfileLandModelManage().deleteByCode(code);
                 req.setAttribute("listData", modelManage.getProfileLandModelManage().findAll());
                 forward = LIST_VIEW;

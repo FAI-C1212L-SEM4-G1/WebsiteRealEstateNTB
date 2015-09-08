@@ -481,7 +481,7 @@
                             <div class="widget-title">
                                 <h4>
                                     <i class="fa fa-list-alt"></i>
-                                    List project building
+                                    List regional
                                 </h4>
                                 <div class="ui-widget-content ui-corner-top ui-corner-bottom">
                                     <div id="toolbox">
@@ -492,7 +492,7 @@
                                                         <td align="center">
                                                             <a id="cph_Main_ctl00_toolbox_rptAction_lbtAction_1" class="toolbar btn btn-info" href="${pageContext.request.contextPath}/ControllerProfileLand?action=add" title="Add new project">
                                                                 <i class="fa fa-plus"></i>
-                                                                Add new project
+                                                                Add new regional
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -504,7 +504,7 @@
                                 <div id="hiddenToolBarScroll" class="scrollBox hidden">
                                     <h4>
                                         <i class="icon-list-alt"></i>
-                                        List project building
+                                        List regional
                                     </h4>
                                     <div class="FloatMenuBar">
                                         <div class="ui-widget-content ui-corner-top ui-corner-bottom">
@@ -516,7 +516,7 @@
                                                                 <td align="center">
                                                                     <a id="cph_Main_ctl00_toolbox2_rptAction_lbtAction_1" class="toolbar btn btn-info" href="${pageContext.request.contextPath}/admin/profileland/addprofileland.jsp" title="Add new project">
                                                                         <i class="fa fa-plus"></i>
-                                                                        Add new project
+                                                                        Add new regional
                                                                     </a>
                                                                 </td>
                                                             </tr>
@@ -550,10 +550,10 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col" style="text-align:center">Code</th>
-                                                <th scope="col" style="text-align:center">Name of project building</th>
-                                                <th scope="col" style="text-align:center">Date start</th>
-                                                <th scope="col" style="text-align:center">On completing</th>
-                                                <th scope="col" style="text-align:center">Project type</th>
+                                                <th scope="col" style="text-align:center">Regional name</th>
+                                                <th scope="col" style="text-align:center">City</th>
+                                                <th scope="col" style="text-align:center">Country</th>
+                                                <th scope="col" style="text-align:center">Unit price ($)</th>
                                                 <th scope="col" style="text-align:center">Actions</th>
                                             </tr>
                                         </thead>

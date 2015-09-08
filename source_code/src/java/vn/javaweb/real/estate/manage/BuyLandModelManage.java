@@ -278,7 +278,7 @@ public class BuyLandModelManage implements Serializable {
                        "from [RealEstate].[dbo].[BuyLand] as bl join [RealEstate].[dbo].[Account] as ac on bl.username = ac.loginId " +
                        "where (ac.role = 2 and ac.status = 'WAITING')) sub " +
                        "WHERE ct > "+ indexStart +"  and ct <= " + indexEnd;
-            Query query = em.createNativeQuery(q, BuyLand.class);
+            Query query = em.createNativeQuery(q, BuyLand.class);             
             return (List<BuyLand>)query.getResultList(); 
         } finally {
             em.close();

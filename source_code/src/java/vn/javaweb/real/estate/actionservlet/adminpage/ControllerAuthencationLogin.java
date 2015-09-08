@@ -42,7 +42,7 @@ public class ControllerAuthencationLogin extends HttpServlet {
         String password = request.getParameter("txtPassword");
         ConfigConnection modelManage = ConfigConnection.getInstance();
         Account account = modelManage.getAccountModelManage().checkAccount(username, password);
-        if(account != null){
+        if(account != null && account.getStatus().equals("ACTIVE")){
             HttpSession session = request.getSession(true);
             session.setAttribute("account", account);
             session.setAttribute("modelManage", modelManage);

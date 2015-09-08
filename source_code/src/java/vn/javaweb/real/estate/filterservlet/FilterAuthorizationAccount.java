@@ -45,7 +45,7 @@ public class FilterAuthorizationAccount implements Filter {
             if (username != null && password != null) {
                 ConfigConnection modelManage = ConfigConnection.getInstance();
                 Account account = modelManage.getAccountModelManage().checkAccount(username, password);
-                if (account != null && account.getRole() == 2) {
+                if (account != null && account.getRole() == 2 && account.getStatus().equals("ACTIVE")) {
                     servletRequest.getSession(true).setAttribute("object", account.getBuyLandList().get(0));
                     servletResponse.sendRedirect(servletRequest.getContextPath() + "/customerinvoice.jsp");
                     return;

@@ -826,7 +826,7 @@
                                                                                         <li>Type:&nbsp;<core:out value="Image/*" /></li>
                                                                                     </core:if>
                                                                                 </ul>                                                                                
-                                                                                <span id="divimg" <core:if test="${object.image eq null || object.image eq ''}"> style="display: none;"</core:if>><img id="thumbnil" style="width:20%; margin-top:5px;" src="${pageContext.request.contextPath}/images/${object.image}" alt="image" /></span>                                                                           
+                                                                                <span id="divimg" <core:if test="${object.image eq null || object.image eq ''}"> style="display: none;"</core:if>><img id="thumbnil" style="width:100px; margin-top:5px;" src="${pageContext.request.contextPath}/images/${object.image}" alt="image" /></span>                                                                           
                                                                             </div>                                                                            
                                                                             <span class="tooltip-help">
                                                                                 <span class="tooltipContent">

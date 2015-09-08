@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import vn.javaweb.real.estate.manage.exceptions.NonexistentEntityException;
 import vn.javaweb.real.estate.manage.exceptions.RollbackFailureException;
 import vn.javaweb.real.estate.model.ConfigConnection;
+import vn.javaweb.real.estate.model.ProfileLand;
 import vn.javaweb.real.estate.model.RegionalPrice;
 
 /**
@@ -36,6 +37,13 @@ public class ControllerRegionalPrice extends HttpServlet {
         if (action.equalsIgnoreCase("delete")) {
             String code = req.getParameter("code");
             try {
+                RegionalPrice regionalPrice = ConfigConnection.getInstance().getRegionalPriceModelManage().findByCode(code);
+                if(regionalPrice.getProfileLandList() != null && regionalPrice.getProfileLandList().size() > 0){
+                    for(ProfileLand pl : regionalPrice.getProfileLandList()){
+                        pl.setCodeRegional(null);
+                        ConfigConnection.getInstance().getProfileLandModelManage().edit(pl);
+                    }
+                }
                 ConfigConnection.getInstance().getRegionalPriceModelManage().deleteByCode(code);
                 req.setAttribute("listData", ConfigConnection.getInstance().getRegionalPriceModelManage().findAll());
                 forward = LIST_VIEW;
